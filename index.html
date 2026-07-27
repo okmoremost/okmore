@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>实用网址导航 | Practical Website Navigation</title>
+  <title data-i18n="title">实用网址导航</title>
   <style>
     /* ===== 全局基础样式 ===== */
     :root {
@@ -40,29 +40,6 @@
       color: var(--sub);
       margin-top: 8px;
       font-size: 14px;
-    }
-    /* ===== 语言切换按钮 ===== */
-    .lang-toggle {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      transition: border-color .2s, background .2s;
-    }
-    .lang-toggle:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-    @media (max-width: 600px) {
-      .lang-toggle { top: 12px; right: 12px; padding: 5px 12px; font-size: 12px; }
     }
     .search-box {
       max-width: 560px;
@@ -214,11 +191,49 @@
       }
     }
   </style>
+
+  <!-- 多语言（中文 / English）：参考 txt.html，按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+  <script>
+    function okmoreGetLang(){
+      var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+      return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+      zh: {
+        title: '实用网址导航',
+        searchPlaceholder: '搜索名称或功能，如：PDF/OCR/背景替换/证件',
+        found: function(n){ return '找到 ' + n + ' 个相关网站'; },
+        notFound: '没有找到匹配的网站，换个关键词试试～',
+        empty: '没有找到匹配的网站',
+        footerPrefix: '共收录',
+        footerSuffix: '个实用网站'
+      },
+      en: {
+        title: 'Useful Web Navigation',
+        searchPlaceholder: 'Search name or feature, e.g. PDF/OCR/BgReplace/ID',
+        found: function(n){ return 'Found ' + n + ' related sites'; },
+        notFound: 'No matching sites found, try another keyword~',
+        empty: 'No matching sites found',
+        footerPrefix: 'Collected',
+        footerSuffix: 'useful sites'
+      }
+    };
+    function T(k){
+      var d = OKMORE_I18N[okmoreGetLang()];
+      return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    function okmoreApplyI18n(){
+      var n = document.querySelectorAll('[data-i18n]');
+      for (var i = 0; i < n.length; i++){
+        var key = n[i].getAttribute('data-i18n');
+        if (key) n[i].textContent = T(key);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+  </script>
 </head>
 <body>
 <header>
-  <button id="langToggle" class="lang-toggle" type="button" aria-label="切换语言 / Switch language">EN</button>
-  <h1 id="pageTitle">实用网址导航</h1>
   <div class="search-box">
     <input id="search" type="text" placeholder="搜索名称或功能，如：PDF/OCR/背景替换/证件" aria-label="搜索" autofocus>
   </div>
@@ -227,7 +242,7 @@
 
 <main id="content"></main>
 
-<footer><span id="footerPrefix">共收录</span> <span id="totalCount">0</span> <span id="footerSuffix">个实用网站</span></footer>
+<footer><span id="footerPrefix" data-i18n="footerPrefix">共收录</span> <span id="totalCount">0</span> <span id="footerSuffix" data-i18n="footerSuffix">个实用网站</span></footer>
 
 <script>
   /* ===== 导航数据（来自 recommend.json，内嵌到本页面） ===== */
@@ -396,53 +411,14 @@
   const searchInput = document.getElementById('search');
   const countTip = document.getElementById('countTip');
   const totalCount = document.getElementById('totalCount');
-  const pageTitle = document.getElementById('pageTitle');
-  const langToggle = document.getElementById('langToggle');
   const footerPrefix = document.getElementById('footerPrefix');
   const footerSuffix = document.getElementById('footerSuffix');
+  // 当前语言：参考 txt.html，按系统语言自动检测（无需手动切换按钮）
+  const lang = okmoreGetLang();
+  // 搜索框占位符按当前语言设置
+  searchInput.placeholder = T('searchPlaceholder');
 
-  // 中英文文案：h1 标题、搜索提示、空状态、页脚、切换按钮文字
-  const I18N = {
-    zh: {
-      title: "实用网址导航",
-      found: n => `找到 ${n} 个相关网站`,
-      notFound: "没有找到匹配的网站，换个关键词试试～",
-      empty: "没有找到匹配的网站",
-      footerPrefix: "共收录",
-      footerSuffix: "个实用网站",
-      toggle: "EN"
-    },
-    en: {
-      title: "Useful Web Navigation",
-      found: n => `Found ${n} related sites`,
-      notFound: "No matching sites found, try another keyword~",
-      empty: "No matching sites found",
-      footerPrefix: "Collected",
-      footerSuffix: "useful sites",
-      toggle: "中"
-    }
-  };
-
-  // 当前语言：默认中文，localStorage 持久化用户选择
-  let lang = localStorage.getItem('nav_lang') === 'en' ? 'en' : 'zh';
-
-  // 应用语言到所有静态文案（h1 / 页脚 / 切换按钮）
-  function applyLang() {
-    const t = I18N[lang];
-    pageTitle.textContent = t.title;
-    footerPrefix.textContent = t.footerPrefix;
-    footerSuffix.textContent = t.footerSuffix;
-    langToggle.textContent = t.toggle;
-    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
-  }
-
-  // 点击切换语言并重新渲染
-  langToggle.addEventListener('click', () => {
-    lang = lang === 'zh' ? 'en' : 'zh';
-    localStorage.setItem('nav_lang', lang);
-    applyLang();
-    render(searchInput.value);
-  });
+  // 以下静态/动态文案统一通过 head 中的 OKMORE_I18N + T() 按系统语言渲染（参考 txt.html）
 
   // 统计总网站数（去重按名称）
   function calcTotal() {
@@ -507,18 +483,17 @@
       content.appendChild(groupEl);
     });
 
-    // 搜索结果提示（随语言切换）
-    const t = I18N[lang];
+    // 搜索结果提示（随系统语言自动切换）
     if (kw) {
       countTip.textContent = matchedTotal > 0
-        ? t.found(matchedTotal)
-        : t.notFound;
+        ? T('found')(matchedTotal)
+        : T('notFound');
     } else {
       countTip.textContent = '';
     }
 
     if (!hasAny) {
-      content.innerHTML = `<div class="empty">${t.empty}</div>`;
+      content.innerHTML = `<div class="empty">${T('empty')}</div>`;
     }
   }
 
@@ -533,7 +508,8 @@
 
   /* ===== 事件绑定 ===== */
   searchInput.addEventListener('input', e => render(e.target.value));
-  applyLang();   // 按持久化的语言初始化标题、页脚、切换按钮文案
+  okmoreApplyI18n();   // 按系统语言初始化标题、h1、页脚文案（参考 txt.html）
+  document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
   calcTotal();
   render();
 </script>
