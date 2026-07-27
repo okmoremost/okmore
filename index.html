@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实用网址导航 | Practical Website Navigation</title>
+  <style>
+    /* ===== 全局基础样式 ===== */
+    :root {
+      --bg: #f5f6fa;
+      --card-bg: #ffffff;
+      --text: #2c3e50;
+      --sub: #7f8c9a;
+      --accent: #4a90e2;
+      --accent-soft: #eaf2fd;
+      --border: #e8ebf0;
+      --shadow: 0 2px 12px rgba(30, 50, 90, 0.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                   "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0 16px 48px;
+      overflow-x: hidden;      /* 兜底：防止任何轻微横向溢出时可滑动 */
+    }
+    /* ===== 顶部标题与搜索 ===== */
+    header {
+      text-align: center;
+      padding: 48px 0 28px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    header p {
+      color: var(--sub);
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    /* ===== 语言切换按钮 ===== */
+    .lang-toggle {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: border-color .2s, background .2s;
+    }
+    .lang-toggle:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    @media (max-width: 600px) {
+      .lang-toggle { top: 12px; right: 12px; padding: 5px 12px; font-size: 12px; }
+    }
+    .search-box {
+      max-width: 560px;
+      margin: 24px auto 0;
+      position: relative;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 15px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(74, 144, 226, 0.18);
+    }
+    .count-tip {
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      margin: 12px 0 0;
+    }
+    /* ===== 分组区域 ===== */
+    .group { max-width: 1100px; margin: 40px auto 0; }
+    .group-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 4px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;            /* 可点击展开/收缩 */
+      user-select: none;
+    }
+    .group-title .arrow {
+      display: inline-block;
+      margin-left: auto;          /* 推到标题最右侧 */
+      font-size: 36px;            /* 三角形再放大一倍 */
+      color: var(--accent);
+      transition: transform .2s ease;
+    }
+    .group.collapsed .arrow { transform: rotate(-90deg); }  /* 收缩时箭头朝右 */
+    .group.collapsed .grid { display: none; }                /* 收缩时隐藏卡片 */
+    .group-title span.badge {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-radius: 10px;
+      padding: 2px 10px;
+    }
+    /* ===== 卡片网格 ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      /* 防止 grid 子项内容撑开导致整行溢出容器 */
+      overflow: hidden;
+    }
+    .card {
+      /* 关键：防止 grid 子项因内容过长将列宽撑开超出父容器 */
+      min-width: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 22px rgba(74, 144, 226, 0.16);
+    }
+    .card .name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .card .features {
+      font-size: 11px;
+      color: var(--sub);
+      line-height: 1.5;
+      /* 固定显示两行，超出以省略号截断，保证卡片高度一致 */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .empty {
+      text-align: center;
+      color: var(--sub);
+      padding: 60px 0;
+      font-size: 15px;
+    }
+    footer {
+      text-align: center;
+      color: var(--sub);
+      font-size: 12px;
+      margin-top: 56px;
+    }
+
+    /* ===== 移动端适配（窄屏 <=600px） ===== */
+    @media (max-width: 600px) {
+      body { padding: 0 12px 36px; }
+      header { padding: 28px 0 18px; }
+      header h1 { font-size: 22px; }
+      header p { font-size: 13px; }
+      .search-box { margin-top: 16px; }
+      .search-box input { padding: 12px 16px; font-size: 14px; }
+      .group { margin-top: 0; }
+      .group-title { font-size: 16px; }
+      /* 所有手机固定三列，避免自动换行导致一行一/两个 */
+      .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+      .card { padding: 14px 12px; }
+      .card .name { font-size: 15px; }
+      .card .features { font-size: 10px; }
+    }
+
+    /* ===== 超小屏（<=360px）仍保持三列，仅进一步压缩内边距与字号 ===== */
+    @media (max-width: 360px) {
+      .grid { gap: 8px; }
+      .card { padding: 10px 8px; }
+      .card .name { font-size: 14px; }
+      .card .features { font-size: 9px; }
+    }
+
+    /* ===== 触屏设备：点击态更明显，去掉悬停位移避免误触 ===== */
+    @media (hover: none) {
+      .card:hover { transform: none; box-shadow: var(--shadow); }
+      .card:active {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <button id="langToggle" class="lang-toggle" type="button" aria-label="切换语言 / Switch language">EN</button>
+  <h1 id="pageTitle">实用网址导航</h1>
+  <div class="search-box">
+    <input id="search" type="text" placeholder="搜索名称或功能，如：PDF/OCR/背景替换/证件" aria-label="搜索" autofocus>
+  </div>
+  <p class="count-tip" id="countTip"></p>
+</header>
+
+<main id="content"></main>
+
+<footer><span id="footerPrefix">共收录</span> <span id="totalCount">0</span> <span id="footerSuffix">个实用网站</span></footer>
+
+<script>
+  /* ===== 导航数据（来自 recommend.json，内嵌到本页面） ===== */
+  const NAV_DATA = [
+    {
+      "groupName": "免费在线转换",
+      "groupNameEn": "Free Online Conversion",
+      "webList": [
+        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "PDF与Word/Excel/PPT/图片互转" },
+        { "name": "PDF派", "link": "https://www.pdfpai.com/", "features": "PDF双向转Word/PPT/图片/图片转PDF/Office转PDF" },
+        { "name": "iLovePDF", "link": "https://www.ilovepdf.com/zh-cn", "features": "PDF与Word/PPT/图片双向转换/图片合并为PDF/文档转PDF" },
+        { "name": "RunConvert", "link": "https://www.runconvert.com/zh", "features": "PDF/Office/图片双向互转" },
+        { "name": "Convertio", "link": "https://convertio.co/zh/", "features": "文档/图片/PDF全格式互相转换" },
+        { "name": "易转换", "link": "https://www.easeconvert.com/", "features": "PDF与Word/PPT/图片双向转换/图片转文档/OCR识别" },
+        { "name": "ONLYOFFICE", "link": "https://onlyoffice.com/online-document-converter", "features": "Word/PPT/PDF互相转换" },
+        { "name": "Office-Converter", "link": "https://www.office-converter.com", "features": "文档/PDF/图片/音视频等400+格式互转" },
+        { "name": "CloudConvert", "link": "https://www.cloudconvert.com", "features": "支持200+格式互转" },
+        { "name": "Aconvert", "link": "https://www.aconvert.com", "features": "文档/电子书/图像/音视频互转" },
+        { "name": "PDF24", "link": "https://www.pdf24.org", "features": "PDF专项" },
+        { "name": "Smallpdf", "link": "https://www.smallpdf.com", "features": "PDF专项" },
+        { "name": "PDF Candy", "link": "https://www.pdfcandy.com", "features": "PDF专项" },
+        { "name": "超级PDF", "link": "https://www.xpdf.net", "features": "PDF专项" },
+        { "name": "文件快转", "link": "https://kz.ggdoc.cn", "features": "所有转换在本地完成" },
+        { "name": "LuxPDF", "link": "https://www.luxpdf.com", "features": "开源本地处理" }
+      ]
+    },
+    {
+      "groupName": "免费在线OCR提取",
+      "groupNameEn": "Free Online OCR",
+      "webList": [
+        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "图片/扫描PDF OCR文字提取" },
+        { "name": "PearOCR", "link": "https://pearocr.com/", "features": "截图/图片/多页扫描PDF识别文字" },
+        { "name": "OOCCRR", "link": "https://www.ooccrr.com/zh/", "features": "图片/截图OCR识别" },
+        { "name": "WPS在线OCR", "link": "https://pdf.wps.cn/ocr", "features": "图片/扫描PDF文字识别" },
+        { "name": "OCR.space", "link": "https://ocr.space/", "features": "图片/扫描PDF文字提取" },
+        { "name": "Ocr Free", "link": "https://ocr-free.com/zh-CN", "features": "图片/PDF扫描件文字提取" },
+        { "name": "img2txt", "link": "https://img2txt.com/", "features": "图片/PDF转可编辑文字" },
+        { "name": "OnlineOCR", "link": "https://onlineocr.io/", "features": "扫描PDF/图片OCR识别" },
+        { "name": "ExtractPDF", "link": "https://www.extractpdf.com/zh.html", "features": "原生PDF提取纯文字/内嵌图片/文字" },
+        { "name": "DeepSeekOCR", "link": "https://deepseekocr.io/zh/deepseek-ocr-2", "features": "AI驱动的OCR工具" },
+        { "name": "ImageToText", "link": "https://toolin.ai/tools/imagetotext-info", "features": "AI图片文字提取" },
+        { "name": "ToolMage Image to Text", "link": "https://www.toolmage.com/en/tag/image-to-text/", "features": "AI图片/文档/手写笔记提取" },
+        { "name": "OCRify", "link": "https://www.koc.com.tw/archives/568360", "features": "OCR图片转文字工具" },
+        { "name": "永中PDF 图片文字识别", "link": "https://pdf.yozocloud.cn/p/ocr", "features": "永中PDF/图片文字提取" },
+        { "name": "GroupDocs.Parser", "link": "https://products.groupdocs.app/parser", "features": "PDF/DOCX/XLSX提取文本" },
+        { "name": "Aspose PDF Parser", "link": "https://api.products-qa.aspose.app/pdf/parser", "features": "PDF解析图片和文字" },
+        { "name": "PDF Candy", "link": "https://pdfcandy.com", "features": "OCR文本识别" },
+        { "name": "PDF24", "link": "https://www.pdf24.org", "features": "PDF文本识别" }
+      ]
+    },
+    {
+      "groupName": "免费在线处理图片",
+      "groupNameEn": "Free Online Image Tools",
+      "webList": [
+        { "name": "Imgkits", "link": "https://www.imgkits.com/zh", "features": "老照片修复上色/画质超清增强/AI无痕消除/AI图片重绘/AI背景替换/文生图AI生成" },
+        { "name": "AIEnhancer", "link": "https://aienhancer.ai", "features": "老照片修复/4K画质超分/无痕移除物体/图生图重绘/抠图换背景/文生图创作" },
+        { "name": "Magic Eraser", "link": "https://magiceraser.org/zh/ai-image-editor/", "features": "老照片破损修复上色/画质细节增强/AI涂抹消除/画风重绘/智能换背景/AI绘画生成" },
+        { "name": "图叮AI", "link": "https://tudingai.cn", "features": "老照片修复/画质超清放大/AI无痕去杂物/背景替换" },
+        { "name": "Cleanup.pictures", "link": "https://cleanup.pictures/", "features": "AI无痕消除水印/路人/简易画质增强/抠图换背景" },
+        { "name": "Seedream AI", "link": "https://seedream.pro/zh", "features": "文生图AI生成/图片重绘改写/抠图背景替换/简易画质优化" },
+        { "name": "waifu2x", "link": "https://waifu2x.udp.jp", "features": "动漫图片超清降噪放大" },
+        { "name": "Restore Old Photos", "link": "https://restoreoldphotos.com", "features": "AI高清老照片修复" },
+        { "name": "MyEdit", "link": "https://myedit.online", "features": "AI高清老照片修复/AI画质超清增强/AI背景替换" },
+        { "name": "佐糖", "link": "https://picwish.cn", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除/AI背景替换" },
+        { "name": "UnblurImage", "link": "https://unblurimage.ai", "features": "AI高清老照片修复/AI画质超清增强" },
+        { "name": "ArtGuru", "link": "https://www.artguru.ai", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除" },
+        { "name": "Qwen-Image-Edit", "link": "https://qwen-image-edit.com", "features": "AI图片重绘/AI无痕消除/AI背景替换" },
+        { "name": "HiDream AI", "link": "https://hidream.org", "features": "AI图片重绘/AI图片生成" },
+        { "name": "AIUpscaler", "link": "https://aiupscaler.com", "features": "AI画质超清增强" },
+        { "name": "Upscale.media", "link": "https://upscale.media", "features": "AI画质超清增强" },
+        { "name": "Krea AI", "link": "https://www.krea.ai", "features": "AI画质超清增强" },
+        { "name": "Let's Enhance", "link": "https://letsenhance.io", "features": "AI画质超清增强" },
+        { "name": "Photoroom", "link": "https://www.photoroom.com", "features": "AI无痕消除/AI背景替换" },
+        { "name": "PicTextRemover Object Remover", "link": "https://pictextremover.com/object-remover", "features": "AI无痕消除" },
+        { "name": "Kapwing", "link": "https://www.kapwing.com", "features": "AI无痕消除/AI背景替换" },
+        { "name": "Nero AI", "link": "https://ai.nero.com", "features": "AI画质超清增强/AI背景替换" },
+        { "name": "Tensor Art", "link": "https://tensor.art", "features": "AI图片生成/AI背景替换" },
+        { "name": "Stable Diffusion AI", "link": "https://stabledifffusion.com", "features": "AI图片生成" },
+        { "name": "Z-Image-Turbo", "link": "https://z-image.app", "features": "AI图片生成" },
+        { "name": "Dreamifly", "link": "https://dreamifly.com", "features": "AI图片生成" },
+        { "name": "BgSub", "link": "https://bgsub.com", "features": "AI背景替换" },
+        { "name": "Raphael AI", "link": "https://raphaelai.org", "features": "AI背景替换" },
+        { "name": "Nano Banana Pro", "link": "https://nanobanana-pro.studio", "features": "AI背景替换/AI无痕消除/AI画质超清增强" }
+      ]
+    },
+    {
+      "groupName": "免费在线证件",
+      "groupNameEn": "Free Online ID Photo",
+      "webList": [
+         {
+           "name": "佐糖",
+           "link": "https://zuotang.com",
+           "features": "AI抠图/一键换底色和AI换装"
+         },
+         {
+           "name": "搜狐简单AI",
+           "link": "https://ai.sohu.com",
+           "features": "海量西装、衬衫等模板可一键换装"
+         },
+         {
+           "name": "证件照大师",
+           "link": "https://id-photo.cn/maker/",
+           "features": "适合考试、签证等严格场景"
+         },
+         {
+           "name": "帮小忙",
+           "link": "https://tool.browser.qq.com/id_photo.html",
+           "features": "一键换底色及美颜"
+         },
+         {
+           "name": "珍彩证件照",
+           "link": "https://zhengjianzhao.com/index.php",
+           "features": "海量规格尺寸任选"
+         },
+         {
+           "name": "智能证件照",
+           "link": "https://id.zhengzhaopai.com",
+           "features": "数百种证件照尺寸及底色/AI智能抠图"
+         },
+         {
+           "name": "Fotor",
+           "link": "https://www.fotor.com",
+           "features": "证件照"
+         },
+         {
+           "name": "Cutout",
+           "link": "https://www.cutout.pro",
+           "features": "AI自动抠图"
+         },
+         {
+           "name": "photo4you",
+           "link": "https://www.photo4you.com",
+           "features": "AI自动去除背景/护照/签证等多种官方尺寸。"
+         },
+         {
+           "name": "拍点点证件照",
+           "link": "https://tool.idphoto.cn",
+           "features": "换底色/换服装/处理回执签证照片。"
+         },
+         {
+           "name": "Pixfit",
+           "link": "https://pix-fit.com/zh-Hans",
+           "features": "本地AI处理，证件照裁剪/换底色/压缩/打印排版"
+         },
+         {
+           "name": "美图秀秀",
+           "link": "https://pc.meitu.com/id-photos",
+           "features": "抠图/换底色/一寸二寸尺寸调整免费导出无水印"
+         },
+         {
+           "name": "凡人AI",
+           "link": "https://www.fanrenai.com/zhengjianzhao/",
+           "features": "四六级/教资/公务员/签证所有考试尺寸"
+         },
+         {
+           "name": "可立图",
+           "link": "https://www.clipimg.com/",
+           "features": "一键换底色/基础美颜/A4排版打印"
+         }
+      ]
+    }
+  ];
+
+  /* ===== 工具函数 ===== */
+  const content = document.getElementById('content');
+  const searchInput = document.getElementById('search');
+  const countTip = document.getElementById('countTip');
+  const totalCount = document.getElementById('totalCount');
+  const pageTitle = document.getElementById('pageTitle');
+  const langToggle = document.getElementById('langToggle');
+  const footerPrefix = document.getElementById('footerPrefix');
+  const footerSuffix = document.getElementById('footerSuffix');
+
+  // 中英文文案：h1 标题、搜索提示、空状态、页脚、切换按钮文字
+  const I18N = {
+    zh: {
+      title: "实用网址导航",
+      found: n => `找到 ${n} 个相关网站`,
+      notFound: "没有找到匹配的网站，换个关键词试试～",
+      empty: "没有找到匹配的网站",
+      footerPrefix: "共收录",
+      footerSuffix: "个实用网站",
+      toggle: "EN"
+    },
+    en: {
+      title: "Useful Web Navigation",
+      found: n => `Found ${n} related sites`,
+      notFound: "No matching sites found, try another keyword~",
+      empty: "No matching sites found",
+      footerPrefix: "Collected",
+      footerSuffix: "useful sites",
+      toggle: "中"
+    }
+  };
+
+  // 当前语言：默认中文，localStorage 持久化用户选择
+  let lang = localStorage.getItem('nav_lang') === 'en' ? 'en' : 'zh';
+
+  // 应用语言到所有静态文案（h1 / 页脚 / 切换按钮）
+  function applyLang() {
+    const t = I18N[lang];
+    pageTitle.textContent = t.title;
+    footerPrefix.textContent = t.footerPrefix;
+    footerSuffix.textContent = t.footerSuffix;
+    langToggle.textContent = t.toggle;
+    document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+  }
+
+  // 点击切换语言并重新渲染
+  langToggle.addEventListener('click', () => {
+    lang = lang === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('nav_lang', lang);
+    applyLang();
+    render(searchInput.value);
+  });
+
+  // 统计总网站数（去重按名称）
+  function calcTotal() {
+    const all = NAV_DATA.flatMap(g => g.webList);
+    totalCount.textContent = all.length;
+  }
+
+  // 渲染分组与卡片
+  function render(keyword = '') {
+    const kw = keyword.trim().toLowerCase();
+    content.innerHTML = '';
+    let matchedTotal = 0;
+    let hasAny = false;
+
+    NAV_DATA.forEach(group => {
+      // 过滤当前分组内符合搜索词的网站
+      const items = group.webList.filter(item => {
+        if (!kw) return true;
+        const hay = (item.name + ' ' + item.features + ' ' + item.link).toLowerCase();
+        return hay.includes(kw);
+      });
+      if (items.length === 0) return;
+
+      hasAny = true;
+      matchedTotal += items.length;
+
+      const groupEl = document.createElement('section');
+      groupEl.className = 'group';
+
+      const title = document.createElement('div');
+      title.className = 'group-title';
+      title.setAttribute('role', 'button');
+      title.setAttribute('aria-expanded', 'true');
+      // 根据当前语言选择分组名（中文 groupName / 英文 groupNameEn）
+      const groupLabel = lang === 'en' ? (group.groupNameEn || group.groupName) : group.groupName;
+      title.innerHTML = `<span>${escapeHtml(groupLabel)}</span>` +
+        `<span class="badge">${items.length}</span>` +
+        `<span class="arrow">▾</span>`;
+      // 点击标题：展开/收缩该分组
+      title.addEventListener('click', () => {
+        const collapsed = groupEl.classList.toggle('collapsed');
+        title.setAttribute('aria-expanded', String(!collapsed));
+      });
+      groupEl.appendChild(title);
+
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+
+      items.forEach(item => {
+        const a = document.createElement('a');
+        a.className = 'card';
+        a.href = item.link;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML =
+          `<div class="name">${escapeHtml(item.name)}</div>` +
+          `<div class="features">${escapeHtml(item.features)}</div>`;
+        grid.appendChild(a);
+      });
+
+      groupEl.appendChild(grid);
+      content.appendChild(groupEl);
+    });
+
+    // 搜索结果提示（随语言切换）
+    const t = I18N[lang];
+    if (kw) {
+      countTip.textContent = matchedTotal > 0
+        ? t.found(matchedTotal)
+        : t.notFound;
+    } else {
+      countTip.textContent = '';
+    }
+
+    if (!hasAny) {
+      content.innerHTML = `<div class="empty">${t.empty}</div>`;
+    }
+  }
+
+  // 防止 HTML 注入
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  /* ===== 事件绑定 ===== */
+  searchInput.addEventListener('input', e => render(e.target.value));
+  applyLang();   // 按持久化的语言初始化标题、页脚、切换按钮文案
+  calcTotal();
+  render();
+</script>
+</body>
+</html>
