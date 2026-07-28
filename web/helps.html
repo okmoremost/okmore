@@ -312,85 +312,8 @@
             <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="展开/收起侧栏">« 收起</button>
         </nav>
 
-        <!-- 右侧内容区 -->
-        <main class="content" id="content">
-            <!-- 首页：使用帮助手册 -->
-            <section id="sec-home" class="active">
-                <h2 data-i18n="homeTitle">使用帮助手册</h2>
-                <p data-i18n="homeBody1">电脑端书签同步推荐使用开源项目 <a href="https://floccus.org/download" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
-            </section>
-
-            <!-- 书签同步（WebDav / Git 的上级分类） -->
-            <section id="sec-bookmarksync">
-                <h2 data-i18n="bookmarksyncTitle">书签同步</h2>
-                <p data-i18n="bookmarksyncBody1">书签同步支持 WebDav/Git/Nextcloud 三种方式，可将书签、设置等数据备份到网盘或代码仓库。</p>
-            </section>
-
-            <!-- 书签同步 / Nextcloud -->
-            <section id="sec-nextcloud">
-                <h2 data-i18n="nextcloudTitle">Nextcloud</h2>
-                <p data-i18n="nextcloudBody1">待更新。</p>
-            </section>
-
-            <!-- WebDav -->
-            <section id="sec-webdav">
-                <h2 data-i18n="webdavTitle">WebDav</h2>
-                <p data-i18n="webdavBody1">通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。</p>
-                <p data-i18n="webdavBody2">（内容待补充）</p>
-            </section>
-
-            <!-- WebDav / 坚果云 -->
-            <section id="sec-webdav-jianguoyun">
-                <h2 data-i18n="webdavJyTitle">坚果云</h2>
-                <div class="help-imgs">
-                    <img data-help-img="jianguoyun" data-ext="png" alt="坚果云" />
-                    <p class="help-note" data-i18n="webdavJyPwdNote">密码来源于设置的第三方应用授权的密码</p>
-                    <p class="help-note" data-i18n="webdavJyBody1">电脑操作如下图：</p>
-                    <img data-help-img="jianguoyun_pc_1" data-ext="png" alt="电脑操作 1" />
-                    <img data-help-img="jianguoyun_pc_2" data-ext="png" alt="电脑操作 2" />
-                </div>
-            </section>
-
-            <!-- WebDav / Koofr -->
-            <section id="sec-webdav-koofr">
-                <h2 data-i18n="webdavKoofrTitle">Koofr</h2>
-                <p data-i18n="webdavKoofrBody1">Koofr WebDav 配置说明。</p>
-                <p class="help-note" data-i18n="webdavKoofrPwdNote">密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码</p>
-            </section>
-
-            <!-- WebDav / 其它 -->
-            <section id="sec-webdav-other">
-                <h2 data-i18n="webdavOtherTitle">其它</h2>
-                <p data-i18n="webdavOtherBody1">大概步骤同坚果云、Koofr，待更新。</p>
-            </section>
-
-            <!-- Git -->
-            <section id="sec-git">
-                <h2 data-i18n="gitTitle">Git</h2>
-                <p data-i18n="gitBody1">通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。</p>
-                <p data-i18n="gitBody2">（内容待补充）</p>
-            </section>
-
-            <!-- Git / Gitee -->
-            <section id="sec-git-gitee">
-                <h2 data-i18n="gitGiteeTitle">Gitee</h2>
-                <p data-i18n="gitGiteeBody1">先创建仓库，Gitee 配置如下图：</p>
-                <div class="help-imgs">
-                    <img data-help-img="gitee" data-ext="jpg" alt="Gitee" />
-                    <p class="help-note" data-i18n="gitGiteePwdNote">密码来源于设置——私人令牌</p>
-                </div>
-            </section>
-
-            <!-- Git / Github -->
-            <section id="sec-git-github">
-                <h2 data-i18n="gitGithubTitle">Github</h2>
-                <p data-i18n="gitGithubBody1">先创建仓库，Github 配置如下图：</p>
-                <div class="help-imgs">
-                    <img data-help-img="github" data-ext="jpg" alt="Github" />
-                    <p class="help-note" data-i18n="gitGithubPwdNote">密码来源于 Settings——Developer Settings——Personal access tokens</p>
-                </div>
-            </section>
-        </main>
+        <!-- 右侧内容区：由脚本根据 OKMORE_HELP_NAV + OKMORE_HELP_CONTENT 循环生成（富文本 Markdown） -->
+        <main class="content" id="content"></main>
     </div>
 
     <!-- 多语言：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
@@ -398,18 +321,18 @@
     // 左侧列表数据源：支持二级 children。新增条目只需在此数组追加，并加一个对应 id 的 section。
     // i18nKey 存在时，标签走 [data-i18n] 由 okmoreApplyI18n 统一切换；品牌名（坚果云/Koofr/Gitee/Github）无 i18nKey，保持原样。
     var OKMORE_HELP_NAV = [
-        { id: 'home', label: '使用帮助手册', i18nKey: 'navHome' },
-        { id: 'bookmarksync', label: '书签同步', i18nKey: 'navBookmarksync', children: [
-            { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', children: [
-                { id: 'webdav-jianguoyun', label: '坚果云' },
-                { id: 'webdav-koofr',      label: 'Koofr' },
-                { id: 'webdav-other',      label: '其它', i18nKey: 'navWebdavOther' }
+        { id: 'home', label: '使用帮助手册', i18nKey: 'navHome', titleKey: 'homeTitle' },
+        { id: 'bookmarksync', label: '书签同步', i18nKey: 'navBookmarksync', titleKey: 'bookmarksyncTitle', children: [
+            { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', titleKey: 'webdavTitle', children: [
+                { id: 'webdav-jianguoyun', label: '坚果云', titleKey: 'webdavJyTitle' },
+                { id: 'webdav-koofr',      label: 'Koofr', titleKey: 'webdavKoofrTitle' },
+                { id: 'webdav-other',      label: '其它', i18nKey: 'navWebdavOther', titleKey: 'webdavOtherTitle' }
             ]},
-            { id: 'git', label: 'Git', i18nKey: 'navGit', children: [
-                { id: 'git-gitee',  label: 'Gitee' },
-                { id: 'git-github', label: 'Github' }
+            { id: 'git', label: 'Git', i18nKey: 'navGit', titleKey: 'gitTitle', children: [
+                { id: 'git-gitee',  label: 'Gitee', titleKey: 'gitGiteeTitle' },
+                { id: 'git-github', label: 'Github', titleKey: 'gitGithubTitle' }
             ]},
-            { id: 'nextcloud', label: 'Nextcloud', i18nKey: 'navNextcloud' }
+            { id: 'nextcloud', label: 'Nextcloud', i18nKey: 'navNextcloud', titleKey: 'nextcloudTitle' }
         ]}
     ];
 
@@ -430,31 +353,15 @@
             navGit: 'Git',
             navNextcloud: 'Nextcloud',
             homeTitle: '使用帮助手册',
-            homeBody1: '电脑端书签同步推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
             bookmarksyncTitle: '书签同步',
-            bookmarksyncBody1: '书签同步支持 WebDav/Git/Nextcloud 三种方式，可将书签、设置等数据备份到网盘或代码仓库。电脑端书签同步推荐开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>',
             nextcloudTitle: 'Nextcloud',
-            nextcloudBody1: '待更新。',
             webdavTitle: 'WebDav',
-            webdavBody1: '通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。',
-            webdavBody2: '支持加密，自建云盘、自建NAS、坚果云、Koofr、pCloud、IceDrive、kDrive、MagentaCLOUD、Disroot、Mailbox.org、Synology NAS、GMX、WEB.DE等',
             webdavJyTitle: '坚果云',
-            webdavJyBody1: '电脑操作如下图：',
-            webdavJyPwdNote: '密码来源于设置的第三方应用授权的密码',
             webdavKoofrTitle: 'Koofr',
-            webdavKoofrBody1: 'Koofr WebDav 配置说明。',
-            webdavKoofrPwdNote: '密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码',
             webdavOtherTitle: '其它',
-            webdavOtherBody1: '大概步骤同坚果云、Koofr，待更新。',
             gitTitle: 'Git',
-            gitBody1: '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。',
-            gitBody2: 'Git 仓库同步，如Gitee、Github、GitLab、Gitea等，不支持加密',
             gitGiteeTitle: 'Gitee',
-            gitGiteeBody1: '先创建仓库，Gitee 配置如下图：',
-            gitGiteePwdNote: '密码来源于设置——私人令牌',
-            gitGithubTitle: 'Github',
-            gitGithubBody1: '先创建仓库，Github 配置如下图：',
-            gitGithubPwdNote: '密码来源于 Settings——Developer Settings——Personal access tokens'
+            gitGithubTitle: 'Github'
         },
         en: {
             title: 'OkMore Browser - Help Manual',
@@ -467,33 +374,140 @@
             navGit: 'Git',
             navNextcloud: 'Nextcloud',
             homeTitle: 'Help Manual',
-            homeBody1: 'For desktop bookmarks sync, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
             bookmarksyncTitle: 'Bookmark Sync',
-            bookmarksyncBody1: 'Bookmark Sync supports WebDav/Git/Nextcloud. You can back up bookmarks and settings to a cloud drive or a code repository.For desktop bookmarks sync, the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>',
             nextcloudTitle: 'Nextcloud',
-            nextcloudBody1: 'To be updated.',
             webdavTitle: 'WebDav',
-            webdavBody1: 'Sync bookmarks and settings to your own or third-party WebDav storage.',
-            webdavBody2: 'Supports encryption, self-hosted cloud, NAS, Nutstore, Koofr, pCloud, IceDrive, kDrive, MagentaCLOUD, Disroot, Mailbox.org, Synology NAS, GMX, WEB.DE, etc.',
-            webdavJyTitle: 'Nutstore',
-            webdavJyBody1: 'PC operations are shown below:',
-            webdavJyPwdNote: 'The password is the one you set for third-party app authorization',
+            webdavJyTitle: 'jianguoyun',
             webdavKoofrTitle: 'Koofr',
-            webdavKoofrBody1: 'Koofr WebDav configuration guide.',
-            webdavKoofrPwdNote: 'The password comes from <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> — the "Generate new password" at the bottom',
             webdavOtherTitle: 'Other',
-            webdavOtherBody1: 'Roughly the same steps as Nutstore and Koofr. To be updated.',
             gitTitle: 'Git',
-            gitBody1: 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).',
-            gitBody2: 'Git repository sync, such as Gitee, GitHub, GitLab, Gitea, etc., does not support encryption.',
             gitGiteeTitle: 'Gitee',
-            gitGiteeBody1: 'Create a repository first, Gitee configuration is shown below:',
-            gitGiteePwdNote: 'The password comes from Settings — Private Token',
-            gitGithubTitle: 'Github',
-            gitGithubBody1: 'Create a repository first, Github configuration is shown below:',
-            gitGithubPwdNote: 'The password comes from Settings — Developer Settings — Personal access tokens'
+            gitGithubTitle: 'Github'
         }
     };
+
+    // 右侧内容：以 Markdown 编写（富文本），按导航项 id 取值，由脚本渲染。
+    var OKMORE_HELP_CONTENT = {
+        zh: {
+            'home': '电脑端书签同步推荐使用开源项目 [floccus](https://github.com/floccusaddon/floccus)，支持 Chrome / Edge / Firefox。',
+            'bookmarksync': '书签同步支持 WebDav/Git/Nextcloud 三种方式，可将书签、设置等数据备份到网盘或代码仓库。\n\n电脑端书签同步推荐开源项目 [floccus](https://github.com/floccusaddon/floccus)',
+            'nextcloud': '待更新。',
+            'webdav': '通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。\n\n支持加密，自建云盘、自建NAS、坚果云、中国科技云、Koofr、pCloud、IceDrive、kDrive、MagentaCLOUD、Disroot、Mailbox.org、Synology NAS、GMX、WEB.DE，仅会员/付费解锁：阿里云盘、天翼云盘、123云盘等',
+            'webdav-jianguoyun': '![坚果云](help:jianguoyun|png)\n> 密码来源于设置的第三方应用授权的密码\n> 电脑操作如下图：\n![电脑操作 1](help:jianguoyun_pc_1|png)\n![电脑操作 2](help:jianguoyun_pc_2|png)',
+            'webdav-koofr': 'Koofr WebDav 配置说明。\n\n> 密码来源于 [https://app.koofr.net/app/admin/preferences/password](https://app.koofr.net/app/admin/preferences/password) 最下面的生成新密码',
+            'webdav-other': '大概步骤同坚果云、Koofr，待更新。',
+            'git': '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。\n\nGit 仓库同步，如Gitee、Github、GitLab、Gitea等，不支持加密',
+            'git-gitee': '先创建仓库，Gitee 配置如下图：\n\n![Gitee](help:gitee|jpg)\n> 密码来源于设置——私人令牌',
+            'git-github': '先创建仓库，Github 配置如下图：\n\n![Github](help:github|jpg)\n> 密码来源于 Settings——Developer Settings——Personal access tokens'
+        },
+        en: {
+            'home': 'For desktop bookmarks sync, we recommend the open-source project [floccus](https://github.com/floccusaddon/floccus), which supports Chrome / Edge / Firefox.',
+            'bookmarksync': 'Bookmark Sync supports WebDav/Git/Nextcloud. You can back up bookmarks and settings to a cloud drive or a code repository.\n\nFor desktop bookmarks sync, the open-source project [floccus](https://github.com/floccusaddon/floccus)',
+            'nextcloud': 'To be updated.',
+            'webdav': 'Sync bookmarks and settings to your own or third-party WebDav storage.\n\nSupports encryption, self-hosted cloud, NAS, Nutstore, Koofr, pCloud, IceDrive, kDrive, MagentaCLOUD, Disroot, Mailbox.org, Synology NAS, GMX, WEB.DE, etc.',
+            'webdav-jianguoyun': '![Nutstore](help:jianguoyun|png)\n> The password is the one you set for third-party app authorization\n> PC operations are shown below:\n![PC operation 1](help:jianguoyun_pc_1|png)\n![PC operation 2](help:jianguoyun_pc_2|png)',
+            'webdav-koofr': 'Koofr WebDav configuration guide.\n\n> The password comes from [https://app.koofr.net/app/admin/preferences/password](https://app.koofr.net/app/admin/preferences/password) — the "Generate new password" at the bottom',
+            'webdav-other': 'Roughly the same steps as Nutstore and Koofr. To be updated.',
+            'git': 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).\n\nGit repository sync, such as Gitee, GitHub, GitLab, Gitea, etc., does not support encryption.',
+            'git-gitee': 'Create a repository first, Gitee configuration is shown below:\n\n![Gitee](help:gitee|jpg)\n> The password comes from Settings — Private Token',
+            'git-github': 'Create a repository first, Github configuration is shown below:\n\n![Github](help:github|jpg)\n> The password comes from Settings — Developer Settings — Personal access tokens'
+        }
+    };
+
+    // 按当前语言取某导航项 id 对应的 Markdown 内容
+    function getHelpContent(id){
+        var lang = okmoreGetLang();
+        var d = OKMORE_HELP_CONTENT[lang] || OKMORE_HELP_CONTENT.zh;
+        return (d && d[id] != null) ? d[id] : '';
+    }
+
+    // HTML 转义，防止 Markdown 文本中的特殊字符破坏结构
+    function escapeHtml(str){
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    // 行内富文本：代码、加粗、斜体、链接（默认新窗口打开）
+    function inlineMd(s){
+        s = escapeHtml(s);
+        s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+        s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+        s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function(m, t, u){
+            var parts = u.split('|');
+            var href = parts[0];
+            var target = parts[1] || '_blank';
+            return '<a href="' + href + '" target="' + target + '" rel="noopener">' + t + '</a>';
+        });
+        return s;
+    }
+
+    // 极简 Markdown → HTML（段落 / 标题 / 列表 / 引用=红色说明 / 帮助截图）
+    // 帮助截图语法：![alt](help:名称|扩展名) → <img data-help-img data-ext>，由 applyHelpImages 注入实际路径
+    function mdToHtml(md){
+        var lines = String(md || '').replace(/\r\n/g, '\n').split('\n');
+        var html = '';
+        var para = [], ul = [], ol = [], note = [], imgs = [];
+
+        function flushPara(){ if (para.length){ html += '<p>' + inlineMd(para.join(' ')) + '</p>'; para = []; } }
+        function flushList(){
+            if (ul.length){ html += '<ul>' + ul.map(function(x){ return '<li>' + inlineMd(x) + '</li>'; }).join('') + '</ul>'; ul = []; }
+            if (ol.length){ html += '<ol>' + ol.map(function(x){ return '<li>' + inlineMd(x) + '</li>'; }).join('') + '</ol>'; ol = []; }
+        }
+        function flushNote(){ if (note.length){ html += '<div class="help-note">' + inlineMd(note.join(' ')) + '</div>'; note = []; } }
+        function flushImgs(){ if (imgs.length){ html += '<div class="help-imgs">' + imgs.join('') + '</div>'; imgs = []; } }
+
+        for (var i = 0; i < lines.length; i++){
+            var line = lines[i];
+            if (/^\s*$/.test(line)){ flushPara(); flushList(); flushNote(); flushImgs(); continue; }
+            var h = line.match(/^(#{1,3})\s+(.*)$/);
+            if (h){ flushPara(); flushList(); flushNote(); flushImgs(); var tag = h[1].length >= 3 ? 'h4' : 'h3'; html += '<' + tag + '>' + inlineMd(h[2]) + '</' + tag + '>'; continue; }
+            var bq = line.match(/^>\s?(.*)$/);
+            if (bq){ flushPara(); flushList(); flushImgs(); note.push(bq[1]); continue; }
+            var img = line.match(/^!\[([^\]]*)\]\(help:([^|]+)\|([^)]+)\)$/);
+            if (img){ flushPara(); flushList(); flushNote(); imgs.push('<img data-help-img="' + img[2].trim() + '" data-ext="' + img[3].trim() + '" alt="' + img[1] + '">'); continue; }
+            var uli = line.match(/^[-*]\s+(.*)$/);
+            if (uli){ flushPara(); flushNote(); flushImgs(); ul.push(uli[1]); continue; }
+            var oli = line.match(/^\d+\.\s+(.*)$/);
+            if (oli){ flushPara(); flushNote(); flushImgs(); ol.push(oli[1]); continue; }
+            flushList(); flushNote(); flushImgs();
+            para.push(line.trim());
+        }
+        flushPara(); flushList(); flushNote(); flushImgs();
+        return html;
+    }
+
+    // 根据导航数据循环生成右侧所有 section（含书签同步的子目录/子子目录）
+    function renderContent(){
+        var content = document.getElementById('content');
+        var items = [];
+        (function collect(list){
+            list.forEach(function(it){
+                items.push(it);
+                if (it.children) collect(it.children);
+            });
+        })(OKMORE_HELP_NAV);
+
+        items.forEach(function(it){
+            var sec = document.createElement('section');
+            sec.id = 'sec-' + it.id;
+            var h2 = document.createElement('h2');
+            if (it.titleKey) h2.setAttribute('data-i18n', it.titleKey);
+            h2.textContent = it.label;
+            sec.appendChild(h2);
+            var body = document.createElement('div');
+            body.className = 'help-body';
+            body.innerHTML = mdToHtml(getHelpContent(it.id));
+            sec.appendChild(body);
+            content.appendChild(sec);
+        });
+
+        var home = document.getElementById('sec-home');
+        if (home) home.classList.add('active');
+    }
 
     function T(k){
         var d = OKMORE_I18N[okmoreGetLang()];
@@ -627,7 +641,11 @@
     document.documentElement.setAttribute('data-lang', okmoreGetLang());
     document.addEventListener('DOMContentLoaded', function(){
         renderNav();
+        renderContent();
         okmoreApplyI18n();
+        // 默认高亮首页导航项
+        var homeNav = document.querySelector('[data-target="sec-home"]');
+        if (homeNav) homeNav.classList.add('active');
 
         // 侧栏展开/收起：展开为当前宽度，收起收窄为仅显示首字缩略
         var layoutEl = document.getElementById('layout');
