@@ -317,13 +317,13 @@
             <!-- 首页：使用帮助手册 -->
             <section id="sec-home" class="active">
                 <h2 data-i18n="homeTitle">使用帮助手册</h2>
-                <p data-i18n="homeBody1">电脑端书签推荐使用开源项目 <a href="https://floccus.org/download" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
+                <p data-i18n="homeBody1">电脑端书签同步推荐使用开源项目 <a href="https://floccus.org/download" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
             </section>
 
             <!-- 书签同步（WebDav / Git 的上级分类） -->
             <section id="sec-bookmarksync">
                 <h2 data-i18n="bookmarksyncTitle">书签同步</h2>
-                <p data-i18n="bookmarksyncBody1">书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。</p>
+                <p data-i18n="bookmarksyncBody1">书签同步支持 WebDav/Git/Nextcloud 三种方式，可将书签、设置等数据备份到网盘或代码仓库。</p>
             </section>
 
             <!-- 书签同步 / Nextcloud -->
@@ -342,10 +342,10 @@
             <!-- WebDav / 坚果云 -->
             <section id="sec-webdav-jianguoyun">
                 <h2 data-i18n="webdavJyTitle">坚果云</h2>
-                <p data-i18n="webdavJyBody1">电脑操作如下图：</p>
                 <div class="help-imgs">
                     <img data-help-img="jianguoyun" data-ext="png" alt="坚果云" />
                     <p class="help-note" data-i18n="webdavJyPwdNote">密码来源于设置的第三方应用授权的密码</p>
+                    <p class="help-note" data-i18n="webdavJyBody1">电脑操作如下图：</p>
                     <img data-help-img="jianguoyun_pc_1" data-ext="png" alt="电脑操作 1" />
                     <img data-help-img="jianguoyun_pc_2" data-ext="png" alt="电脑操作 2" />
                 </div>
@@ -374,7 +374,7 @@
             <!-- Git / Gitee -->
             <section id="sec-git-gitee">
                 <h2 data-i18n="gitGiteeTitle">Gitee</h2>
-                <p data-i18n="gitGiteeBody1">Gitee 配置操作如下图：</p>
+                <p data-i18n="gitGiteeBody1">先创建仓库，Gitee 配置如下图：</p>
                 <div class="help-imgs">
                     <img data-help-img="gitee" data-ext="jpg" alt="Gitee" />
                     <p class="help-note" data-i18n="gitGiteePwdNote">密码来源于设置——私人令牌</p>
@@ -384,7 +384,7 @@
             <!-- Git / Github -->
             <section id="sec-git-github">
                 <h2 data-i18n="gitGithubTitle">Github</h2>
-                <p data-i18n="gitGithubBody1">Github 配置操作如下图：</p>
+                <p data-i18n="gitGithubBody1">先创建仓库，Github 配置如下图：</p>
                 <div class="help-imgs">
                     <img data-help-img="github" data-ext="jpg" alt="Github" />
                     <p class="help-note" data-i18n="gitGithubPwdNote">密码来源于 Settings——Developer Settings——Personal access tokens</p>
@@ -430,9 +430,9 @@
             navGit: 'Git',
             navNextcloud: 'Nextcloud',
             homeTitle: '使用帮助手册',
-            homeBody1: '电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
+            homeBody1: '电脑端书签同步推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
             bookmarksyncTitle: '书签同步',
-            bookmarksyncBody1: '书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。',
+            bookmarksyncBody1: '书签同步支持 WebDav/Git/Nextcloud 三种方式，可将书签、设置等数据备份到网盘或代码仓库。电脑端书签同步推荐开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>',
             nextcloudTitle: 'Nextcloud',
             nextcloudBody1: '待更新。',
             webdavTitle: 'WebDav',
@@ -450,10 +450,10 @@
             gitBody1: '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。',
             gitBody2: 'Git 仓库同步，如Gitee、Github、GitLab、Gitea等，不支持加密',
             gitGiteeTitle: 'Gitee',
-            gitGiteeBody1: 'Gitee 配置操作如下图：',
+            gitGiteeBody1: '先创建仓库，Gitee 配置如下图：',
             gitGiteePwdNote: '密码来源于设置——私人令牌',
             gitGithubTitle: 'Github',
-            gitGithubBody1: 'Github 配置操作如下图：',
+            gitGithubBody1: '先创建仓库，Github 配置如下图：',
             gitGithubPwdNote: '密码来源于 Settings——Developer Settings——Personal access tokens'
         },
         en: {
@@ -467,9 +467,9 @@
             navGit: 'Git',
             navNextcloud: 'Nextcloud',
             homeTitle: 'Help Manual',
-            homeBody1: 'For desktop bookmarks, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
+            homeBody1: 'For desktop bookmarks sync, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
             bookmarksyncTitle: 'Bookmark Sync',
-            bookmarksyncBody1: 'Bookmark Sync supports WebDav and Git. You can back up bookmarks and settings to a cloud drive or a code repository.',
+            bookmarksyncBody1: 'Bookmark Sync supports WebDav/Git/Nextcloud. You can back up bookmarks and settings to a cloud drive or a code repository.For desktop bookmarks sync, the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>',
             nextcloudTitle: 'Nextcloud',
             nextcloudBody1: 'To be updated.',
             webdavTitle: 'WebDav',
@@ -487,10 +487,10 @@
             gitBody1: 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).',
             gitBody2: 'Git repository sync, such as Gitee, GitHub, GitLab, Gitea, etc., does not support encryption.',
             gitGiteeTitle: 'Gitee',
-            gitGiteeBody1: 'Gitee configuration is shown below:',
+            gitGiteeBody1: 'Create a repository first, Gitee configuration is shown below:',
             gitGiteePwdNote: 'The password comes from Settings — Private Token',
             gitGithubTitle: 'Github',
-            gitGithubBody1: 'Github configuration is shown below:',
+            gitGithubBody1: 'Create a repository first, Github configuration is shown below:',
             gitGithubPwdNote: 'The password comes from Settings — Developer Settings — Personal access tokens'
         }
     };

@@ -20,7 +20,6 @@ jobs:
         # 用固定文件名上传，保证 releases/latest/download/xxx 永远指向最新版
         run: |
           mkdir -p dist
-          cp apk/okmore_v*.apk      dist/okmore.apk
           cp apk/okmore_lite_v*.apk dist/okmore_lite.apk
           cp apk/okmore_full_v*.apk dist/okmore_full.apk
           ls -lh dist
@@ -34,7 +33,6 @@ jobs:
           generate_release_notes: true
           # 上传稳定命名的文件作为附件（latest 链接依赖固定文件名）
           files: |
-            dist/okmore.apk
             dist/okmore_lite.apk
             dist/okmore_full.apk
         env:
