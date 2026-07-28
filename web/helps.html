@@ -46,7 +46,7 @@
 
         /* 左侧列表（PC 端固定侧栏） */
         .sidebar {
-            width: 240px;
+            width: 180px;
             flex-shrink: 0;
             background: #fff;
             border-radius: 0 0 14px 14px;
@@ -117,6 +117,45 @@
             font-weight: 400;
             border-left-color: transparent;
         }
+
+        /* 多级嵌套的递进缩进（折叠态由 .layout.collapsed 规则覆盖为 0） */
+        .sidebar .nav-depth-1 { padding-left: 2.6rem; }
+        .sidebar .nav-depth-2 { padding-left: 3.8rem; }
+
+        /* 侧栏展开/收起按钮 */
+        .sidebar-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 0 0 0.5rem;
+            padding: 0.55rem;
+            border: none;
+            border-radius: 10px;
+            background: #eff4ff;
+            color: #2563eb;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sidebar-toggle:hover { background: #dbe7ff; }
+
+        /* 折叠态：侧栏收窄为缩略条，仅显示每项首字 */
+        .sidebar .nav-label { display: inline; }
+        .sidebar .nav-mono { display: none; }
+        .layout.collapsed .sidebar { width: 42px; min-width: 42px; }
+        .layout.collapsed .sidebar .nav-label { display: none; }
+        .layout.collapsed .sidebar .nav-mono { display: inline; }
+        .layout.collapsed .sidebar .nav-item {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .layout.collapsed .sidebar .nav-child { padding-left: 0; }
+        .layout.collapsed .sidebar .nav-toggle { display: none; }
+        .layout.collapsed .sidebar-toggle { font-size: 1.1rem; }
 
         /* 右侧内容区 */
         .content {
@@ -197,42 +236,53 @@
             font-size: 0.95rem;
             font-weight: 600;
             margin: 0.2rem 0;
+            /* 长 URL（如 Koofr 密码链接）在窄屏能正常换行，不溢出内容区 */
+            overflow-wrap: anywhere;
+            word-break: break-word;
         }
 
         /* 红色说明内的链接保持红色，避免与红字不协调 */
         .content .help-note a {
             color: #e11d48;
             text-decoration: underline;
+            /* 链接内的 URL 也允许在任意字符间断行 */
+            overflow-wrap: anywhere;
+            word-break: break-all;
         }
 
         /* 移动端：左侧列表变为顶部横向可滚动标签，内容在下方 */
         @media (max-width: 768px) {
+            /* 手机端仍保持左右两栏：窄侧栏 + 自适应内容，不改上下排布 */
             .layout {
-                flex-direction: column;
+                flex-direction: row;
                 min-height: auto;
             }
 
             .sidebar {
-                width: auto;
-                margin: 1rem 5% 0;
+                width: 34%;
+                max-width: 180px;
+                min-width: 104px;
+                margin: 1rem 0.5rem 1rem 4%;
                 position: static;
-                display: flex;
-                flex-direction: column;
-                padding: 0.5rem;
+                align-self: stretch;
+                padding: 0.6rem 0;
                 border-radius: 14px;
             }
 
             .sidebar .nav-item {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.92rem;
                 border-left: none;
             }
 
             .sidebar .nav-child {
-                padding-left: 2.6rem;
+                padding: 0.6rem 0.8rem 0.6rem 1.7rem;
+                font-size: 0.88rem;
             }
 
             .content {
-                margin: 1rem 5% 2rem;
-                padding: 1.6rem 1.4rem;
+                margin: 1rem 4% 1rem 0;
+                padding: 1.4rem 1.2rem;
             }
 
             .content h2 {
@@ -243,6 +293,9 @@
             .help-imgs img {
                 max-width: 100%;
             }
+
+            /* 手机端收缩态宽度再减半（PC 为 30px，这里取 15px），并覆盖展开态的 min-width 使其真正收窄 */
+            .layout.collapsed .sidebar { width: 32px; min-width: 32px; }
         }
     </style>
 </head>
@@ -252,10 +305,12 @@
         <p data-i18n="headerDesc">OK以上浏览器 · 常见问题与使用指南</p>
     </header>
 
-    <div class="layout">
+    <div class="layout" id="layout">
         <!-- 左侧列表：支持二级子目录。新增条目时在 OKMORE_HELP_NAV 追加；
-             含 children 的项为可折叠父级，叶节点点击切换右侧 section（id 对应 sec-xxx） -->
-        <nav class="sidebar" id="sidebar"></nav>
+            含 children 的项为可折叠父级，叶节点点击切换右侧 section（id 对应 sec-xxx） -->
+        <nav class="sidebar" id="sidebar">
+            <button type="button" id="sidebarToggle" class="sidebar-toggle" aria-label="展开/收起侧栏">« 收起</button>
+        </nav>
 
         <!-- 右侧内容区 -->
         <main class="content" id="content">
@@ -263,6 +318,12 @@
             <section id="sec-home" class="active">
                 <h2 data-i18n="homeTitle">使用帮助手册</h2>
                 <p data-i18n="homeBody1">电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
+            </section>
+
+            <!-- 书签同步（WebDav / Git 的上级分类） -->
+            <section id="sec-bookmarksync">
+                <h2 data-i18n="bookmarksyncTitle">书签同步</h2>
+                <p data-i18n="bookmarksyncBody1">书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。</p>
             </section>
 
             <!-- WebDav -->
@@ -326,13 +387,15 @@
     // i18nKey 存在时，标签走 [data-i18n] 由 okmoreApplyI18n 统一切换；品牌名（坚果云/Koofr/Gitee/Github）无 i18nKey，保持原样。
     var OKMORE_HELP_NAV = [
         { id: 'home', label: '使用帮助手册', i18nKey: 'navHome' },
-        { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', children: [
-            { id: 'webdav-jianguoyun', label: '坚果云' },
-            { id: 'webdav-koofr',      label: 'Koofr' }
-        ]},
-        { id: 'git', label: 'Git', i18nKey: 'navGit', children: [
-            { id: 'git-gitee',  label: 'Gitee' },
-            { id: 'git-github', label: 'Github' }
+        { id: 'bookmarksync', label: '书签同步', i18nKey: 'navBookmarksync', children: [
+            { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', children: [
+                { id: 'webdav-jianguoyun', label: '坚果云' },
+                { id: 'webdav-koofr',      label: 'Koofr' }
+            ]},
+            { id: 'git', label: 'Git', i18nKey: 'navGit', children: [
+                { id: 'git-gitee',  label: 'Gitee' },
+                { id: 'git-github', label: 'Github' }
+            ]}
         ]}
     ];
 
@@ -347,10 +410,13 @@
             headerTitle: '使用帮助手册',
             headerDesc: 'OK以上浏览器 · 常见问题与使用指南',
             navHome: '使用帮助手册',
+            navBookmarksync: '书签同步',
             navWebdav: 'WebDav',
             navGit: 'Git',
             homeTitle: '使用帮助手册',
             homeBody1: '电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
+            bookmarksyncTitle: '书签同步',
+            bookmarksyncBody1: '书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。',
             webdavTitle: 'WebDav',
             webdavBody1: '通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。',
             webdavBody2: '（内容待补充）',
@@ -375,10 +441,13 @@
             headerTitle: 'Help Manual',
             headerDesc: 'OkMore Browser · FAQ & Usage Guide',
             navHome: 'Help Manual',
+            navBookmarksync: 'Bookmark Sync',
             navWebdav: 'WebDav',
             navGit: 'Git',
             homeTitle: 'Help Manual',
             homeBody1: 'For desktop bookmarks, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
+            bookmarksyncTitle: 'Bookmark Sync',
+            bookmarksyncBody1: 'Bookmark Sync supports WebDav and Git. You can back up bookmarks and settings to a cloud drive or a code repository.',
             webdavTitle: 'WebDav',
             webdavBody1: 'Sync bookmarks and settings to your own or third-party WebDav storage.',
             webdavBody2: '(Content to be added)',
@@ -407,62 +476,70 @@
 
     // 渲染左侧列表（支持二级折叠）
     // 若节点带 i18nKey，则给标签元素打 data-i18n，由通用 okmoreApplyI18n() 统一切换中英文。
+    // 每个节点包含 .nav-label（展开时显示）与 .nav-mono（折叠时显示首字缩略）。
+    // 支持任意层级嵌套：含 children 的项生成「父级标题 + 子目录容器」，子项递归渲染。
     function renderNav(){
         var nav = document.getElementById('sidebar');
-        OKMORE_HELP_NAV.forEach(function(item){
+
+        // 构建「标签 + 首字缩略」两个 span 并追加到节点
+        function buildLabel(node, text, i18nKey){
+            var label = document.createElement('span');
+            label.className = 'nav-label';
+            if (i18nKey) label.setAttribute('data-i18n', i18nKey);
+            label.textContent = text;
+
+            var mono = document.createElement('span');
+            mono.className = 'nav-mono';
+            mono.textContent = text.charAt(0);
+
+            node.appendChild(label);
+            node.appendChild(mono);
+        }
+
+        // 递归渲染单个节点；container 为挂载容器（侧栏或父级子目录容器），depth 控制缩进层级
+        function buildNode(item, container, depth){
             if (item.children && item.children.length){
                 // 含子项的父级：可点击切换自身内容 + 折叠子目录
                 var parent = document.createElement('div');
-                parent.className = 'nav-item nav-parent';
-
-                var labelSpan = document.createElement('span');
-                if (item.i18nKey) labelSpan.setAttribute('data-i18n', item.i18nKey);
-                labelSpan.textContent = item.label;
+                parent.className = 'nav-item nav-parent' + (depth > 0 ? ' nav-child nav-depth-' + depth : '');
+                buildLabel(parent, item.label, item.i18nKey);
 
                 var toggle = document.createElement('span');
                 toggle.className = 'nav-toggle';
                 toggle.textContent = '▶';
-
-                parent.appendChild(labelSpan);
                 parent.appendChild(toggle);
 
                 var childrenWrap = document.createElement('div');
                 childrenWrap.className = 'nav-children';
 
-                // 父级点击：展开/收起子目录，并选中父级内容
                 parent.addEventListener('click', function(){
                     var isOpen = childrenWrap.classList.toggle('open');
                     parent.classList.toggle('open', isOpen);
-                    showSection(item.id, parent, childrenWrap);
+                    if (item.id) showSection(item.id, parent, childrenWrap);
                 });
 
                 item.children.forEach(function(child){
-                    var a = document.createElement('a');
-                    a.className = 'nav-item nav-child';
-                    if (child.i18nKey) a.setAttribute('data-i18n', child.i18nKey);
-                    a.textContent = child.label;
-                    a.setAttribute('data-target', 'sec-' + child.id);
-                    a.addEventListener('click', function(e){
-                        e.stopPropagation();
-                        showSection(child.id, parent, childrenWrap, a);
-                    });
-                    childrenWrap.appendChild(a);
+                    buildNode(child, childrenWrap, depth + 1);
                 });
 
-                nav.appendChild(parent);
-                nav.appendChild(childrenWrap);
+                container.appendChild(parent);
+                container.appendChild(childrenWrap);
             } else {
-                // 普通一级项
+                // 叶节点：点击切换右侧 section
                 var a = document.createElement('a');
-                a.className = 'nav-item';
-                if (item.i18nKey) a.setAttribute('data-i18n', item.i18nKey);
-                a.textContent = item.label;
+                a.className = 'nav-item nav-child' + (depth > 0 ? ' nav-depth-' + depth : '');
+                buildLabel(a, item.label, item.i18nKey);
                 a.setAttribute('data-target', 'sec-' + item.id);
-                a.addEventListener('click', function(){
-                    showSection(item.id, a);
+                a.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    showSection(item.id, null, container, a);
                 });
-                nav.appendChild(a);
+                container.appendChild(a);
             }
+        }
+
+        OKMORE_HELP_NAV.forEach(function(item){
+            buildNode(item, nav, 0);
         });
     }
 
@@ -525,6 +602,14 @@
     document.addEventListener('DOMContentLoaded', function(){
         renderNav();
         okmoreApplyI18n();
+
+        // 侧栏展开/收起：展开为当前宽度，收起收窄为仅显示首字缩略
+        var layoutEl = document.getElementById('layout');
+        var toggleBtn = document.getElementById('sidebarToggle');
+        toggleBtn.addEventListener('click', function(){
+            var collapsed = layoutEl.classList.toggle('collapsed');
+            toggleBtn.textContent = collapsed ? '»' : '« 收起';
+        });
     });
     </script>
 </body>
