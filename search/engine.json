@@ -1,9 +1,9 @@
 {
   "baidu": "https://www.baidu.com/s?wd=$encodedQuery",
-  "sogou": "https://www.sogou.com/web?query=$encodedQuery",
-  "so360": "https://www.so.com/s?q=$encodedQuery",
   "shenma": "https://m.sm.cn/s?q=$encodedQuery",
   "quark": "https://quark.sm.cn/s?q=$encodedQuery",
+  "sogou": "https://www.sogou.com/web?query=$encodedQuery",
+  "so360": "https://www.so.com/s?q=$encodedQuery",
   "google": "https://www.google.com/search?q=$encodedQuery",
   "bing": "https://www.bing.com/search?q=$encodedQuery",
   "yandex": "https://yandex.com/search/?text=$encodedQuery",
