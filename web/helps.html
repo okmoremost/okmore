@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">OK以上浏览器 - 使用帮助手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* 顶部标题栏 */
+        header {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 1.2rem 5%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            margin-bottom: 0.3rem;
+        }
+
+        header p {
+            opacity: 0.92;
+            font-size: 0.9rem;
+        }
+
+        /* 主体布局：左侧列表 + 右侧内容 */
+        .layout {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 220px);
+        }
+
+        /* 左侧列表（PC 端固定侧栏） */
+        .sidebar {
+            width: 240px;
+            flex-shrink: 0;
+            background: #fff;
+            border-radius: 0 0 14px 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+            margin: 1.5rem 1rem 2rem 5%;
+            align-self: flex-start;
+            position: sticky;
+            top: 1.5rem;
+        }
+
+        /* 一级导航项 */
+        .sidebar .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1.4rem;
+            color: #444;
+            text-decoration: none;
+            font-size: 1rem;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .sidebar .nav-item:hover {
+            background-color: #eff4ff;
+            color: #2563eb;
+        }
+
+        .sidebar .nav-item.active {
+            background-color: #eff4ff;
+            color: #2563eb;
+            border-left-color: #2563eb;
+            font-weight: 600;
+        }
+
+        /* 含子项的父级标题加粗 */
+        .sidebar .nav-parent {
+            font-weight: 600;
+        }
+
+        /* 折叠箭头 */
+        .sidebar .nav-toggle {
+            font-size: 0.75rem;
+            transition: transform 0.2s ease;
+            opacity: 0.6;
+        }
+
+        .sidebar .nav-parent.open .nav-toggle {
+            transform: rotate(90deg);
+        }
+
+        /* 二级子目录容器 */
+        .sidebar .nav-children {
+            display: none;
+            background-color: #fafbff;
+        }
+
+        .sidebar .nav-children.open {
+            display: block;
+        }
+
+        .sidebar .nav-child {
+            padding: 0.7rem 1.4rem 0.7rem 2.6rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            border-left-color: transparent;
+        }
+
+        /* 右侧内容区 */
+        .content {
+            flex: 1;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            padding: 2.4rem 2.6rem;
+            margin: 1.5rem 5% 2rem 0;
+        }
+
+        .content section {
+            display: none;
+        }
+
+        .content section.active {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content h2 {
+            color: #222;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #eff4ff;
+        }
+
+        .content p {
+            color: #555;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .content a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .content code {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.45rem;
+            border-radius: 5px;
+            font-family: Consolas, "Microsoft Yahei", monospace;
+            font-size: 0.92rem;
+            color: #e11d48;
+        }
+
+        /* 帮助页截图：竖向排列、自适应宽度 */
+        .help-imgs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .help-imgs img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            background: #fff;
+        }
+
+        /* 第一张图下方的红色说明文字（用 .content 前缀提高优先级，覆盖 .content p 的 #555） */
+        .content .help-note {
+            color: #e11d48;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin: 0.2rem 0;
+        }
+
+        /* 红色说明内的链接保持红色，避免与红字不协调 */
+        .content .help-note a {
+            color: #e11d48;
+            text-decoration: underline;
+        }
+
+        /* 移动端：左侧列表变为顶部横向可滚动标签，内容在下方 */
+        @media (max-width: 768px) {
+            .layout {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .sidebar {
+                width: auto;
+                margin: 1rem 5% 0;
+                position: static;
+                display: flex;
+                flex-direction: column;
+                padding: 0.5rem;
+                border-radius: 14px;
+            }
+
+            .sidebar .nav-item {
+                border-left: none;
+            }
+
+            .sidebar .nav-child {
+                padding-left: 2.6rem;
+            }
+
+            .content {
+                margin: 1rem 5% 2rem;
+                padding: 1.6rem 1.4rem;
+            }
+
+            .content h2 {
+                font-size: 1.3rem;
+            }
+
+            /* 手机端截图恢复满宽，避免半宽过小看不清 */
+            .help-imgs img {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 data-i18n="headerTitle">使用帮助手册</h1>
+        <p data-i18n="headerDesc">OK以上浏览器 · 常见问题与使用指南</p>
+    </header>
+
+    <div class="layout">
+        <!-- 左侧列表：支持二级子目录。新增条目时在 OKMORE_HELP_NAV 追加；
+             含 children 的项为可折叠父级，叶节点点击切换右侧 section（id 对应 sec-xxx） -->
+        <nav class="sidebar" id="sidebar"></nav>
+
+        <!-- 右侧内容区 -->
+        <main class="content" id="content">
+            <!-- 首页：使用帮助手册 -->
+            <section id="sec-home" class="active">
+                <h2 data-i18n="homeTitle">使用帮助手册</h2>
+                <p data-i18n="homeBody1">电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
+            </section>
+
+            <!-- WebDav -->
+            <section id="sec-webdav">
+                <h2 data-i18n="webdavTitle">WebDav</h2>
+                <p data-i18n="webdavBody1">通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。</p>
+                <p data-i18n="webdavBody2">（内容待补充）</p>
+            </section>
+
+            <!-- WebDav / 坚果云 -->
+            <section id="sec-webdav-jianguoyun">
+                <h2 data-i18n="webdavJyTitle">坚果云</h2>
+                <p data-i18n="webdavJyBody1">电脑操作如下图：</p>
+                <div class="help-imgs">
+                    <img data-help-img="jianguoyun" data-ext="png" alt="坚果云" />
+                    <p class="help-note" data-i18n="webdavJyPwdNote">密码来源于设置的第三方应用授权的密码</p>
+                    <img data-help-img="jianguoyun_pc_1" data-ext="png" alt="电脑操作 1" />
+                    <img data-help-img="jianguoyun_pc_2" data-ext="png" alt="电脑操作 2" />
+                </div>
+            </section>
+
+            <!-- WebDav / Koofr -->
+            <section id="sec-webdav-koofr">
+                <h2 data-i18n="webdavKoofrTitle">Koofr</h2>
+                <p data-i18n="webdavKoofrBody1">Koofr WebDav 配置说明。</p>
+                <p class="help-note" data-i18n="webdavKoofrPwdNote">密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码</p>
+            </section>
+
+            <!-- Git -->
+            <section id="sec-git">
+                <h2 data-i18n="gitTitle">Git</h2>
+                <p data-i18n="gitBody1">通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。</p>
+                <p data-i18n="gitBody2">（内容待补充）</p>
+            </section>
+
+            <!-- Git / Gitee -->
+            <section id="sec-git-gitee">
+                <h2 data-i18n="gitGiteeTitle">Gitee</h2>
+                <p data-i18n="gitGiteeBody1">Gitee 配置操作如下图：</p>
+                <div class="help-imgs">
+                    <img data-help-img="gitee" data-ext="jpg" alt="Gitee" />
+                    <p class="help-note" data-i18n="gitGiteePwdNote">密码来源于设置——私人令牌</p>
+                </div>
+            </section>
+
+            <!-- Git / Github -->
+            <section id="sec-git-github">
+                <h2 data-i18n="gitGithubTitle">Github</h2>
+                <p data-i18n="gitGithubBody1">Github 配置操作如下图：</p>
+                <div class="help-imgs">
+                    <img data-help-img="github" data-ext="jpg" alt="Github" />
+                    <p class="help-note" data-i18n="gitGithubPwdNote">密码来源于 Settings——Developer Settings——Personal access tokens</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 多语言：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+    <script>
+    // 左侧列表数据源：支持二级 children。新增条目只需在此数组追加，并加一个对应 id 的 section。
+    // i18nKey 存在时，标签走 [data-i18n] 由 okmoreApplyI18n 统一切换；品牌名（坚果云/Koofr/Gitee/Github）无 i18nKey，保持原样。
+    var OKMORE_HELP_NAV = [
+        { id: 'home', label: '使用帮助手册', i18nKey: 'navHome' },
+        { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', children: [
+            { id: 'webdav-jianguoyun', label: '坚果云' },
+            { id: 'webdav-koofr',      label: 'Koofr' }
+        ]},
+        { id: 'git', label: 'Git', i18nKey: 'navGit', children: [
+            { id: 'git-gitee',  label: 'Gitee' },
+            { id: 'git-github', label: 'Github' }
+        ]}
+    ];
+
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+
+    var OKMORE_I18N = {
+        zh: {
+            title: 'OK以上浏览器 - 使用帮助手册',
+            headerTitle: '使用帮助手册',
+            headerDesc: 'OK以上浏览器 · 常见问题与使用指南',
+            navHome: '使用帮助手册',
+            navWebdav: 'WebDav',
+            navGit: 'Git',
+            homeTitle: '使用帮助手册',
+            homeBody1: '电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
+            webdavTitle: 'WebDav',
+            webdavBody1: '通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。',
+            webdavBody2: '（内容待补充）',
+            webdavJyTitle: '坚果云',
+            webdavJyBody1: '电脑操作如下图：',
+            webdavJyPwdNote: '密码来源于设置的第三方应用授权的密码',
+            webdavKoofrTitle: 'Koofr',
+            webdavKoofrBody1: 'Koofr WebDav 配置说明。',
+            webdavKoofrPwdNote: '密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码',
+            gitTitle: 'Git',
+            gitBody1: '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。',
+            gitBody2: '（内容待补充）',
+            gitGiteeTitle: 'Gitee',
+            gitGiteeBody1: 'Gitee 配置操作如下图：',
+            gitGiteePwdNote: '密码来源于设置——私人令牌',
+            gitGithubTitle: 'Github',
+            gitGithubBody1: 'Github 配置操作如下图：',
+            gitGithubPwdNote: '密码来源于 Settings——Developer Settings——Personal access tokens'
+        },
+        en: {
+            title: 'OkMore Browser - Help Manual',
+            headerTitle: 'Help Manual',
+            headerDesc: 'OkMore Browser · FAQ & Usage Guide',
+            navHome: 'Help Manual',
+            navWebdav: 'WebDav',
+            navGit: 'Git',
+            homeTitle: 'Help Manual',
+            homeBody1: 'For desktop bookmarks, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
+            webdavTitle: 'WebDav',
+            webdavBody1: 'Sync bookmarks and settings to your own or third-party WebDav storage.',
+            webdavBody2: '(Content to be added)',
+            webdavJyTitle: 'Nutstore',
+            webdavJyBody1: 'PC operations are shown below:',
+            webdavJyPwdNote: 'The password is the one you set for third-party app authorization',
+            webdavKoofrTitle: 'Koofr',
+            webdavKoofrBody1: 'Koofr WebDav configuration guide.',
+            webdavKoofrPwdNote: 'The password comes from <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> — the "Generate new password" at the bottom',
+            gitTitle: 'Git',
+            gitBody1: 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).',
+            gitBody2: '(Content to be added)',
+            gitGiteeTitle: 'Gitee',
+            gitGiteeBody1: 'Gitee configuration is shown below:',
+            gitGiteePwdNote: 'The password comes from Settings — Private Token',
+            gitGithubTitle: 'Github',
+            gitGithubBody1: 'Github configuration is shown below:',
+            gitGithubPwdNote: 'The password comes from Settings — Developer Settings — Personal access tokens'
+        }
+    };
+
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+
+    // 渲染左侧列表（支持二级折叠）
+    // 若节点带 i18nKey，则给标签元素打 data-i18n，由通用 okmoreApplyI18n() 统一切换中英文。
+    function renderNav(){
+        var nav = document.getElementById('sidebar');
+        OKMORE_HELP_NAV.forEach(function(item){
+            if (item.children && item.children.length){
+                // 含子项的父级：可点击切换自身内容 + 折叠子目录
+                var parent = document.createElement('div');
+                parent.className = 'nav-item nav-parent';
+
+                var labelSpan = document.createElement('span');
+                if (item.i18nKey) labelSpan.setAttribute('data-i18n', item.i18nKey);
+                labelSpan.textContent = item.label;
+
+                var toggle = document.createElement('span');
+                toggle.className = 'nav-toggle';
+                toggle.textContent = '▶';
+
+                parent.appendChild(labelSpan);
+                parent.appendChild(toggle);
+
+                var childrenWrap = document.createElement('div');
+                childrenWrap.className = 'nav-children';
+
+                // 父级点击：展开/收起子目录，并选中父级内容
+                parent.addEventListener('click', function(){
+                    var isOpen = childrenWrap.classList.toggle('open');
+                    parent.classList.toggle('open', isOpen);
+                    showSection(item.id, parent, childrenWrap);
+                });
+
+                item.children.forEach(function(child){
+                    var a = document.createElement('a');
+                    a.className = 'nav-item nav-child';
+                    if (child.i18nKey) a.setAttribute('data-i18n', child.i18nKey);
+                    a.textContent = child.label;
+                    a.setAttribute('data-target', 'sec-' + child.id);
+                    a.addEventListener('click', function(e){
+                        e.stopPropagation();
+                        showSection(child.id, parent, childrenWrap, a);
+                    });
+                    childrenWrap.appendChild(a);
+                });
+
+                nav.appendChild(parent);
+                nav.appendChild(childrenWrap);
+            } else {
+                // 普通一级项
+                var a = document.createElement('a');
+                a.className = 'nav-item';
+                if (item.i18nKey) a.setAttribute('data-i18n', item.i18nKey);
+                a.textContent = item.label;
+                a.setAttribute('data-target', 'sec-' + item.id);
+                a.addEventListener('click', function(){
+                    showSection(item.id, a);
+                });
+                nav.appendChild(a);
+            }
+        });
+    }
+
+    // 切换右侧内容并高亮当前项
+    function showSection(id, activeEl, parentEl, childEl){
+        // 重置所有高亮
+        document.querySelectorAll('#sidebar .nav-item').forEach(function(el){
+            el.classList.remove('active');
+        });
+        // 高亮当前项；若为子项被点击，则展开其所在父级的子目录（parentEl 即 childrenWrap）
+        if (childEl){
+            parentEl.classList.add('open');
+            childEl.classList.add('active');
+        } else if (activeEl){
+            activeEl.classList.add('active');
+        }
+        // 切换内容显示
+        document.querySelectorAll('#content section').forEach(function(sec){
+            sec.classList.toggle('active', sec.id === 'sec-' + id);
+        });
+    }
+
+    // 帮助页截图目录（web/helps.html 相对项目根：上一级 + images/helps/）
+    var OKMORE_HELP_IMG_PREFIX = '../images/helps/';
+
+    // 根据当前语言设置帮助页截图：英文优先用 同名_en 变体，缺失则回退到原图，避免破图。
+    function applyHelpImages(){
+        var lang = okmoreGetLang();
+        var suffix = lang === 'en' ? '_en' : '';
+        var imgs = document.querySelectorAll('[data-help-img]');
+        for (var i = 0; i < imgs.length; i++){
+            // 用 IIFE 按元素捕获，避免循环变量闭包错乱（所有 onerror 指向最后一次迭代）
+            (function(img){
+                var base = img.getAttribute('data-help-img');
+                var ext = img.getAttribute('data-ext') || 'png';
+                img.onerror = null; // 清除旧处理器，防止回退时死循环
+                img.onerror = function(){
+                    // _en 变体不存在时回退到默认图（仅回退一次）
+                    this.onerror = null;
+                    if (suffix) this.src = OKMORE_HELP_IMG_PREFIX + base + '.' + ext;
+                };
+                img.src = OKMORE_HELP_IMG_PREFIX + base + suffix + '.' + ext;
+            })(imgs[i]);
+        }
+    }
+
+    function okmoreApplyI18n(){
+        document.documentElement.setAttribute('data-lang', okmoreGetLang());
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            // 使用 innerHTML 以支持翻译文本内联链接（如首页的 floccus 超链接）
+            if (key) n[i].innerHTML = T(key);
+        }
+        // 语言切换时同步更新截图（中文原图 / 英文 _en 变体）
+        applyHelpImages();
+    }
+
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', function(){
+        renderNav();
+        okmoreApplyI18n();
+    });
+    </script>
+</body>
+</html>
