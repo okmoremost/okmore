@@ -317,13 +317,19 @@
             <!-- 首页：使用帮助手册 -->
             <section id="sec-home" class="active">
                 <h2 data-i18n="homeTitle">使用帮助手册</h2>
-                <p data-i18n="homeBody1">电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
+                <p data-i18n="homeBody1">电脑端书签推荐使用开源项目 <a href="https://floccus.org/download" target="_blank">floccus</a>，支持 Chrome / Edge / Firefox。</p>
             </section>
 
             <!-- 书签同步（WebDav / Git 的上级分类） -->
             <section id="sec-bookmarksync">
                 <h2 data-i18n="bookmarksyncTitle">书签同步</h2>
                 <p data-i18n="bookmarksyncBody1">书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。</p>
+            </section>
+
+            <!-- 书签同步 / Nextcloud -->
+            <section id="sec-nextcloud">
+                <h2 data-i18n="nextcloudTitle">Nextcloud</h2>
+                <p data-i18n="nextcloudBody1">待更新。</p>
             </section>
 
             <!-- WebDav -->
@@ -350,6 +356,12 @@
                 <h2 data-i18n="webdavKoofrTitle">Koofr</h2>
                 <p data-i18n="webdavKoofrBody1">Koofr WebDav 配置说明。</p>
                 <p class="help-note" data-i18n="webdavKoofrPwdNote">密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码</p>
+            </section>
+
+            <!-- WebDav / 其它 -->
+            <section id="sec-webdav-other">
+                <h2 data-i18n="webdavOtherTitle">其它</h2>
+                <p data-i18n="webdavOtherBody1">大概步骤同坚果云、Koofr，待更新。</p>
             </section>
 
             <!-- Git -->
@@ -390,12 +402,14 @@
         { id: 'bookmarksync', label: '书签同步', i18nKey: 'navBookmarksync', children: [
             { id: 'webdav', label: 'WebDav', i18nKey: 'navWebdav', children: [
                 { id: 'webdav-jianguoyun', label: '坚果云' },
-                { id: 'webdav-koofr',      label: 'Koofr' }
+                { id: 'webdav-koofr',      label: 'Koofr' },
+                { id: 'webdav-other',      label: '其它', i18nKey: 'navWebdavOther' }
             ]},
             { id: 'git', label: 'Git', i18nKey: 'navGit', children: [
                 { id: 'git-gitee',  label: 'Gitee' },
                 { id: 'git-github', label: 'Github' }
-            ]}
+            ]},
+            { id: 'nextcloud', label: 'Nextcloud', i18nKey: 'navNextcloud' }
         ]}
     ];
 
@@ -412,11 +426,15 @@
             navHome: '使用帮助手册',
             navBookmarksync: '书签同步',
             navWebdav: 'WebDav',
+            navWebdavOther: '其它',
             navGit: 'Git',
+            navNextcloud: 'Nextcloud',
             homeTitle: '使用帮助手册',
             homeBody1: '电脑端书签推荐使用开源项目 <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>，支持 Chrome / Edge / Firefox。',
             bookmarksyncTitle: '书签同步',
             bookmarksyncBody1: '书签同步支持 WebDav 与 Git 两种方式，可将书签、设置等数据备份到网盘或代码仓库。',
+            nextcloudTitle: 'Nextcloud',
+            nextcloudBody1: '待更新。',
             webdavTitle: 'WebDav',
             webdavBody1: '通过 WebDav 可将书签、设置等数据同步到自建或第三方网盘。',
             webdavBody2: '支持加密，自建云盘、自建NAS、坚果云、Koofr、pCloud、IceDrive、kDrive、MagentaCLOUD、Disroot、Mailbox.org、Synology NAS、GMX、WEB.DE等',
@@ -426,6 +444,8 @@
             webdavKoofrTitle: 'Koofr',
             webdavKoofrBody1: 'Koofr WebDav 配置说明。',
             webdavKoofrPwdNote: '密码来源于 <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> 最下面的生成新密码',
+            webdavOtherTitle: '其它',
+            webdavOtherBody1: '大概步骤同坚果云、Koofr，待更新。',
             gitTitle: 'Git',
             gitBody1: '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。',
             gitBody2: 'Git 仓库同步，如Gitee、Github、GitLab、Gitea等，不支持加密',
@@ -443,11 +463,15 @@
             navHome: 'Help Manual',
             navBookmarksync: 'Bookmark Sync',
             navWebdav: 'WebDav',
+            navWebdavOther: 'Other',
             navGit: 'Git',
+            navNextcloud: 'Nextcloud',
             homeTitle: 'Help Manual',
             homeBody1: 'For desktop bookmarks, we recommend the open-source project <a href="https://github.com/floccusaddon/floccus" target="_blank" rel="noopener">floccus</a>, which supports Chrome / Edge / Firefox.',
             bookmarksyncTitle: 'Bookmark Sync',
             bookmarksyncBody1: 'Bookmark Sync supports WebDav and Git. You can back up bookmarks and settings to a cloud drive or a code repository.',
+            nextcloudTitle: 'Nextcloud',
+            nextcloudBody1: 'To be updated.',
             webdavTitle: 'WebDav',
             webdavBody1: 'Sync bookmarks and settings to your own or third-party WebDav storage.',
             webdavBody2: 'Supports encryption, self-hosted cloud, NAS, Nutstore, Koofr, pCloud, IceDrive, kDrive, MagentaCLOUD, Disroot, Mailbox.org, Synology NAS, GMX, WEB.DE, etc.',
@@ -457,6 +481,8 @@
             webdavKoofrTitle: 'Koofr',
             webdavKoofrBody1: 'Koofr WebDav configuration guide.',
             webdavKoofrPwdNote: 'The password comes from <a href="https://app.koofr.net/app/admin/preferences/password" target="_blank" rel="noopener">https://app.koofr.net/app/admin/preferences/password</a> — the "Generate new password" at the bottom',
+            webdavOtherTitle: 'Other',
+            webdavOtherBody1: 'Roughly the same steps as Nutstore and Koofr. To be updated.',
             gitTitle: 'Git',
             gitBody1: 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).',
             gitBody2: 'Git repository sync, such as Gitee, GitHub, GitLab, Gitea, etc., does not support encryption.',
