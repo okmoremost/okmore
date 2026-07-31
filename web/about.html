@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">关于 OK以上浏览器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 1.6rem 5%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        header p {
+            opacity: 0.92;
+            font-size: 0.95rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.6rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #2563eb;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eff4ff;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 极客特性列表 */
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .tag {
+            background: #eff4ff;
+            color: #2563eb;
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* 联系方式条目 */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: #333;
+            min-width: 84px;
+        }
+
+        .contact-value {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .contact-value:hover {
+            text-decoration: underline;
+        }
+
+        .contact-value.copyable {
+            cursor: pointer;
+        }
+
+        /* 致谢条目 */
+        .thanks-list {
+            list-style: none;
+        }
+
+        .thanks-list li {
+            padding: 0.5rem 0 0.5rem 1.4rem;
+            position: relative;
+            color: #555;
+        }
+
+        .thanks-list li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+        }
+
+        .thanks-list a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .thanks-list a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            .card { padding: 1.4rem 1.2rem; }
+        }
+    </style>
+    <!-- 多语言（中文 / English）：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+    <script>
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+        zh: {
+            title: '关于 OK以上浏览器',
+            headerTitle: '关于 OK以上浏览器',
+            headerDesc: '一款极简、极客、功能丰富的安卓浏览器',
+            aboutTitle: '关于 OK以上',
+            aboutDesc: 'OK以上浏览器是一款「轻、快、强」的安卓浏览器。我们删掉了所有花哨的累赘，只把核心体验打磨到极致：',
+            aboutGeek: '极客向 · 功能丰富',
+            aboutGeekDesc: '从智能阅读模式、广告拦截、隐私防护，到书签同步（WebDav / Git / Nextcloud）、TXT 朗读、悬浮窗、自定义 UA、翻译…… 你能想到的折腾方式，这里都给你备好了。',
+            aboutSimple: '简洁 · 干净',
+            aboutSimpleDesc: '无推送、无弹窗、无后台偷跑，无广告、无捆绑。启动即用，界面清爽，把浏览器的主语还给「网页」本身。',
+            aboutFast: '极速 · 省流',
+            aboutFastDesc: '轻量化内核，秒开网页；智能压缩图片与资源，移动网络下也能又快又省。',
+            contactTitle: '反馈与联系',
+            contactFeedback: '反馈与建议',
+            contactQq: '官方 QQ 群',
+            copyTip: '（点击复制）',
+            thanksTitle: '致谢',
+            thanksDesc: 'OK以上浏览器能走到今天，离不开这些开源项目与社区的力量。我们站在巨人的肩膀上，也希望能回馈更多：',
+            thanksRepo: '项目地址',
+            footer: '© 2026 OK以上浏览器 | Made with ❤ for geeks'
+        },
+        en: {
+            title: 'About OkMore Browser',
+            headerTitle: 'About OkMore Browser',
+            headerDesc: 'A minimal, geeky and feature-rich Android browser',
+            aboutTitle: 'About OkMore',
+            aboutDesc: 'OkMore Browser is a lightweight, fast and powerful Android browser. We stripped away all the fluffy bloat and polished the core experience to the extreme:',
+            aboutGeek: 'Geeky · Feature-rich',
+            aboutGeekDesc: 'From smart reader mode, ad blocking and privacy protection to bookmark sync (WebDav / Git / Nextcloud), TXT read-aloud, floating window, custom UA and translation — every way you like to tinker is built in.',
+            aboutSimple: 'Clean · Minimal',
+            aboutSimpleDesc: 'No push notifications, no pop-ups, no background running, no ads, no bundles. Launch and use instantly, with a tidy UI that puts the web page itself front and center.',
+            aboutFast: 'Fast · Data-saving',
+            aboutFastDesc: 'Lightweight engine for instant page loads, with smart compression of images and resources that keeps things fast and lean on mobile networks.',
+            contactTitle: 'Feedback & Contact',
+            contactFeedback: 'Feedback & Suggestions',
+            contactQq: 'Official QQ Group',
+            copyTip: '(click to copy)',
+            thanksTitle: 'Acknowledgements',
+            thanksDesc: 'OkMore Browser would not be here today without the power of these open-source projects and communities. We stand on the shoulders of giants, and hope to give back more:',
+            thanksRepo: 'Project Repository',
+            footer: '© 2026 OkMore Browser | Made with ❤ for geeks'
+        }
+    };
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    function okmoreApplyI18n(){
+        document.documentElement.setAttribute('data-lang', okmoreGetLang());
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            if (key) n[i].textContent = T(key);
+        }
+    }
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+    </script>
+</head>
+<body>
+    <header>
+        <h1 data-i18n="headerTitle">关于 OK以上浏览器</h1>
+        <p data-i18n="headerDesc">一个为「爱折腾」的人打造的安卓浏览器</p>
+    </header>
+
+    <div class="container">
+        <!-- 关于 OK以上 -->
+        <section class="card">
+            <h2 data-i18n="aboutTitle">关于 OK以上</h2>
+            <p data-i18n="aboutDesc">OK以上浏览器是一款「轻、快、强」的安卓浏览器。我们删掉了所有花哨的累赘，只把核心体验打磨到极致：</p>
+            <div class="tag-list">
+                <span class="tag" data-i18n="aboutGeek">极客向 · 功能丰富</span>
+                <span class="tag" data-i18n="aboutSimple">简洁 · 干净</span>
+                <span class="tag" data-i18n="aboutFast">极速 · 省流</span>
+            </div>
+            <p style="margin-top: 1rem;" data-i18n="aboutGeekDesc">从智能阅读模式、广告拦截、隐私防护，到书签同步（WebDav / Git / Nextcloud）、TXT 朗读、悬浮窗、自定义 UA、翻译…… 你能想到的折腾方式，这里都给你备好了。</p>
+            <p data-i18n="aboutSimpleDesc">无推送、无弹窗、无后台偷跑，无广告、无捆绑。启动即用，界面清爽，把浏览器的主语还给「网页」本身。</p>
+            <p data-i18n="aboutFastDesc">轻量化内核，秒开网页；智能压缩图片与资源，移动网络下也能又快又省。</p>
+        </section>
+
+        <!-- 反馈与联系 -->
+        <section class="card">
+            <h2 data-i18n="contactTitle">反馈与联系</h2>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contactFeedback">反馈与建议</span>
+                <a class="contact-value" href="https://github.com/okmoremost/okmore/issues" target="_blank" rel="noopener">https://github.com/okmoremost/okmore/issues</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contactQq">官方 QQ 群</span>
+                <span class="contact-value copyable" id="qqGroup" title="" onclick="copyQq()">90826491</span>
+                <span style="font-size: 0.82rem; color: #999;" data-i18n="copyTip">（点击复制）</span>
+            </div>
+        </section>
+
+        <!-- 致谢 -->
+        <section class="card">
+            <h2 data-i18n="thanksTitle">致谢</h2>
+            <p data-i18n="thanksDesc">OK以上浏览器能走到今天，离不开这些开源项目与社区的力量。我们站在巨人的肩膀上，也希望能回馈更多：</p>
+            <ul class="thanks-list">
+                <li>所有参与反馈、提交 Issue、提出建议的用户 —— 你们是 OK以上不断改进的动力。</li>
+                <li><a href="https://github.com/okmoremost/okmore" target="_blank" rel="noopener" data-i18n="thanksRepo">项目地址</a> —— 欢迎 Star、Fork 与共建。</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer data-i18n="footer">© 2026 OK以上浏览器 | Made with ❤ for geeks</footer>
+
+    <script>
+    // QQ 群号一键复制（兼容原生 WebView 的 Clipboard API / 旧 execCommand 回退）
+    function copyQq(){
+        var num = '90826491';
+        function done(){
+            var el = document.getElementById('qqGroup');
+            var old = el.textContent;
+            el.textContent = '✓ 已复制';
+            setTimeout(function(){ el.textContent = old; }, 1200);
+        }
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText){
+                navigator.clipboard.writeText(num).then(done, fallback);
+            } else {
+                fallback();
+            }
+        } catch(e){ fallback(); }
+        function fallback(){
+            try {
+                var ta = document.createElement('textarea');
+                ta.value = num;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                done();
+            } catch(e2){ /* 复制失败时保持原样 */ }
+        }
+    }
+    </script>
+</body>
+</html>
