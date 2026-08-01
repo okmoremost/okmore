@@ -88,6 +88,7 @@
         .contact-item {
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             gap: 0.6rem;
             padding: 0.7rem 0;
             border-bottom: 1px dashed #eee;
@@ -106,6 +107,10 @@
         .contact-value {
             color: #2563eb;
             text-decoration: none;
+            /* 允许长 URL 在任意字符处断行，避免窄屏溢出 */
+            min-width: 0;
+            overflow-wrap: anywhere;
+            word-break: break-all;
         }
 
         .contact-value:hover {
@@ -179,8 +184,10 @@
             contactQq: '官方 QQ 群',
             copyTip: '（点击复制）',
             thanksTitle: '致谢',
-            thanksDesc: 'OK以上浏览器能走到今天，离不开这些开源项目与社区的力量。我们站在巨人的肩膀上，也希望能回馈更多：',
+            thanksDesc: 'OK以上浏览器能走到今天，感谢每一位用户长久以来的帮助、支持与反馈——是你们的报告、建议和鼓励，让 OK以上浏览器不断变好；也感谢开源社区与各位贡献者，让我们能站在巨人的肩膀上走得更远。',
             thanksRepo: '项目地址',
+            thanksItemUsers: '所有参与反馈、提交 Issue、提出建议的用户 —— 你们是 OK以上不断改进的动力。',
+            thanksItemRepo: ' —— 欢迎 Star 与共建。',
             footer: '© 2026 OK以上浏览器 | Made with ❤ for geeks'
         },
         en: {
@@ -200,8 +207,10 @@
             contactQq: 'Official QQ Group',
             copyTip: '(click to copy)',
             thanksTitle: 'Acknowledgements',
-            thanksDesc: 'OkMore Browser would not be here today without the power of these open-source projects and communities. We stand on the shoulders of giants, and hope to give back more:',
+            thanksDesc: 'OkMore Browser would not be here today without you. Thanks to every user for your help, support and feedback along the way — your reports, suggestions and encouragement keep making OkMore better. Thanks also to the open-source community and all contributors who let us stand on the shoulders of giants.',
             thanksRepo: 'Project Repository',
+            thanksItemUsers: 'All users who reported issues, submitted feedback and shared suggestions — you are what keeps driving OkMore forward.',
+            thanksItemRepo: ' — Star and contribute, all welcome.',
             footer: '© 2026 OkMore Browser | Made with ❤ for geeks'
         }
     };
@@ -259,10 +268,10 @@
         <!-- 致谢 -->
         <section class="card">
             <h2 data-i18n="thanksTitle">致谢</h2>
-            <p data-i18n="thanksDesc">OK以上浏览器能走到今天，离不开这些开源项目与社区的力量。我们站在巨人的肩膀上，也希望能回馈更多：</p>
+            <p data-i18n="thanksDesc">OK以上浏览器能走到今天，感谢每一位用户长久以来的帮助、支持与反馈——是你们的报告、建议和鼓励，让 OK以上浏览器不断变好；也感谢开源社区与各位贡献者，让我们能站在巨人的肩膀上走得更远。</p>
             <ul class="thanks-list">
-                <li>所有参与反馈、提交 Issue、提出建议的用户 —— 你们是 OK以上不断改进的动力。</li>
-                <li><a href="https://github.com/okmoremost/okmore" target="_blank" rel="noopener" data-i18n="thanksRepo">项目地址</a> —— 欢迎 Star、Fork 与共建。</li>
+                <li><span data-i18n="thanksItemUsers">所有参与反馈、提交 Issue、提出建议的用户 —— 你们是 OK以上不断改进的动力。</span></li>
+                <li><a href="https://github.com/okmoremost/okmore" target="_blank" rel="noopener" data-i18n="thanksRepo">项目地址</a><span data-i18n="thanksItemRepo"> —— 欢迎 Star 与共建。</span></li>
             </ul>
         </section>
     </div>

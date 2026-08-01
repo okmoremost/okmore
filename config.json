@@ -1,6 +1,6 @@
 {
-  "versionCode": 5,
-  "versionName": "1.0.4",
+  "versionCode": 6,
+  "versionName": "1.0.5",
   "updateContent": "修复部分媒体嗅探不显示大小问题；查看图片优化；增加重定向询问，拦截自动跳转广告",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
