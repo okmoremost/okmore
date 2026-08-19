@@ -1,7 +1,7 @@
 {
-  "versionCode": 7,
-  "versionName": "1.0.6",
-  "updateContent": "加入书签增加选择文件夹，增加更多自定义布局，增加自定义壁纸，修复已知问题",
+  "versionCode": 8,
+  "versionName": "1.0.7",
+  "updateContent": "增加跨域不询问不跳转，加入书签增加添加到首屏，壁纸优化，媒体嗅探优化，修复已知问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
