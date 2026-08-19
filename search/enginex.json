@@ -1,15 +1,15 @@
 {
-  "sort": ["baidu", "shenma", "quark", "sogou", "so360", "google", "bing", "yandex", "duckduckgo", "toutiao", "douyin", "bilibili", "zhihu", "startpage", "qwant"],
+  "sort": ["baidu", "shenma", "sogou", "so360", "google", "bing", "yandex", "duckduckgo", "quark", "toutiao", "douyin", "bilibili", "zhihu", "startpage", "qwant"],
   "engine": {
     "baidu": "https://www.baidu.com/s?wd=$encodedQuery",
     "shenma": "https://m.sm.cn/s?q=$encodedQuery",
-    "quark": "https://quark.sm.cn/s?q=$encodedQuery",
     "sogou": "https://www.sogou.com/web?query=$encodedQuery",
     "so360": "https://www.so.com/s?q=$encodedQuery",
     "google": "https://www.google.com/search?q=$encodedQuery",
     "bing": "https://www.bing.com/search?q=$encodedQuery",
     "yandex": "https://yandex.com/search/?text=$encodedQuery",
     "duckduckgo": "https://duckduckgo.com/?q=$encodedQuery",
+    "quark": "https://quark.sm.cn/s?q=$encodedQuery",
     "toutiao": "https://so.toutiao.com/search?keyword=$encodedQuery",
     "douyin": "https://www.douyin.com/search/$encodedQuery",
     "bilibili": "https://search.bilibili.com/all?keyword=$encodedQuery",
