@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网盘/磁力引擎 · 聚合搜索</title>
+    <style>
+        /* ----- 全局样式 ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f4f6f9;
+            color: #2c3e50;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 顶部栏：标题 + 配置按钮 */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            color: #5a6c7d;
+        }
+
+        .config-trigger {
+            background: #2a5298;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.3rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(42, 82, 152, 0.3);
+        }
+
+        .config-trigger:hover {
+            background: #1e3c72;
+        }
+
+        /* 搜索区 */
+        .search-section {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 60px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem 1rem;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-section input {
+            flex: 1 1 220px;
+            min-width: 180px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid #dce1e8;
+            font-size: 1rem;
+            background: #f8fafc;
+            transition: 0.2s ease;
+            outline: none;
+        }
+
+        .search-section input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.15);
+            background-color: #fff;
+        }
+
+        .search-section button {
+            background: #2a5298;
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+
+        .search-section button:hover {
+            background: #1e3c72;
+        }
+
+        .search-section .badge {
+            font-size: 0.8rem;
+            color: #7a8b9c;
+            margin-left: 0.3rem;
+        }
+
+        /* ----- 结果展示区 ----- */
+        #resultArea {
+            margin-top: 2rem;
+            display: none;
+            /* 默认隐藏，有结果时显示 */
+        }
+
+        #resultArea.active {
+            display: block;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .result-item {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid #ebedf0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-item .site-title {
+            background: #f8fafc;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            color: #1e3c72;
+            border-bottom: 1px solid #e2e7ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-item .site-title a {
+            color: #2a5298;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .result-item .site-title a:hover {
+            text-decoration: underline;
+        }
+
+        .result-item iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            background: #fff;
+            /* 让嵌入页面按移动端视口渲染：缩小内容以适配 iframe 宽度 */
+            zoom: 0.85;
+            -moz-transform: scale(0.85);
+            -moz-transform-origin: 0 0;
+        }
+
+        /* 移动端：iframe 按手机视口渲染，内容横向不溢出、可纵向滚动浏览 */
+        @media (max-width: 700px) {
+            .result-item iframe {
+                zoom: 1;
+                -moz-transform: none;
+                height: 70vh;
+                min-height: 420px;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* 无结果或空状态 */
+        .empty-result {
+            text-align: center;
+            color: #7a8b9c;
+            padding: 3rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* ----- 模态框（配置面板，整屏显示） ----- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* 整屏遮罩下，弹窗占满整个界面 */
+        .modal-overlay.active {
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        .modal-overlay.active .modal-box {
+            max-width: none;
+            width: 100%;
+            max-height: none;
+            height: 100%;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        /* 整屏时内容区左右留白，避免贴边 */
+        .modal-overlay.active .modal-scroll {
+            padding: 0 2rem;
+        }
+
+        .modal-box {
+            background: #fff;
+            border-radius: 28px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 92vh;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 弹窗内可滚动区域（除顶部添加行外） */
+        .modal-scroll {
+            overflow-y: auto;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem 0.8rem;
+            flex: 0 0 auto;
+        }
+
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #1e3c72;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #7a8b9c;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #b13e3e;
+        }
+
+        /* 添加表单（置于顶部，不滚动） */
+        .add-form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #edf0f5;
+            background: #fff;
+            flex: 0 0 auto;
+        }
+
+        .add-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-left {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1 1 auto;
+        }
+
+        .add-form label {
+            font-weight: 500;
+            color: #4a5b6e;
+            font-size: 0.9rem;
+        }
+
+        .add-form input[type="text"] {
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #dce1e8;
+            background: #f8fafc;
+            font-size: 0.95rem;
+            flex: 1 1 200px;
+            min-width: 160px;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        /* PC 端：名称、URL、添加按钮 三者放在同一行，URL 输入框弹性拉宽 */
+        @media (min-width: 701px) {
+            .add-form {
+                flex-wrap: nowrap;
+            }
+
+            .add-form .add-left {
+                flex: 1 1 auto;
+                flex-wrap: nowrap;
+            }
+
+            .add-form .add-row {
+                flex: 0 1 auto;
+            }
+
+            .add-form .add-row:first-child {
+                flex: 0 0 220px;
+            }
+
+            .add-form .add-row:first-child input[type="text"] {
+                width: 100%;
+            }
+
+            .add-form .add-row:last-child {
+                flex: 1 1 auto;
+            }
+
+            .add-form .add-row:last-child input[type="text"] {
+                width: 100%;
+                flex: 1 1 auto;
+                min-width: 0;
+            }
+
+            .add-form .add-right {
+                flex: 0 0 auto;
+            }
+        }
+
+        .add-form input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+            background: #fff;
+        }
+
+        .add-form .add-btn {
+            background: #2a5298;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .add-form .add-btn:hover {
+            background: #1e3c72;
+        }
+
+        .add-form .hint {
+            font-size: 0.8rem;
+            color: #7a8b9c;
+            margin-left: 0.2rem;
+        }
+
+        /* 配置表格 */
+        .table-wrap {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 0.7rem 0.5rem;
+            border-bottom: 2px solid #e2e7ed;
+            color: #4a5b6e;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.7rem 0.5rem;
+            border-bottom: 1px solid #edf0f5;
+            vertical-align: middle;
+        }
+
+        .col-name {
+            width: 55%;
+            font-weight: 500;
+        }
+
+        .col-toggle {
+            width: 15%;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .col-actions {
+            width: 30%;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        /* 开关样式 */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 42px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #cbd5e1;
+            border-radius: 24px;
+            transition: background 0.2s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            top: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        .switch input:checked + .slider {
+            background: #2a5298;
+        }
+
+        .switch input:checked + .slider::before {
+            transform: translateX(18px);
+        }
+
+        .site-disabled .col-name strong {
+            color: #aab4c0;
+            text-decoration: line-through;
+        }
+
+        .col-actions button {
+            background: transparent;
+            border: none;
+            padding: 0.25rem 0.4rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.15s;
+            margin: 0 0.1rem;
+        }
+
+        .btn-edit {
+            color: #2a5298;
+        }
+
+        .btn-edit:hover {
+            background: #e8edf8;
+        }
+
+        .btn-delete {
+            color: #b13e3e;
+        }
+
+        .btn-delete:hover {
+            background: #fde8e8;
+        }
+
+        .empty-row td {
+            text-align: center;
+            color: #7a8b9c;
+            padding: 1.5rem 0;
+        }
+
+        .modal-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-header-actions button {
+            background: #eef2f7;
+            border: none;
+            padding: 0.35rem 0.95rem;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-header-actions button:hover {
+            background: #dce1e8;
+        }
+
+        .modal-header-actions .btn-import {
+            background: #e8edf8;
+            color: #2a5298;
+        }
+
+        .modal-header-actions .btn-import:hover {
+            background: #d6e0f5;
+        }
+
+        .modal-header-actions .btn-export {
+            background: #e6f4ea;
+            color: #1e7a3c;
+        }
+
+        .modal-header-actions .btn-export:hover {
+            background: #d2ecda;
+        }
+
+        /* 导入文本弹窗 */
+        .import-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            padding: 1rem;
+        }
+
+        .import-overlay.active {
+            display: flex;
+        }
+
+        .import-box {
+            background: #fff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 560px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .import-box h3 {
+            font-size: 1.3rem;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .export-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .export-header h3 {
+            margin-bottom: 0;
+        }
+
+        .import-mode {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .import-mode button {
+            flex: 1 1 auto;
+            background: #eef2f7;
+            border: 1px solid transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .import-mode button.active {
+            background: #2a5298;
+            color: #fff;
+        }
+
+        .import-field label {
+            display: block;
+            font-weight: 500;
+            color: #4a5b6e;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .import-field textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #dce1e8;
+            background: #f8fafc;
+            font-size: 0.9rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            outline: none;
+            resize: vertical;
+            transition: 0.2s;
+            box-sizing: border-box;
+        }
+
+        .import-field textarea:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.12);
+            background: #fff;
+        }
+
+        .import-file-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .import-file-wrap input[type="file"] {
+            flex: 1 1 auto;
+            font-size: 0.85rem;
+        }
+
+        .import-hint {
+            font-size: 0.8rem;
+            color: #7a8b9c;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        .import-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .import-actions button {
+            border: none;
+            padding: 0.5rem 1.6rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .import-cancel {
+            background: #eef2f7;
+            color: #2c3e50;
+        }
+
+        .import-cancel:hover {
+            background: #dce1e8;
+        }
+
+        .import-confirm {
+            background: #2a5298;
+            color: #fff;
+        }
+
+        .import-confirm:hover {
+            background: #1e3c72;
+        }
+
+        /* ----- 编辑弹窗（带两个输入框） ----- */
+        .edit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            padding: 1rem;
+        }
+
+        .edit-overlay.active {
+            display: flex;
+        }
+
+        .edit-box {
+            background: #fff;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 520px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+
+        .edit-box h3 {
+            font-size: 1.3rem;
+            color: #1e3c72;
+            margin-bottom: 1.3rem;
+        }
+
+        .edit-field {
+            margin-bottom: 1.1rem;
+        }
+
+        .edit-enabled-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .edit-enabled-row label:first-child {
+            margin-bottom: 0;
+        }
+
+        .edit-field label {
+            display: block;
+            font-weight: 500;
+            color: #4a5b6e;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .edit-field input {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #dce1e8;
+            background: #f8fafc;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .edit-field input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.12);
+            background: #fff;
+        }
+
+        .edit-hint {
+            font-size: 0.8rem;
+            color: #7a8b9c;
+            margin: -0.4rem 0 1.2rem;
+            display: block;
+        }
+
+        .edit-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.8rem;
+            margin-top: 0.6rem;
+        }
+
+        .edit-actions button {
+            border: none;
+            padding: 0.5rem 1.6rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .edit-cancel {
+            background: #eef2f7;
+            color: #2c3e50;
+        }
+
+        .edit-cancel:hover {
+            background: #dce1e8;
+        }
+
+        .edit-save {
+            background: #2a5298;
+            color: #fff;
+        }
+
+        .edit-save:hover {
+            background: #1e3c72;
+        }
+
+        /* Toast 提示 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e3c72;
+            color: #fff;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* 页脚 */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #7a8b9c;
+            border-top: 1px solid #e2e7ed;
+            padding-top: 1.8rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem 0.6rem;
+            }
+
+            .top-bar {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 0.8rem;
+            }
+
+            .header h1 {
+                font-size: 1.7rem;
+            }
+
+            .header p {
+                font-size: 0.85rem;
+            }
+
+            .search-section {
+                border-radius: 24px;
+                padding: 0.6rem 0.8rem;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .search-section input {
+                flex: 1 1 auto;
+                min-width: 0;
+                width: auto;
+                padding: 0.55rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .search-section button {
+                flex: 0 0 auto;
+                width: auto;
+                padding: 0.55rem 1.4rem;
+            }
+
+            .search-section .badge {
+                flex: 0 0 auto;
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-item {
+                border-radius: 12px;
+            }
+
+            .result-item .site-title {
+                padding: 0.55rem 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .result-item .site-title a {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .result-item iframe {
+                height: 70vh;
+                min-height: 420px;
+            }
+
+            /* 整屏弹窗在手机上去掉多余内边距 */
+            .modal-overlay.active .modal-box {
+                padding: 0;
+            }
+
+            .modal-header {
+                padding: 1rem 1rem 0.6rem;
+            }
+
+            .modal-scroll {
+                padding: 0 1rem;
+            }
+
+            .modal-header h2 {
+                font-size: 1.25rem;
+            }
+
+            .add-form {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: stretch;
+                justify-content: space-between;
+                gap: 0.8rem;
+                padding: 0.7rem 1rem;
+            }
+
+            .add-left {
+                flex: 1 1 auto;
+                min-width: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .add-row {
+                width: 100%;
+                gap: 0.5rem;
+            }
+
+            .add-form label {
+                font-size: 0.85rem;
+                flex: 0 0 auto;
+            }
+
+            .add-form input {
+                flex: 1 1 auto;
+                min-width: 0;
+                padding: 0.45rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .add-form .add-btn {
+                flex: 0 0 auto;
+                width: auto;
+                align-self: flex-start;
+                padding: 0.45rem 0.8rem;
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            .add-form .hint {
+                margin: 0;
+                font-size: 0.78rem;
+            }
+
+            .modal-header {
+                padding: 1rem 1rem 0.6rem;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .modal-header-left {
+                flex-wrap: wrap;
+                gap: 0.6rem;
+            }
+
+            .modal-header-actions {
+                gap: 0.4rem;
+            }
+
+            .modal-header-actions button {
+                padding: 0.3rem 0.75rem;
+                font-size: 0.78rem;
+            }
+
+            /* 站点列表：名称、编辑、删除在同一行 */
+            table,
+            tbody,
+            td {
+                display: block;
+            }
+
+            tr {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                margin-bottom: 0.8rem;
+                border-bottom: 1px solid #edf0f5;
+                padding-bottom: 0.5rem;
+            }
+
+            .col-name {
+                flex: 1 1 auto;
+                min-width: 0;
+                width: auto;
+                padding: 0.3rem 0.2rem;
+                border-bottom: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .col-actions {
+                flex: 0 0 auto;
+                width: auto;
+                text-align: right;
+                padding: 0.3rem 0.2rem;
+                border-bottom: none;
+                white-space: nowrap;
+            }
+
+            th {
+                display: none;
+            }
+
+            /* 编辑弹窗适配手机 */
+            .edit-overlay {
+                padding: 0.8rem;
+                align-items: flex-end;
+            }
+
+            .edit-box {
+                max-width: none;
+                border-radius: 20px 20px 0 0;
+                padding: 1.4rem 1.2rem calc(1.4rem + env(safe-area-inset-bottom));
+            }
+
+            .edit-box h3 {
+                font-size: 1.15rem;
+                margin-bottom: 1rem;
+            }
+
+            .edit-field input {
+                font-size: 1rem;
+                padding: 0.5rem 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="header">
+            <h1>🔍 网盘/磁力聚合搜索</h1>
+            <p>配置搜索引擎，一键查看所有站点结果</p>
+        </div>
+        <button class="config-trigger" id="configTrigger">配置</button>
+    </div>
+
+    <!-- 搜索区 -->
+    <div class="search-section">
+        <input type="text" id="searchInput" placeholder="输入关键词…" />
+        <button id="searchBtn">🔍 聚合搜索</button>
+    </div>
+
+    <!-- 结果展示区 -->
+    <div id="resultArea">
+        <div id="resultContainer" class="result-grid">
+            <!-- 动态生成 iframe 卡片 -->
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>⚠️ 本站不存储任何资源。请遵守当地法律法规。</p>
+        <p style="margin-top:0.2rem;">配置数据保存在本地，不会上传。</p>
+    </div>
+</div>
+
+<!-- 模态框（配置面板） -->
+<div class="modal-overlay" id="configModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <h2>📋 站点配置</h2>
+                <div class="modal-header-actions">
+                    <button class="btn-import" id="importBtn">⬆ 导入</button>
+                    <button class="btn-export" id="exportBtn">⬇ 导出</button>
+                </div>
+            </div>
+            <button class="modal-close" id="modalClose">&times;</button>
+        </div>
+
+        <!-- 添加表单（置于表格上方） -->
+        <div class="add-form">
+            <div class="add-left">
+                <div class="add-row">
+                    <label for="newName">名称</label>
+                    <input type="text" id="newName" placeholder="请输入名称" />
+                </div>
+                <div class="add-row">
+                    <label for="newUrl">URL</label>
+                    <input type="text" id="newUrl" placeholder="https://example.com/search?q={keyword}" />
+                </div>
+            </div>
+            <button class="add-btn" id="addBtn">添加</button>
+        </div>
+
+        <div class="modal-scroll">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>站点名称</th>
+                        <th style="text-align:center;">启用</th>
+                        <th style="text-align:right;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="configBody">
+                    <!-- 动态渲染 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 导入弹窗 -->
+<div class="import-overlay" id="importModal">
+    <div class="import-box">
+        <h3>⬆ 导入站点配置</h3>
+        <div class="import-mode">
+            <button type="button" id="modeFile" class="active">选择 .json 文件</button>
+            <button type="button" id="modeText">粘贴 JSON 文本</button>
+        </div>
+
+        <div class="import-field" id="importFileField">
+            <label for="importFile">选择 .json 配置文件</label>
+            <div class="import-file-wrap">
+                <input type="file" id="importFile" accept=".json,application/json" />
+            </div>
+            <span class="import-hint">仅支持包含站点配置的 .json 文件</span>
+        </div>
+
+        <div class="import-field" id="importTextField" style="display:none;">
+            <label for="importText">粘贴 JSON 文本</label>
+            <textarea id="importText" placeholder='[{"name":"示例","urlTemplate":"https://example.com/search?q={keyword}"}]'></textarea>
+            <span class="import-hint">格式：站点数组，每项含 name 与 urlTemplate</span>
+        </div>
+
+        <div class="import-actions">
+            <button class="import-cancel" id="importCancel">取消</button>
+            <button class="import-confirm" id="importConfirm">导入</button>
+        </div>
+    </div>
+</div>
+
+<!-- 导出弹窗 -->
+<div class="import-overlay" id="exportModal">
+    <div class="import-box">
+        <div class="export-header">
+            <h3>⬇ 导出站点配置</h3>
+            <button class="modal-close" id="exportCancel">&times;</button>
+        </div>
+        <div class="import-actions">
+            <button class="import-confirm" id="exportCopy" style="background:#e8edf8;color:#2a5298;">复制到剪贴板</button>
+            <button class="import-confirm" id="exportDownload">下载 .json</button>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑弹窗（两个输入框：名称 + URL） -->
+<div class="edit-overlay" id="editModal">
+    <div class="edit-box">
+        <h3>✎ 编辑站点</h3>
+        <div class="edit-field">
+            <label for="editName">站点名称</label>
+            <input type="text" id="editName" placeholder="请输入名称" />
+        </div>
+        <div class="edit-field">
+            <label for="editUrl">搜索URL</label>
+            <input type="text" id="editUrl" placeholder="https://example.com/search?q={keyword}" />
+            <span class="edit-hint">{keyword} 会被替换为关键词</span>
+        </div>
+        <div class="edit-field edit-enabled-row">
+            <label for="editEnabled">启用（参与搜索）</label>
+            <label class="switch">
+                <input type="checkbox" id="editEnabled" />
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="edit-actions">
+            <button class="edit-cancel" id="editCancel">取消</button>
+            <button class="edit-save" id="editSave">保存</button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<script>
+    (function() {
+        // ----- 默认站点列表 -----
+        const DEFAULT_SITES = [
+        ];
+
+        // ----- 状态 -----
+        let sites = [];
+        let nextId = 1;
+
+        // DOM 引用
+        const configBody = document.getElementById('configBody');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const siteCount = document.getElementById('siteCount');
+        const resultArea = document.getElementById('resultArea');
+        const resultContainer = document.getElementById('resultContainer');
+        const configTrigger = document.getElementById('configTrigger');
+        const configModal = document.getElementById('configModal');
+        const modalClose = document.getElementById('modalClose');
+        const addBtn = document.getElementById('addBtn');
+        const newName = document.getElementById('newName');
+        const newUrl = document.getElementById('newUrl');
+        const toastEl = document.getElementById('toast');
+
+        // 编辑弹窗 DOM 引用
+        const editModal = document.getElementById('editModal');
+        const editName = document.getElementById('editName');
+        const editUrl = document.getElementById('editUrl');
+        const editEnabled = document.getElementById('editEnabled');
+        const editCancel = document.getElementById('editCancel');
+        const editSave = document.getElementById('editSave');
+        let editingId = null;
+
+        // 导入/导出 DOM 引用
+        const importBtn = document.getElementById('importBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const importModal = document.getElementById('importModal');
+        const importCancel = document.getElementById('importCancel');
+        const importConfirm = document.getElementById('importConfirm');
+        const importFile = document.getElementById('importFile');
+        const importText = document.getElementById('importText');
+        const modeFile = document.getElementById('modeFile');
+        const modeText = document.getElementById('modeText');
+        const importFileField = document.getElementById('importFileField');
+        const importTextField = document.getElementById('importTextField');
+
+        // 导出弹窗 DOM 引用
+        const exportModal = document.getElementById('exportModal');
+        const exportCancel = document.getElementById('exportCancel');
+        const exportCopy = document.getElementById('exportCopy');
+        const exportDownload = document.getElementById('exportDownload');
+
+        // ----- 工具 -----
+        let toastTimer = null;
+
+        function showToast(msg, duration = 2500) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toastEl.classList.remove('show');
+            }, duration);
+        }
+
+        // ----- 存储 -----
+        function loadFromStorage() {
+            try {
+                const stored = localStorage.getItem('searchEngines');
+                if (stored) {
+                    try {
+                        const parsed = JSON.parse(stored);
+                        if (Array.isArray(parsed) && parsed.length > 0) {
+                            sites = parsed;
+                            let maxId = 0;
+                            sites.forEach(s => {
+                                if (!s.id) s.id = Date.now() + Math.random();
+                                if (s.id > maxId) maxId = s.id;
+                            });
+                            nextId = maxId + 1;
+                            return true;
+                        }
+                    } catch (e) { /* 忽略 */ }
+                }
+            } catch (e) {
+                // localStorage 不可用（如 file:// 协议受限）时忽略
+            }
+            return false;
+        }
+
+        function saveToStorage() {
+            try {
+                localStorage.setItem('searchEngines', JSON.stringify(sites));
+            } catch (e) {
+                // localStorage 不可用时（如 file:// 协议受限）静默忽略，不影响前台交互
+            }
+        }
+
+        function loadDefaults() {
+            sites = DEFAULT_SITES.map((s, idx) => ({
+                ...s,
+                enabled: s.enabled !== false,
+                id: nextId + idx,
+            }));
+            nextId = nextId + DEFAULT_SITES.length;
+            saveToStorage();
+        }
+
+        if (!loadFromStorage()) {
+            loadDefaults();
+        }
+
+        // ----- 渲染配置表格 -----
+        function renderConfig() {
+            if (sites.length === 0) {
+                configBody.innerHTML = `<tr class="empty-row"><td colspan="3">还没有配置站点，请添加。</td></tr>`;
+                return;
+            }
+
+            let html = '';
+            sites.forEach(site => {
+                const name = escapeHtml(site.name);
+                const enabled = site.enabled !== false;
+                const disabledClass = enabled ? '' : 'site-disabled';
+                html += `
+                        <tr data-id="${site.id}" class="${disabledClass}">
+                            <td class="col-name"><strong>${name}</strong></td>
+                            <td class="col-toggle">
+                                <label class="switch">
+                                    <input type="checkbox" class="site-toggle" data-id="${site.id}" ${enabled ? 'checked' : ''} />
+                                    <span class="slider"></span>
+                                </label>
+                            </td>
+                            <td class="col-actions">
+                                <button class="btn-edit" data-id="${site.id}">编辑</button>
+                                <button class="btn-delete" data-id="${site.id}">删除</button>
+                            </td>
+                        </tr>
+                    `;
+            });
+            configBody.innerHTML = html;
+
+            // 绑定事件
+            configBody.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = Number(btn.dataset.id);
+                    openEditModal(id);
+                });
+            });
+            configBody.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = Number(btn.dataset.id);
+                    handleDelete(id);
+                });
+            });
+            configBody.querySelectorAll('.site-toggle').forEach(toggle => {
+                toggle.addEventListener('change', (e) => {
+                    const id = Number(toggle.dataset.id);
+                    toggleSiteEnabled(id, toggle.checked);
+                });
+            });
+        }
+
+        function toggleSiteEnabled(id, enabled) {
+            const site = sites.find(s => s.id === id);
+            if (!site) return;
+            site.enabled = enabled;
+            saveToStorage();
+            const row = configBody.querySelector(`tr[data-id="${id}"]`);
+            if (row) row.classList.toggle('site-disabled', !enabled);
+            const activeCount = sites.filter(s => s.enabled !== false).length;
+            showToast(enabled ? '已启用' : '已停用', 1200);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 更新站点计数（显示在搜索框旁）
+        function updateBadge() {
+            //siteCount.textContent = `${sites.length} 个站点`;
+        }
+
+        // ----- 配置操作 -----
+        function openEditModal(id) {
+            const site = sites.find(s => s.id === id);
+            if (!site) {
+                showToast('站点不存在', 1500);
+                return;
+            }
+            editingId = id;
+            editName.value = site.name;
+            editUrl.value = site.urlTemplate;
+            editEnabled.checked = site.enabled !== false;
+            editModal.classList.add('active');
+            editName.focus();
+        }
+
+        function closeEditModal() {
+            editModal.classList.remove('active');
+            editingId = null;
+        }
+
+        function saveEdit() {
+            if (editingId === null) return;
+            const site = sites.find(s => s.id === editingId);
+            if (!site) {
+                closeEditModal();
+                return;
+            }
+            const trimmedName = editName.value.trim();
+            if (!trimmedName) {
+                showToast('名称不能为空', 1500);
+                return;
+            }
+            const trimmedUrl = editUrl.value.trim();
+            if (!trimmedUrl) {
+                showToast('URL模板不能为空', 1500);
+                return;
+            }
+            if (!trimmedUrl.includes('{keyword}')) {
+                if (!confirm('URL模板中未包含 {keyword}，搜索时将不会被替换，确定继续吗？')) {
+                    return;
+                }
+            }
+            site.name = trimmedName;
+            site.urlTemplate = trimmedUrl;
+            site.enabled = editEnabled.checked;
+            saveToStorage();
+            renderConfig();
+            updateBadge();
+            closeEditModal();
+            showToast('已更新 ✅', 1500);
+        }
+
+        function handleDelete(id) {
+            if (!confirm('确定要删除该站点吗？')) return;
+            sites = sites.filter(s => s.id !== id);
+            saveToStorage();
+            renderConfig();
+            updateBadge();
+            showToast('已删除', 1500);
+        }
+
+        function addSite(name, urlTemplate) {
+            const trimmedName = String(name || '').trim();
+            const trimmedUrl = String(urlTemplate || '').trim();
+            if (!trimmedName || !trimmedUrl) {
+                showToast('名称和URL都不能为空', 1500);
+                return false;
+            }
+            if (!trimmedUrl.includes('{keyword}')) {
+                showToast('提示：URL 不含 {keyword}，搜索时将直接打开该地址', 2000);
+            }
+            sites.push({
+                id: nextId++,
+                name: trimmedName,
+                urlTemplate: trimmedUrl,
+                enabled: true,
+            });
+            // 先清空输入框并显示提示，确保即使后续渲染/存储异常也一定生效
+            if (newName) newName.value = '';
+            if (newUrl) newUrl.value = '';
+            showToast('添加成功 ✅', 1500);
+            saveToStorage();
+            renderConfig();
+            updateBadge();
+            return true;
+        }
+
+        // ----- 核心：聚合搜索（在当前页面展示 iframe）-----
+        function performSearch() {
+            const keyword = searchInput.value.trim();
+            if (!keyword) {
+                showToast('请输入关键词', 1500);
+                return;
+            }
+            if (sites.length === 0) {
+                showToast('请先添加站点', 1500);
+                return;
+            }
+
+            const encoded = encodeURIComponent(keyword);
+            const activeSites = sites.filter(s => s.enabled !== false);
+            if (activeSites.length === 0) {
+                showToast('没有已启用的站点', 1500);
+                return;
+            }
+            let html = '';
+
+            activeSites.forEach(site => {
+                let url = site.urlTemplate.replace(/\{keyword\}/g, encoded);
+                if (!site.urlTemplate.includes('{keyword}')) {
+                    url = site.urlTemplate;
+                }
+                const name = escapeHtml(site.name);
+                const directUrl = escapeHtml(url);
+                html += `
+                        <div class="result-item">
+                            <div class="site-title">
+                                <span>${name}</span>
+                                <a href="${directUrl}" target="_blank" rel="noopener">🔗 直接访问</a>
+                            </div>
+                            <iframe src="${directUrl}" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" onload="(function(f){try{var d=f.contentDocument;if(d&&!d.querySelector('meta[name=viewport]')){var m=d.createElement('meta');m.name='viewport';m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no';d.head.appendChild(m);}var b=d.body;if(b){b.style.maxWidth='100%';b.style.overflowX='hidden';}}catch(e){}})(this)"></iframe>
+                        </div>
+                    `;
+            });
+
+            resultContainer.innerHTML = html;
+            resultArea.classList.add('active');
+            resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            showToast(`已加载 ${activeSites.length} 个站点的搜索结果`, 2000);
+        }
+
+        // ----- 模态框控制 -----
+        function openModal() {
+            configModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            configModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        configModal.addEventListener('click', (e) => {
+            if (e.target === configModal) {
+                closeModal();
+            }
+        });
+
+        // ----- 事件绑定 -----
+        configTrigger.addEventListener('click', openModal);
+        modalClose.addEventListener('click', closeModal);
+
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        addBtn.addEventListener('click', () => {
+            const name = newName.value;
+            const url = newUrl.value;
+            if (addSite(name, url)) {
+                newName.value = '';
+                newUrl.value = '';
+                newName.focus();
+                renderConfig();
+                updateBadge();
+            }
+        });
+
+        // ----- 编辑弹窗事件 -----
+        editCancel.addEventListener('click', closeEditModal);
+        editSave.addEventListener('click', saveEdit);
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) closeEditModal();
+        });
+        editName.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); editUrl.focus(); }
+        });
+        editUrl.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); saveEdit(); }
+        });
+
+        // ----- 导入 / 导出 -----
+        function downloadObjectAsJson(obj, filename) {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj, null, 2));
+            const a = document.createElement('a');
+            a.href = dataStr;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function getExportData() {
+            return sites.map(s => ({ name: s.name, urlTemplate: s.urlTemplate, enabled: s.enabled !== false }));
+        }
+
+        function openExportModal() {
+            if (sites.length === 0) {
+                showToast('没有可导出的站点', 1500);
+                return;
+            }
+            exportModal.classList.add('active');
+        }
+
+        function closeExportModal() {
+            exportModal.classList.remove('active');
+        }
+
+        function copyExportText() {
+            const text = JSON.stringify(getExportData(), null, 2);
+            if (!text) return;
+            const done = () => showToast('已复制到剪贴板 ✅', 1500);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text));
+            } else {
+                fallbackCopy(text);
+            }
+            function fallbackCopy(t) {
+                const ta = document.createElement('textarea');
+                ta.value = t;
+                ta.style.position = 'fixed';
+                ta.style.top = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                ta.setSelectionRange(0, ta.value.length);
+                try {
+                    document.execCommand('copy');
+                    done();
+                } catch (e) {
+                    showToast('复制失败，请手动复制', 2000);
+                }
+                document.body.removeChild(ta);
+            }
+        }
+
+        // 解析导入的 JSON 文本，返回规范化的站点数组
+        function parseImportedJson(text) {
+            const parsed = JSON.parse(text);
+            let list = parsed;
+            // 兼容包裹对象 { sites: [...] }
+            if (!Array.isArray(parsed) && parsed && Array.isArray(parsed.sites)) {
+                list = parsed.sites;
+            }
+            if (!Array.isArray(list)) {
+                throw new Error('JSON 顶层应为数组或含 sites 字段的对象');
+            }
+            const result = [];
+            list.forEach((item, idx) => {
+                if (!item || typeof item !== 'object') return;
+                const name = String(item.name != null ? item.name : '').trim();
+                const url = String(item.urlTemplate != null ? item.urlTemplate : (item.url != null ? item.url : '')).trim();
+                if (!name || !url) return;
+                const enabled = item.enabled !== false;
+                result.push({ id: nextId++, name, urlTemplate: url, enabled });
+            });
+            if (result.length === 0) {
+                throw new Error('未找到有效的站点数据');
+            }
+            return result;
+        }
+
+        // 合并导入的站点到现有列表（按名称去重）
+        function mergeImportedSites(imported) {
+            let added = 0;
+            imported.forEach(item => {
+                if (sites.some(s => s.name === item.name)) return;
+                sites.push(item);
+                added++;
+            });
+            return added;
+        }
+
+        function openImportModal() {
+            importModal.classList.add('active');
+            importFile.value = '';
+            importText.value = '';
+            setImportMode('file');
+        }
+
+        function closeImportModal() {
+            importModal.classList.remove('active');
+        }
+
+        function setImportMode(mode) {
+            if (mode === 'file') {
+                modeFile.classList.add('active');
+                modeText.classList.remove('active');
+                importFileField.style.display = 'block';
+                importTextField.style.display = 'none';
+            } else {
+                modeText.classList.add('active');
+                modeFile.classList.remove('active');
+                importTextField.style.display = 'block';
+                importFileField.style.display = 'none';
+            }
+        }
+
+        function handleImport() {
+            let imported;
+            let sourceText = null;
+            if (modeFile.classList.contains('active')) {
+                if (!importFile.files || importFile.files.length === 0) {
+                    showToast('请先选择 .json 文件', 1500);
+                    return;
+                }
+                const file = importFile.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const importedSites = parseImportedJson(e.target.result);
+                        finishImport(importedSites);
+                    } catch (err) {
+                        showToast('导入失败：' + err.message, 3000);
+                    }
+                };
+                reader.onerror = function() {
+                    showToast('文件读取失败', 2000);
+                };
+                reader.readAsText(file);
+                return;
+            } else {
+                sourceText = importText.value.trim();
+                if (!sourceText) {
+                    showToast('请粘贴 JSON 文本', 1500);
+                    return;
+                }
+                try {
+                    imported = parseImportedJson(sourceText);
+                } catch (err) {
+                    showToast('导入失败：' + err.message, 3000);
+                    return;
+                }
+                finishImport(imported);
+            }
+        }
+
+        function finishImport(importedSites) {
+            const added = mergeImportedSites(importedSites);
+            saveToStorage();
+            renderConfig();
+            updateBadge();
+            closeImportModal();
+            showToast(`已导入 ${added} 个新站点（共 ${importedSites.length} 条有效）`, 2500);
+        }
+
+        importBtn.addEventListener('click', openImportModal);
+        exportBtn.addEventListener('click', openExportModal);
+        exportCancel.addEventListener('click', closeExportModal);
+        exportCopy.addEventListener('click', copyExportText);
+        exportDownload.addEventListener('click', () => {
+            downloadObjectAsJson(getExportData(), 'tsearch-sites.json');
+            showToast('已下载 .json 文件 ✅', 1500);
+        });
+        exportModal.addEventListener('click', (e) => {
+            if (e.target === exportModal) closeExportModal();
+        });
+        importCancel.addEventListener('click', closeImportModal);
+        importConfirm.addEventListener('click', handleImport);
+        modeFile.addEventListener('click', () => setImportMode('file'));
+        modeText.addEventListener('click', () => setImportMode('text'));
+        importModal.addEventListener('click', (e) => {
+            if (e.target === importModal) closeImportModal();
+        });
+
+        // 初始渲染
+        renderConfig();
+        updateBadge();
+        resultArea.classList.remove('active');
+    })();
+</script>
+</body>
+</html>
