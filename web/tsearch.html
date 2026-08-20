@@ -240,14 +240,14 @@
 
         @media (max-width: 700px) {
             .result-item .link-list {
-                max-height: 60vh;
+                max-height: 40vh;
             }
 
             .result-item .result-body iframe {
                 zoom: 1;
                 -moz-transform: none;
-                height: 70vh;
-                min-height: 420px;
+                height: 46vh;
+                min-height: 380px;
                 overflow: auto;
                 -webkit-overflow-scrolling: touch;
             }
@@ -1648,24 +1648,27 @@
             });
         }
 
-        // 从网页内容中提取链接并渲染为列表
+        // 从网页内容中提取「纵向结果列表」并渲染
+        // 规则：
+        //  - 只取可见元素（排除 hidden / display:none / visibility:hidden / aria-hidden / 弹窗模态框）
+        //  - 排除横排导航（nav/header/footer/菜单/侧栏）等非结果区域
+        //  - 链接文本必须是可读文字（排除纯图标、图片、空白）
         function renderLinkList(html, baseUrl) {
             try {
                 const doc = new DOMParser().parseFromString(html, 'text/html');
-                const anchors = Array.from(doc.querySelectorAll('a[href]'));
-                const seen = new Set();
-                const items = [];
-                anchors.forEach(a => {
-                    let href = a.getAttribute('href');
-                    const text = (a.textContent || '').trim();
-                    if (!href || href.startsWith('javascript:') || href.startsWith('#')) return;
-                    href = normalizeUrl(href, baseUrl);
-                    if (!href) return;
-                    if (seen.has(href)) return;
-                    seen.add(href);
-                    const label = text || href;
-                    items.push({ href, label });
-                });
+
+                // 1) 移除弹窗 / 隐藏容器（不解析其内容）
+                removeHiddenAndModal(doc);
+
+                // 2) 优先从纵向列表语义结构提取
+                let items = extractFromLists(doc, baseUrl);
+
+                // 3) 若列表结构不足，则回退到正文区域中可见的纵向链接
+                if (items.length < 3) {
+                    const fallback = extractFromContent(doc, baseUrl);
+                    items = mergeItems(items, fallback);
+                }
+
                 if (items.length === 0) return '';
                 return `<ul class="link-list">` + items.map(it =>
                     `<li><a href="${escapeHtml(it.href)}" target="_blank" rel="noopener">${escapeHtml(it.label)}</a></li>`
@@ -1673,6 +1676,124 @@
             } catch (e) {
                 return '';
             }
+        }
+
+        // 删除隐藏元素与弹窗/模态框（及其内部链接，避免提取到未展示内容）
+        function removeHiddenAndModal(doc) {
+            const hiddenSel = [
+                '[hidden]',
+                '[aria-hidden="true"]',
+                '[style*="display: none"]', '[style*="display:none"]',
+                '[style*="visibility: hidden"]', '[style*="visibility:hidden"]',
+                '.modal', '.dialog', '.popup', '.lightbox', '.overlay',
+                '[role="dialog"]', '[role="alertdialog"]',
+                '.modal-backdrop', '.tooltip', '.dropdown-menu'
+            ].join(',');
+            doc.querySelectorAll(hiddenSel).forEach(el => el.remove());
+        }
+
+        // 判断元素是否落在横排导航/辅助区域（这些不是结果列表）
+        function isNavigationArea(el) {
+            let node = el;
+            while (node && node.nodeType === 1) {
+                const tag = node.tagName;
+                if (tag === 'NAV' || tag === 'HEADER' || tag === 'FOOTER') return true;
+                const cls = (node.className || '').toString().toLowerCase();
+                const id = (node.id || '').toString().toLowerCase();
+                if (/(^|\s)(nav|navbar|menu|header|footer|sidebar|breadcrumb|pagination|toc|topbar|toolbar|subnav)(\s|$)/.test(cls) ||
+                    /(nav|menu|header|footer|sidebar|breadcrumb)/.test(id)) {
+                    return true;
+                }
+                if (node.getAttribute && node.getAttribute('role') === 'navigation') return true;
+                node = node.parentElement;
+            }
+            return false;
+        }
+
+        // 从 <ul>/<ol>/<li> 中的纵向链接提取（纵向排列的语义列表）
+        function extractFromLists(doc, baseUrl) {
+            const items = [];
+            const seen = new Set();
+            const lists = doc.querySelectorAll('ul, ol');
+            lists.forEach(list => {
+                if (isNavigationArea(list)) return;
+                if (isHiddenByClass(list)) return;
+                // 只收集确实纵向排列（li 为块级叠放）的列表
+                const lis = list.querySelectorAll(':scope > li');
+                if (lis.length === 0) return;
+                lis.forEach(li => {
+                    const a = li.querySelector('a[href]');
+                    if (!a) return;
+                    if (isNavigationArea(a)) return;
+                    const item = buildItem(a, baseUrl);
+                    if (item && !seen.has(item.href)) {
+                        seen.add(item.href);
+                        items.push(item);
+                    }
+                });
+            });
+            return items;
+        }
+
+        // 从正文（main/article 或 body）中提取纵向可见链接
+        function extractFromContent(doc, baseUrl) {
+            const items = [];
+            const seen = new Set();
+            const roots = doc.querySelectorAll('main, article');
+            const scope = roots.length ? Array.from(roots) : [doc.body];
+            scope.forEach(root => {
+                if (!root || isNavigationArea(root) || isHiddenByClass(root)) return;
+                const anchors = root.querySelectorAll('a[href]');
+                anchors.forEach(a => {
+                    if (isNavigationArea(a)) return;
+                    if (isHiddenByClass(a)) return;
+                    const item = buildItem(a, baseUrl);
+                    if (item && !seen.has(item.href)) {
+                        seen.add(item.href);
+                        items.push(item);
+                    }
+                });
+            });
+            return items;
+        }
+
+        // 基于单个 <a> 构造链接项；不满足文字型要求则返回 null
+        function buildItem(a, baseUrl) {
+            let href = a.getAttribute('href');
+            if (!href || href.startsWith('javascript:') || href.startsWith('#') ||
+                href.startsWith('mailto:') || href.startsWith('tel:')) return null;
+            href = normalizeUrl(href, baseUrl);
+            if (!href) return null;
+
+            const text = (a.textContent || '').replace(/\s+/g, ' ').trim();
+            // 文本必须是可读文字：非空、去除空白后长度≥2
+            if (text.length < 2) return null;
+            // 排除纯图片/图标链接（含 img 且无实质文字）
+            const hasImg = a.querySelector('img, svg, icon');
+            if (hasImg && text.length === 0) return null;
+            // 排除明显是导航项的极短符号
+            if (/^[\W_]+$/.test(text)) return null;
+
+            return { href, label: text };
+        }
+
+        // 通过 class / 内联样式判断隐藏（辅助 removeHiddenAndModal 之后残留的隐藏态）
+        function isHiddenByClass(el) {
+            if (!el || !el.getAttribute) return false;
+            if (el.hasAttribute('hidden')) return true;
+            if (el.getAttribute('aria-hidden') === 'true') return true;
+            const style = (el.getAttribute('style') || '').toLowerCase();
+            if (/display\s*:\s*none/.test(style)) return true;
+            if (/visibility\s*:\s*hidden/.test(style)) return true;
+            return false;
+        }
+
+        function mergeItems(a, b) {
+            const seen = new Set(a.map(i => i.href));
+            b.forEach(i => {
+                if (!seen.has(i.href)) { seen.add(i.href); a.push(i); }
+            });
+            return a;
         }
 
         function normalizeUrl(href, baseUrl) {
