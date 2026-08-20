@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网盘/磁力引擎 · 聚合搜索</title>
+    <title>磁力引擎 · 聚合搜索</title>
     <style>
         /* ----- 全局样式 ----- */
         * {
@@ -172,20 +172,78 @@
             text-decoration: underline;
         }
 
-        .result-item iframe {
+        /* 无结果或空状态 */
+        .empty-result {
+            text-align: center;
+            color: #7a8b9c;
+            padding: 3rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* 结果卡片内容区（列表 / 加载提示 / iframe 容器） */
+        .result-item .result-body {
+            padding: 0.6rem 1rem 1rem;
+            min-height: 120px;
+            background: #fff;
+        }
+
+        .result-item .loading-tip {
+            color: #7a8b9c;
+            font-size: 0.9rem;
+            padding: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* 解析出的链接列表 */
+        .result-item .link-list {
+            list-style: none;
+            max-height: 460px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 0;
+            padding: 0;
+        }
+
+        .result-item .link-list li {
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .result-item .link-list li:last-child {
+            border-bottom: none;
+        }
+
+        .result-item .link-list a {
+            display: block;
+            padding: 0.55rem 0.4rem;
+            color: #2a5298;
+            text-decoration: none;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            word-break: break-all;
+        }
+
+        .result-item .link-list a:hover {
+            color: #1e3c72;
+            background: #f5f8fd;
+        }
+
+        /* iframe 回退：保持原渲染方式 */
+        .result-item .result-body iframe {
             width: 100%;
             height: 500px;
             border: none;
             background: #fff;
-            /* 让嵌入页面按移动端视口渲染：缩小内容以适配 iframe 宽度 */
             zoom: 0.85;
             -moz-transform: scale(0.85);
             -moz-transform-origin: 0 0;
         }
 
-        /* 移动端：iframe 按手机视口渲染，内容横向不溢出、可纵向滚动浏览 */
         @media (max-width: 700px) {
-            .result-item iframe {
+            .result-item .link-list {
+                max-height: 60vh;
+            }
+
+            .result-item .result-body iframe {
                 zoom: 1;
                 -moz-transform: none;
                 height: 70vh;
@@ -193,14 +251,6 @@
                 overflow: auto;
                 -webkit-overflow-scrolling: touch;
             }
-        }
-
-        /* 无结果或空状态 */
-        .empty-result {
-            text-align: center;
-            color: #7a8b9c;
-            padding: 3rem 0;
-            font-size: 1.1rem;
         }
 
         /* ----- 模态框（配置面板，整屏显示） ----- */
@@ -1100,7 +1150,7 @@
     <!-- 顶部栏 -->
     <div class="top-bar">
         <div class="header">
-            <h1>🔍 网盘/磁力聚合搜索</h1>
+            <h1>🔍 磁力聚合搜索</h1>
             <p>配置搜索引擎，一键查看所有站点结果</p>
         </div>
         <button class="config-trigger" id="configTrigger">配置</button>
@@ -1520,7 +1570,9 @@
             return true;
         }
 
-        // ----- 核心：聚合搜索（在当前页面展示 iframe）-----
+        // ----- 核心：聚合搜索 -----
+        // 策略：先发起网络请求获取网页内容，处理后以列表显示；
+        // 网络请求失败时回退到 iframe 直接嵌入。
         function performSearch() {
             const keyword = searchInput.value.trim();
             if (!keyword) {
@@ -1533,35 +1585,146 @@
             }
 
             const encoded = encodeURIComponent(keyword);
-            const activeSites = sites.filter(s => s.enabled !== false);
+            let activeSites = sites.filter(s => s.enabled !== false);
             if (activeSites.length === 0) {
                 showToast('没有已启用的站点', 1500);
                 return;
             }
-            let html = '';
 
-            activeSites.forEach(site => {
+            // 先渲染卡片骨架（占位），请求完成后填充内容
+            const cards = activeSites.map(site => {
                 let url = site.urlTemplate.replace(/\{keyword\}/g, encoded);
                 if (!site.urlTemplate.includes('{keyword}')) {
                     url = site.urlTemplate;
                 }
+                return { site, url };
+            });
+
+            resultContainer.innerHTML = cards.map(({site, url}) => {
                 const name = escapeHtml(site.name);
                 const directUrl = escapeHtml(url);
-                html += `
-                        <div class="result-item">
+                return `
+                        <div class="result-item" data-url="${directUrl}">
                             <div class="site-title">
                                 <span>${name}</span>
                                 <a href="${directUrl}" target="_blank" rel="noopener">🔗 直接访问</a>
                             </div>
-                            <iframe src="${directUrl}" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" onload="(function(f){try{var d=f.contentDocument;if(d&&!d.querySelector('meta[name=viewport]')){var m=d.createElement('meta');m.name='viewport';m.content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no';d.head.appendChild(m);}var b=d.body;if(b){b.style.maxWidth='100%';b.style.overflowX='hidden';}}catch(e){}})(this)"></iframe>
+                            <div class="result-body"><div class="loading-tip">加载中…</div></div>
                         </div>
                     `;
-            });
+            }).join('');
 
-            resultContainer.innerHTML = html;
             resultArea.classList.add('active');
             resultArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            showToast(`已加载 ${activeSites.length} 个站点的搜索结果`, 2000);
+
+            // 逐个站点发起请求
+            cards.forEach(({site, url}) => {
+                fetchSiteContent(url, site.name)
+                    .then(html => {
+                        const listHtml = renderLinkList(html, url);
+                        if (listHtml) {
+                            fillCard(url, listHtml);
+                        } else {
+                            // 解析不到链接，回退 iframe
+                            fillCardWithIframe(url, url);
+                        }
+                    })
+                    .catch(() => {
+                        // 网络请求失败，回退 iframe
+                        fillCardWithIframe(url, url);
+                    });
+            });
+
+            showToast(`正在加载 ${cards.length} 个站点的搜索结果`, 2000);
+        }
+
+        // 发起网络请求，返回网页文本（跨域已在其它地方处理）
+        function fetchSiteContent(url, name) {
+            return fetch(url, { method: 'GET', credentials: 'omit' }).then(resp => {
+                if (!resp.ok) {
+                    throw new Error('HTTP ' + resp.status);
+                }
+                return resp.text();
+            });
+        }
+
+        // 从网页内容中提取链接并渲染为列表
+        function renderLinkList(html, baseUrl) {
+            try {
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const anchors = Array.from(doc.querySelectorAll('a[href]'));
+                const seen = new Set();
+                const items = [];
+                anchors.forEach(a => {
+                    let href = a.getAttribute('href');
+                    const text = (a.textContent || '').trim();
+                    if (!href || href.startsWith('javascript:') || href.startsWith('#')) return;
+                    href = normalizeUrl(href, baseUrl);
+                    if (!href) return;
+                    if (seen.has(href)) return;
+                    seen.add(href);
+                    const label = text || href;
+                    items.push({ href, label });
+                });
+                if (items.length === 0) return '';
+                return `<ul class="link-list">` + items.map(it =>
+                    `<li><a href="${escapeHtml(it.href)}" target="_blank" rel="noopener">${escapeHtml(it.label)}</a></li>`
+                ).join('') + `</ul>`;
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function normalizeUrl(href, baseUrl) {
+            try {
+                return new URL(href, baseUrl).href;
+            } catch (e) {
+                return href;
+            }
+        }
+
+        function getCard(url) {
+            return resultContainer.querySelector(`.result-item[data-url="${cssEscape(url)}"]`);
+        }
+
+        function cssEscape(str) {
+            return str.replace(/["\\]/g, '\\$&');
+        }
+
+        function fillCard(url, innerHtml) {
+            const card = getCard(url);
+            if (!card) return;
+            const body = card.querySelector('.result-body');
+            if (body) body.innerHTML = innerHtml;
+        }
+
+        function fillCardWithIframe(url, directUrl) {
+            const card = getCard(url);
+            if (!card) return;
+            let body = card.querySelector('.result-body');
+            if (!body) {
+                body = document.createElement('div');
+                body.className = 'result-body';
+                card.appendChild(body);
+            }
+            body.innerHTML = '';
+            const iframe = document.createElement('iframe');
+            iframe.src = directUrl;
+            iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
+            iframe.onload = function () {
+                try {
+                    const d = this.contentDocument;
+                    if (d && !d.querySelector('meta[name=viewport]')) {
+                        const m = d.createElement('meta');
+                        m.name = 'viewport';
+                        m.content = 'width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no';
+                        d.head.appendChild(m);
+                    }
+                    const b = d.body;
+                    if (b) { b.style.maxWidth = '100%'; b.style.overflowX = 'hidden'; }
+                } catch (e) { /* 跨域限制时忽略 */ }
+            };
+            body.appendChild(iframe);
         }
 
         // ----- 模态框控制 -----
