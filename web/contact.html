@@ -76,6 +76,20 @@
             text-decoration: underline;
         }
 
+        a.contact-value {
+            text-decoration: none;
+        }
+
+        a.contact-value:hover {
+            text-decoration: none;
+        }
+
+        a.contact-value:visited,
+        a.contact-value:active,
+        a.contact-value:focus {
+            text-decoration: none;
+        }
+
         .contact-value.copyable {
             cursor: pointer;
         }
@@ -150,15 +164,16 @@
             <div class="contact-item">
                 <span class="contact-label" data-i18n="contactQq">官方 QQ 群</span>
                 <span class="contact-value copyable" id="qqGroup" title="" onclick="copyQq()">90826491</span>
-                <span style="font-size: 0.82rem; color: #999;" data-i18n="copyTip">（点击复制）</span>
+                <span style="font-size: 0.82rem; color: #999;" data-i18n="copyTip" onclick="copyQq()">（点击复制）</span>
             </div>
             <div class="contact-item">
                 <span class="contact-label" data-i18n="contactEmailLabel">通过邮件联系我</span>
-                <span class="contact-value"><a href="mailto:ok_more@qq.com" data-i18n="contactEmailValue">ok_more@qq.com</a></span>
+                <span class="contact-value" onclick="location.href='mailto:ok_more@qq.com'" data-i18n="contactEmailValue" style="cursor: pointer; text-decoration: none;">ok_more@qq.com</span>
             </div>
             <div class="contact-item">
                 <span class="contact-label" data-i18n="contactWechat">微信公众号</span>
-                <span class="contact-value" data-i18n="contactWechatValue">OK以上浏览器</span>
+                <span class="contact-value copyable" id="wechatId" title="" onclick="copyWechat()" data-i18n="contactWechatValue">OK以上浏览器</span>
+                <span style="font-size: 0.82rem; color: #999;" data-i18n="copyTip" onclick="copyWechat()">（点击复制）</span>
             </div>
             <div class="contact-item" style="justify-content: center;">
                 <img src="../images/OfficialAccount.png" alt="Official Account" style="width: 100%; border-radius: 10px;">
@@ -174,6 +189,36 @@
         var num = '90826491';
         function done(){
             var el = document.getElementById('qqGroup');
+            var old = el.textContent;
+            el.textContent = '✓ 已复制';
+            setTimeout(function(){ el.textContent = old; }, 1200);
+        }
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText){
+                navigator.clipboard.writeText(num).then(done, fallback);
+            } else {
+                fallback();
+            }
+        } catch(e){ fallback(); }
+        function fallback(){
+            try {
+                var ta = document.createElement('textarea');
+                ta.value = num;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                done();
+            } catch(e2){ /* 复制失败时保持原样 */ }
+        }
+    }
+    // 微信公众号一键复制
+    function copyWechat(){
+        var num = 'OK以上浏览器';
+        function done(){
+            var el = document.getElementById('wechatId');
             var old = el.textContent;
             el.textContent = '✓ 已复制';
             setTimeout(function(){ el.textContent = old; }, 1200);
