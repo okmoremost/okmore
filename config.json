@@ -6,5 +6,5 @@
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
   "isForce": false,
-  "showRecommend": true
+  "showRecommend": false
 }
