@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">OK以上浏览器</title>
+    <style>
+        header {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 1.6rem 5%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.6rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            color: #2563eb;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eff4ff;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 联系方式条目 */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: #333;
+            min-width: 84px;
+        }
+
+        .contact-value {
+            color: #2563eb;
+            text-decoration: none;
+            /* 允许长 URL 在任意字符处断行，避免窄屏溢出 */
+            min-width: 0;
+            overflow-wrap: anywhere;
+            word-break: break-all;
+        }
+
+        .contact-value:hover {
+            text-decoration: underline;
+        }
+
+        .contact-value.copyable {
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.5rem; }
+            .card { padding: 1.4rem 1.2rem; }
+        }
+    </style>
+    <!-- 多语言（中文 / English）：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+    <script>
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+        zh: {
+            title: 'OK以上浏览器',
+            contactTitle: '交流与联系',
+            contactQq: '官方 QQ 群',
+            contactEmailLabel: '通过邮件联系我',
+            contactEmailValue: 'ok_more@qq.com',
+            contactWechat: '微信公众号',
+            contactWechatValue: 'OK以上浏览器',
+            copyTip: '（点击复制）',
+            footer: '© 2026 OK以上浏览器'
+        },
+        en: {
+            title: 'OkMore Browser',
+            contactTitle: 'Communication & Contact',
+            contactQq: 'Official QQ Group',
+            contactEmailLabel: 'Email me at',
+            contactEmailValue: 'ok_more@qq.com',
+            contactWechat: 'Official WeChat Account',
+            contactWechatValue: 'OK以上浏览器',
+            copyTip: '(click to copy)',
+            footer: '© 2026 OkMore Browser'
+        }
+    };
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    function okmoreApplyI18n(){
+        document.documentElement.setAttribute('data-lang', okmoreGetLang());
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            if (key) n[i].textContent = T(key);
+        }
+    }
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+    </script>
+</head>
+<body>
+    <header>
+        <h1 data-i18n="title">OK以上浏览器</h1>
+    </header>
+
+    <div class="container">
+        <!-- 联系 -->
+        <section class="card">
+            <h2 data-i18n="contactTitle">交流与联系</h2>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contactQq">官方 QQ 群</span>
+                <span class="contact-value copyable" id="qqGroup" title="" onclick="copyQq()">90826491</span>
+                <span style="font-size: 0.82rem; color: #999;" data-i18n="copyTip">（点击复制）</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contactEmailLabel">通过邮件联系我</span>
+                <span class="contact-value"><a href="mailto:ok_more@qq.com" data-i18n="contactEmailValue">ok_more@qq.com</a></span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label" data-i18n="contactWechat">微信公众号</span>
+                <span class="contact-value" data-i18n="contactWechatValue">OK以上浏览器</span>
+            </div>
+            <div class="contact-item" style="justify-content: center;">
+                <img src="../images/OfficialAccount.png" alt="Official Account" style="width: 100%; border-radius: 10px;">
+            </div>
+        </section>
+    </div>
+
+    <footer data-i18n="footer">© 2026 OK以上浏览器 | Made with ❤ for geeks</footer>
+
+    <script>
+    // QQ 群号一键复制（兼容原生 WebView 的 Clipboard API / 旧 execCommand 回退）
+    function copyQq(){
+        var num = '90826491';
+        function done(){
+            var el = document.getElementById('qqGroup');
+            var old = el.textContent;
+            el.textContent = '✓ 已复制';
+            setTimeout(function(){ el.textContent = old; }, 1200);
+        }
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText){
+                navigator.clipboard.writeText(num).then(done, fallback);
+            } else {
+                fallback();
+            }
+        } catch(e){ fallback(); }
+        function fallback(){
+            try {
+                var ta = document.createElement('textarea');
+                ta.value = num;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                done();
+            } catch(e2){ /* 复制失败时保持原样 */ }
+        }
+    }
+    </script>
+</body>
+</html>
