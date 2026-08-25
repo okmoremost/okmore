@@ -1022,20 +1022,43 @@
             }
 
             .add-form {
-                flex-direction: row;
-                flex-wrap: nowrap;
-                align-items: stretch;
-                justify-content: space-between;
-                gap: 0.8rem;
+                display: grid;
+                grid-template-columns: 1fr auto;
+                gap: 0.5rem;
+                align-items: center;
                 padding: 0.7rem 1rem;
             }
 
             .add-left {
-                flex: 1 1 auto;
-                min-width: 0;
+                display: contents;
+            }
+
+            .add-form .add-row {
                 display: flex;
-                flex-direction: column;
+                align-items: center;
                 gap: 0.5rem;
+            }
+
+            .add-form .add-row:first-child {
+                grid-column: 1;
+                grid-row: 1;
+            }
+
+            .add-form .add-row:last-child {
+                grid-column: 1 / -1;
+                grid-row: 2;
+            }
+
+            .add-form .add-btn {
+                grid-column: 2;
+                grid-row: 1;
+                justify-self: start;
+            }
+
+            .add-form .add-row input[type="text"] {
+                flex: 1 1 auto;
+                width: 100%;
+                min-width: 0;
             }
 
             .add-row {
