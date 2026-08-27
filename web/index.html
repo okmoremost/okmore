@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">OK以上浏览器 - 纯净轻快｜自带阅读模式</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 1.2rem 5%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+        }
+
+        header p {
+            opacity: 0.92;
+            font-size: 0.95rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .download-box {
+            background: #fff;
+            border-radius: 14px;
+            padding: 2.8rem;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2.2rem;
+        }
+
+        .download-box h2 {
+            color: #222;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+
+        .download-box p {
+            color: #666;
+            margin-bottom: 1.8rem;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 160px;
+        }
+
+        .btn-main {
+            background-color: #2563eb;
+            color: #fff;
+        }
+        .btn-main:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-backup {
+            background-color: #64748b;
+            color: #fff;
+        }
+        .btn-backup:hover {
+            background-color: #475569;
+            transform: translateY(-2px);
+        }
+
+        .btn-cloud {
+            background-color: #0ea5e9;
+            color: #fff;
+        }
+        .btn-cloud:hover {
+            background-color: #0284c7;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 1.8rem;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            transition: 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .feature-card h3 {
+            color: #2563eb;
+            margin-bottom: 0.8rem;
+            font-size: 1.15rem;
+        }
+
+        .read-card {
+            border: 2px solid #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 英文环境下隐藏仅面向中文用户的元素（国内网盘链接、ICP 备案等） */
+        html[data-lang="en"] .zh-only {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .download-box {
+                padding: 2rem 1.2rem;
+            }
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .download-btn {
+                width: 80%;
+            }
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6111003923411702"
+     crossorigin="anonymous"></script>
+    <!-- 多语言（中文 / English）：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖。
+         英文环境下仅显示最后一条 Github 下载链接（.zh-only 元素被隐藏）。 -->
+    <script>
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+        zh: {
+            title: 'OK以上浏览器 - 纯净轻快｜自带阅读模式',
+            headerTitle: 'OK以上浏览器',
+            headerDesc: '安卓纯净浏览器｜极速浏览 · 智能阅读模式 · 安全无广告',
+            downloadTitle: '立即下载 OK以上浏览器 Android 最新版',
+            downloadDesc: '支持智能阅读模式、无痕浏览、广告拦截、省流加速，全系安卓兼容，提供三条下载通道',
+            btnBaidu: '百度网盘下载 密码：drrx',
+            btnLanzou: '蓝奏云下载 密码：et39',
+            btnGithub: 'Github Download',
+            feat1Title: '极速启动',
+            feat1Desc: '轻量化内核优化，零启动广告，秒开网页，低配安卓手机也能流畅运行。',
+            feat2Title: '📖 智能阅读模式',
+            feat2Desc: '自动识别文章页面，去除广告、弹窗、侧边杂项。自动排版正文、调节字号、行间距、背景色，支持日间/夜间护眼阅读，看小说、新闻、资讯超舒服。',
+            feat3Title: '强力广告拦截',
+            feat3Desc: '智能拦截弹窗广告、悬浮广告、信息流推广、恶意跳转，网页干净清爽。',
+            feat4Title: '隐私安全防护',
+            feat4Desc: '无痕浏览、阻止网站追踪、拦截恶意网站，全方位保护你的浏览隐私安全。',
+            feat5Title: '省流加速',
+            feat5Desc: '智能压缩网页图片与资源，大幅节省流量，移动网络加载更快更稳。',
+            feat6Title: '纯净无捆绑',
+            feat6Desc: '无推送、无弹窗、无后台偷跑，专注纯粹浏览体验，干净好用。',
+            footer: '© 2026 OK以上浏览器 官方网站 | 安卓纯净浏览工具'
+        },
+        en: {
+            title: 'OkMore Browser - Clean & Fast | Built-in Reader Mode',
+            headerTitle: 'OkMore Browser',
+            headerDesc: 'Clean Android browser | Fast browsing · Smart reader mode · Ad-free & secure',
+            downloadTitle: 'Download the Latest OkMore Browser for Android',
+            downloadDesc: 'Smart reader mode, private browsing, ad blocking and data saving. Compatible with all Android devices.',
+            btnBaidu: 'Baidu Netdisk (Password: drrx)',
+            btnLanzou: 'Lanzou Cloud (Password: et39)',
+            btnGithub: 'Github Download',
+            feat1Title: 'Instant Launch',
+            feat1Desc: 'Lightweight optimized engine, zero startup ads, instant page loads — runs smoothly even on low-end Android phones.',
+            feat2Title: '📖 Smart Reader Mode',
+            feat2Desc: 'Automatically detects article pages and removes ads, pop-ups and clutter. Reformats the text with adjustable font size, line spacing and background color, with day/night eye-care modes — perfect for novels, news and articles.',
+            feat3Title: 'Powerful Ad Blocking',
+            feat3Desc: 'Smartly blocks pop-up ads, floating ads, feed promotions and malicious redirects for clean, tidy pages.',
+            feat4Title: 'Privacy & Security',
+            feat4Desc: 'Private browsing, tracker blocking and malicious-site protection to fully safeguard your browsing privacy.',
+            feat5Title: 'Data Saving',
+            feat5Desc: 'Smartly compresses web images and resources to greatly reduce data usage and load faster on mobile networks.',
+            feat6Title: 'Clean & Bundle-Free',
+            feat6Desc: 'No push notifications, no pop-ups, no background running — a pure, clean and easy-to-use browsing experience.',
+            footer: '© 2026 OkMore Browser Official Website | Clean Android Browsing Tool'
+        }
+    };
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    function okmoreApplyI18n(){
+        // 在 <html> 上标记当前语言，供 CSS 隐藏 .zh-only 元素使用
+        document.documentElement.setAttribute('data-lang', okmoreGetLang());
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            if (key) n[i].textContent = T(key);
+        }
+    }
+    // 尽早设置 data-lang，避免中文网盘按钮闪现
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+    </script>
+</head>
+<body>
+    <header>
+        <h1 data-i18n="headerTitle">OK以上浏览器</h1>
+        <p data-i18n="headerDesc">安卓纯净浏览器｜极速浏览 · 智能阅读模式 · 安全无广告</p>
+    </header>
+
+    <div class="container">
+        <div class="download-box">
+            <h2 data-i18n="downloadTitle">立即下载 OK以上浏览器 Android 最新版</h2>
+            <p data-i18n="downloadDesc">支持智能阅读模式、无痕浏览、广告拦截、省流加速，全系安卓兼容，提供三条下载通道</p>
+            <div class="download-buttons">
+                <!-- 百度网盘（仅中文显示） -->
+                <a href="https://pan.baidu.com/s/10XyaVEHoumHEH_fqlSLWEA?pwd=drrx" class="download-btn btn-main zh-only" data-i18n="btnBaidu">百度网盘下载 密码：drrx</a>
+                <!-- 蓝奏云（仅中文显示） -->
+                <a href="https://wwbej.lanzoum.com/b004jl6ede#pwd=et39" class="download-btn btn-backup zh-only" data-i18n="btnLanzou">蓝奏云下载 密码：et39</a>
+                <!-- Github（中英文均显示；英文时仅显示此项） -->
+                <a href="https://github.com/okmoremost/okmore" class="download-btn btn-cloud" data-i18n="btnGithub">Github Download</a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3 data-i18n="feat1Title">极速启动</h3>
+                <p data-i18n="feat1Desc">轻量化内核优化，零启动广告，秒开网页，低配安卓手机也能流畅运行。</p>
+            </div>
+
+            <div class="feature-card read-card">
+                <h3 data-i18n="feat2Title">📖 智能阅读模式</h3>
+                <p data-i18n="feat2Desc">自动识别文章页面，去除广告、弹窗、侧边杂项。自动排版正文、调节字号、行间距、背景色，支持日间/夜间护眼阅读，看小说、新闻、资讯超舒服。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-i18n="feat3Title">强力广告拦截</h3>
+                <p data-i18n="feat3Desc">智能拦截弹窗广告、悬浮广告、信息流推广、恶意跳转，网页干净清爽。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-i18n="feat4Title">隐私安全防护</h3>
+                <p data-i18n="feat4Desc">无痕浏览、阻止网站追踪、拦截恶意网站，全方位保护你的浏览隐私安全。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-i18n="feat5Title">省流加速</h3>
+                <p data-i18n="feat5Desc">智能压缩网页图片与资源，大幅节省流量，移动网络加载更快更稳。</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 data-i18n="feat6Title">纯净无捆绑</h3>
+                <p data-i18n="feat6Desc">无推送、无弹窗、无后台偷跑，专注纯粹浏览体验，干净好用。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ICP备案 + 公安备案 双备案（仅中文显示） -->
+    <div class="zh-only" style="text-align: center; padding: 15px 0; font-size: 14px; color: #666; line-height: 1.8;">
+        <a href="https://beian.miit.gov.cn/" target="_blank" style="color: #1d4ed8; text-decoration: none; margin:0 10px;">
+            粤ICP备2026016933号
+        </a>
+        <span>|</span>
+        <a href="http://www.beian.gov.cn/portal/index.do" target="_blank" style="color: #1d4ed8; text-decoration: none; margin:0 10px;">
+            粤ICP备2026016933号
+        </a>
+    </div>
+
+    <footer data-i18n="footer">
+        © 2026 OK以上浏览器 官方网站 | 安卓纯净浏览工具
+    </footer>
+</body>
+</html>
