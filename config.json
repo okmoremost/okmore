@@ -1,7 +1,7 @@
 {
-  "versionCode": 8,
-  "versionName": "1.0.7",
-  "updateContent": "增加跨域不询问不跳转，加入书签增加添加到首屏，壁纸优化，媒体嗅探优化，修复已知问题",
+  "versionCode": 10,
+  "versionName": "1.0.9",
+  "updateContent": "增加识别图片二维码，加入书签优化，修复下载速度、修复UA、修复护眼色问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
