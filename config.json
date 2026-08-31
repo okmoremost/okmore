@@ -1,7 +1,7 @@
 {
   "versionCode": 12,
   "versionName": "1.1.1",
-  "updateContent": "●支持打印PDF\n●支持只添加到首页\n●优化后退逻辑、网页加载性能\n●翻译更改为谷歌、Yandex\n●下载页增加不同类型文件图标，支持打开txt大文件\n●修复下载文件显示大小问题",
+  "updateContent": "●支持打印PDF\n●支持只添加到首页\n●支持首页不显示加号、不显示搜索框\n●优化后退逻辑、网页加载性能\n●翻译更改为谷歌、Yandex\n●下载页增加不同类型文件图标，支持打开txt大文件\n●修复下载文件显示大小问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
