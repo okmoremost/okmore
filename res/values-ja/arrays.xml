@@ -85,6 +85,15 @@
         <item>never</item>
     </string-array>
 
+    <string-array name="translate_services">
+        <item>Google 翻訳</item>
+        <item>Yandex 翻訳</item>
+    </string-array>
+    <string-array name="translate_service_values">
+        <item>google</item>
+        <item>yandex</item>
+    </string-array>
+
     <string-array name="downloader_types">
         <item>デフォルトのダウンローダー</item>
         <item>システムのダウンローダー</item>
@@ -92,6 +101,15 @@
     <string-array name="downloader_type_values">
         <item>default</item>
         <item>system</item>
+    </string-array>
+
+    <string-array name="player_types">
+        <item>内蔵プレイヤー</item>
+        <item>ネイティブプレイヤー</item>
+    </string-array>
+    <string-array name="player_type_values">
+        <item>builtin</item>
+        <item>native</item>
     </string-array>
 
     <string-array name="download_location_labels">
@@ -119,5 +137,44 @@
         <item>bing</item>
         <item>duckduckgo</item>
         <item>sogou</item>
+    </string-array>
+    <string-array name="webdav_preset_values">
+        <item>custom</item>
+        <item>jianguoyun</item>
+        <item>1und1_dsl</item>
+        <item>1und1_webhosting</item>
+        <item>blaucloud</item>
+        <item>disroot</item>
+        <item>freenetcloud</item>
+        <item>gmx</item>
+        <item>hidrive_ionos</item>
+        <item>hidrive_strato</item>
+        <item>icedrive</item>
+        <item>kdrive</item>
+        <item>koofr</item>
+        <item>magentacloud</item>
+        <item>mailboxorg</item>
+        <item>pcloud</item>
+        <item>webde</item>
+    </string-array>
+
+    <string-array name="webdav_preset_labels">
+        <item>Custom Server Address</item>
+        <item>jianguoyun</item>
+        <item>1 &amp; 1 Online-Speicher(DSL)</item>
+        <item>1 &amp; 1 Online-Speicher(Webhosting)</item>
+        <item>blaucloud</item>
+        <item>Disroot</item>
+        <item>freenetcloud</item>
+        <item>GMX MediaCenter</item>
+        <item>HiDrive IONOS</item>
+        <item>HiDrive Strato</item>
+        <item>IceDrive</item>
+        <item>kDrive</item>
+        <item>Koofr</item>
+        <item>MagentaCLOUD</item>
+        <item>Mailbox.org</item>
+        <item>pCloud</item>
+        <item>WEB.DE Online-Speicher</item>
     </string-array>
 </resources>

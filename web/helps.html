@@ -41,7 +41,8 @@
             display: flex;
             max-width: 1200px;
             margin: 0 auto;
-            min-height: calc(100vh - 220px);
+            height: calc(100vh - 160px);
+            min-height: 360px;
         }
 
         /* 左侧列表（PC 端固定侧栏） */
@@ -56,6 +57,8 @@
             align-self: flex-start;
             position: sticky;
             top: 1.5rem;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
         }
 
         /* 一级导航项 */
@@ -157,7 +160,7 @@
         .layout.collapsed .sidebar .nav-toggle { display: none; }
         .layout.collapsed .sidebar-toggle { font-size: 1.1rem; }
 
-        /* 右侧内容区 */
+        /* 右侧内容区：独立滚动 */
         .content {
             flex: 1;
             background: #fff;
@@ -165,6 +168,7 @@
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             padding: 2.4rem 2.6rem;
             margin: 1.5rem 5% 2rem 0;
+            overflow-y: auto;
         }
 
         .content section {
@@ -255,7 +259,8 @@
             /* 手机端仍保持左右两栏：窄侧栏 + 自适应内容，不改上下排布 */
             .layout {
                 flex-direction: row;
-                min-height: auto;
+                height: calc(100vh - 110px);
+                min-height: 360px;
             }
 
             .sidebar {
@@ -397,8 +402,8 @@
             'webdav-koofr': 'Koofr WebDav 配置说明。\n\n> 密码来源于 [https://app.koofr.net/app/admin/preferences/password](https://app.koofr.net/app/admin/preferences/password) 最下面的生成新密码',
             'webdav-other': '大概步骤同坚果云、Koofr，待更新。',
             'git': '通过 Git 仓库（如 GitHub / Gitee）以版本化方式备份与同步数据。\n\nGit 仓库同步，如Gitee、Github、GitLab、Gitea等，不支持加密',
-            'git-gitee': '注册地址：[Gitee](https://gitee.com/)\n\n先创建仓库，Gitee 配置如下图：\n\n![Gitee](help:gitee|jpg)\n> 密码来源于设置——私人令牌',
-            'git-github': '注册地址：[GitHub](https://github.com/)\n\n先创建仓库，Github 配置如下图：\n\n![Github](help:github|jpg)\n> 密码来源于 Settings——Developer Settings——Personal access tokens'
+            'git-gitee': '注册地址：[Gitee](https://gitee.com/)\n\n先创建仓库，Gitee 配置如下图：\n\n![Gitee](help:gitee|jpg)\n> 密码来源于Gitee网站，设置——私人令牌',
+            'git-github': '注册地址：[GitHub](https://github.com/)\n\n先创建仓库，Github 配置如下图：\n\n![Github](help:github|jpg)\n> 密码来源于GitHub网站，Settings——Developer Settings——Personal access tokens'
         },
         en: {
             'home': 'For desktop bookmarks sync, we recommend the open-source project [floccus](https://github.com/floccusaddon/floccus), which supports Chrome / Edge / Firefox.',
@@ -409,8 +414,8 @@
             'webdav-koofr': 'Koofr WebDav configuration guide.\n\n> The password comes from [https://app.koofr.net/app/admin/preferences/password](https://app.koofr.net/app/admin/preferences/password) — the "Generate new password" at the bottom',
             'webdav-other': 'Roughly the same steps as jianguoyun and Koofr. To be updated.',
             'git': 'Back up and sync your data in a versioned way via a Git repository (e.g. GitHub / Gitee).\n\nGit repository sync, such as Gitee, GitHub, GitLab, Gitea, etc., does not support encryption.',
-            'git-gitee': 'Registration: [Gitee](https://gitee.com/)\n\nCreate a repository first, Gitee configuration is shown below:\n\n![Gitee](help:gitee|jpg)\n> The password comes from Settings — Private Token',
-            'git-github': 'Registration: [GitHub](https://github.com/)\n\nCreate a repository first, Github configuration is shown below:\n\n![Github](help:github|jpg)\n> The password comes from Settings — Developer Settings — Personal access tokens'
+            'git-gitee': 'Registration: [Gitee](https://gitee.com/)\n\nCreate a repository first, Gitee configuration is shown below:\n\n![Gitee](help:gitee|jpg)\n> The password comes from Gitee web，Settings — Private Token',
+            'git-github': 'Registration: [GitHub](https://github.com/)\n\nCreate a repository first, Github configuration is shown below:\n\n![Github](help:github|jpg)\n> The password comes from GitHub web，Settings — Developer Settings — Personal access tokens'
         }
     };
 
