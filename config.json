@@ -1,7 +1,7 @@
 {
-  "versionCode": 16,
-  "versionName": "1.3.1",
-  "updateContent": "•支持底部工具栏左右滑动切换窗口\n•优化下载目录显示路径\n•修复新建脚本无法编辑问题\n•阅读模式时系统手势无需后退",
+  "versionCode": 15,
+  "versionName": "1.3.0",
+  "updateContent": "•支持打印PDF\n•支持只添加到首页\n•支持首页不显示加号、不显示搜索框\n•优化后退逻辑、网页加载性能",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
