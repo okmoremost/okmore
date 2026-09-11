@@ -26,49 +26,13 @@
       padding: 0 16px 48px;
       overflow-x: hidden;      /* 兜底：防止任何轻微横向溢出时可滑动 */
     }
-    /* ===== 顶部标题与搜索 ===== */
+    /* ===== 顶部标题 ===== */
     header {
       text-align: center;
       padding: 48px 0 28px;
     }
-    header h1 {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    header p {
-      color: var(--sub);
-      margin-top: 8px;
-      font-size: 14px;
-    }
-    .search-box {
-      max-width: 560px;
-      margin: 24px auto 0;
-      position: relative;
-    }
-    .search-box input {
-      width: 100%;
-      padding: 14px 20px;
-      font-size: 15px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: var(--card-bg);
-      box-shadow: var(--shadow);
-      outline: none;
-      transition: border-color .2s, box-shadow .2s;
-    }
-    .search-box input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 4px 16px rgba(74, 144, 226, 0.18);
-    }
-    .count-tip {
-      text-align: center;
-      color: var(--sub);
-      font-size: 13px;
-      margin: 12px 0 0;
-    }
 
-    /* ===== 站点导航（搜索框上方，参考图样式） ===== */
+    /* ===== 站点导航（页面顶部，参考图样式） ===== */
     .site-nav {
       max-width: 860px;
       margin: 22px auto 0;
@@ -289,10 +253,6 @@
     @media (max-width: 600px) {
       body { padding: 0 12px 36px; }
       header { padding: 8px 0 8px; }
-      header h1 { font-size: 22px; }
-      header p { font-size: 13px; }
-      .search-box { margin-top: 16px; }
-      .search-box input { padding: 12px 16px; font-size: 14px; }
       .site-nav { margin-top: 2px; padding: 12px 12px 14px; }
       .site-nav .cat-tabs { gap: 8px; }
       .site-nav .cat-tabs .cat-list { gap: 14px; }
@@ -339,22 +299,12 @@
     var OKMORE_I18N = {
       zh: {
         title: '实用网址导航',
-        searchPlaceholder: '搜索名称或功能，如：PDF/OCR/背景替换/证件',
-        found: function(n){ return '找到 ' + n + ' 个相关网站'; },
-        notFound: '没有找到匹配的网站，换个关键词试试～',
         empty: '没有找到匹配的网站',
-        footerPrefix: '共收录',
-        footerSuffix: '个实用网站',
         navEmpty: '暂无匹配的网站'
       },
       en: {
         title: 'Useful Web Navigation',
-        searchPlaceholder: 'Search name or feature, e.g. PDF/OCR/BgReplace/ID',
-        found: function(n){ return 'Found ' + n + ' related sites'; },
-        notFound: 'No matching sites found, try another keyword~',
         empty: 'No matching sites found',
-        footerPrefix: 'Collected',
-        footerSuffix: 'useful sites',
         navEmpty: 'No matching sites'
       }
     };
@@ -379,15 +329,9 @@
     <div class="cat-tabs" id="catTabs"></div>
     <div class="cat-panel" id="catPanel"></div>
   </nav>
-  <div class="search-box">
-    <input id="search" type="text" placeholder="搜索名称或功能，如：PDF/OCR/背景替换/证件" aria-label="搜索" autofocus>
-  </div>
-  <p class="count-tip" id="countTip"></p>
 </header>
 
 <main id="content"></main>
-
-<footer><span id="footerPrefix" data-i18n="footerPrefix">共收录</span> <span id="totalCount">0</span> <span id="footerSuffix" data-i18n="footerSuffix">个实用网站</span></footer>
 
 <script>
   /* ===== 导航数据（来自 recommend.json，内嵌到本页面） ===== */
@@ -1110,17 +1054,10 @@
 
   /* ===== 工具函数 ===== */
   const content = document.getElementById('content');
-  const searchInput = document.getElementById('search');
-  const countTip = document.getElementById('countTip');
-  const totalCount = document.getElementById('totalCount');
-  const footerPrefix = document.getElementById('footerPrefix');
-  const footerSuffix = document.getElementById('footerSuffix');
   const catTabs = document.getElementById('catTabs');
   const catPanel = document.getElementById('catPanel');
   // 当前语言：参考 txt.html，按系统语言自动检测（无需手动切换按钮）
   const lang = okmoreGetLang();
-  // 搜索框占位符按当前语言设置
-  searchInput.placeholder = T('searchPlaceholder');
 
   // 以下静态/动态文案统一通过 head 中的 OKMORE_I18N + T() 按系统语言渲染（参考 txt.html）
 
@@ -1252,30 +1189,16 @@
     renderRows(subs, expandedMap);
   }
 
-  // 统计总网站数（去重按名称）
-  function calcTotal() {
-    const all = NAV_DATA.flatMap(g => g.webList);
-    totalCount.textContent = all.length;
-  }
-
   // 渲染分组与卡片
-  function render(keyword = '') {
-    const kw = keyword.trim().toLowerCase();
+  function render() {
     content.innerHTML = '';
-    let matchedTotal = 0;
     let hasAny = false;
 
     NAV_DATA.forEach(group => {
-      // 过滤当前分组内符合搜索词的网站
-      const items = group.webList.filter(item => {
-        if (!kw) return true;
-        const hay = (item.name + ' ' + item.features + ' ' + item.link).toLowerCase();
-        return hay.includes(kw);
-      });
+      const items = group.webList;
       if (items.length === 0) return;
 
       hasAny = true;
-      matchedTotal += items.length;
 
       const groupEl = document.createElement('section');
       groupEl.className = 'group';
@@ -1315,15 +1238,6 @@
       content.appendChild(groupEl);
     });
 
-    // 搜索结果提示（随系统语言自动切换）
-    if (kw) {
-      countTip.textContent = matchedTotal > 0
-        ? T('found')(matchedTotal)
-        : T('notFound');
-    } else {
-      countTip.textContent = '';
-    }
-
     if (!hasAny) {
       content.innerHTML = `<div class="empty">${T('empty')}</div>`;
     }
@@ -1339,14 +1253,8 @@
   }
 
   /* ===== 事件绑定 ===== */
-  searchInput.addEventListener('input', e => {
-    const v = e.target.value;
-    render(v);          // 过滤下方卡片分组
-    renderSiteNav(v);   // 同步过滤上方站点导航
-  });
-  okmoreApplyI18n();   // 按系统语言初始化标题、h1、页脚文案（参考 txt.html）
+  okmoreApplyI18n();   // 按系统语言初始化标题等文案（参考 txt.html）
   document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
-  calcTotal();
   renderSiteNav();
   render();
 </script>
