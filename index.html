@@ -67,6 +67,137 @@
       font-size: 13px;
       margin: 12px 0 0;
     }
+
+    /* ===== 站点导航（搜索框上方，参考图样式） ===== */
+    .site-nav {
+      max-width: 860px;
+      margin: 22px auto 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 14px 16px 16px;
+      text-align: left;
+    }
+    /* 分类标签行 */
+    .site-nav .cat-tabs {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 0 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    /* 分类标签内层：同一行横向滑动，不换行 */
+    .site-nav .cat-tabs .cat-list {
+      flex: 1 1 auto;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 20px;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;          /* Firefox 隐藏滚动条 */
+    }
+    .site-nav .cat-tabs .cat-list::-webkit-scrollbar { display: none; }  /* Chrome/Safari 隐藏滚动条 */
+    .site-nav .cat-tab {
+      position: relative;
+      flex: 0 0 auto;              /* 不收缩，超出时横向滑动 */
+      font-size: 15px;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 2px 0 8px;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .site-nav .cat-tab:hover { color: var(--accent); }
+    .site-nav .cat-tab.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .site-nav .cat-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+    /* 分类对应的网站行：左侧分类名 + 右侧网站名 */
+    .site-nav .cat-panel { padding-top: 6px; }
+    .site-nav .site-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--border);
+    }
+    .site-nav .site-row:last-child { border-bottom: none; }
+    .site-nav .site-row .row-label {
+      flex: 0 0 auto;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+    .site-nav .site-row .row-links {
+      flex: 1 1 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 0;
+      min-width: 0;
+    }
+    .site-nav .site-link {
+      width: 25%;
+      padding: 3px 6px;
+      font-size: 14px;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border-radius: 6px;
+      transition: color .15s, background .15s;
+    }
+    .site-nav .site-link:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+    /* 分类行展开 / 收起按钮 */
+    .site-nav .row-toggle {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      margin-top: 1px;
+      padding: 0;
+      color: var(--sub);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: color .15s;
+    }
+    .site-nav .row-toggle:hover { color: var(--accent); }
+    .site-nav .row-toggle .arrow {
+      display: inline-block;
+      font-size: 16px;
+      line-height: 1;
+      transition: transform .2s ease;
+    }
+    .site-nav .row-toggle.expanded .arrow { transform: rotate(180deg); }
+    .site-nav .nav-empty {
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 24px 0;
+    }
+
     /* ===== 分组区域 ===== */
     .group { max-width: 1100px; margin: 40px auto 0; }
     .group-title {
@@ -157,11 +288,18 @@
     /* ===== 移动端适配（窄屏 <=600px） ===== */
     @media (max-width: 600px) {
       body { padding: 0 12px 36px; }
-      header { padding: 28px 0 18px; }
+      header { padding: 8px 0 8px; }
       header h1 { font-size: 22px; }
       header p { font-size: 13px; }
       .search-box { margin-top: 16px; }
       .search-box input { padding: 12px 16px; font-size: 14px; }
+      .site-nav { margin-top: 2px; padding: 12px 12px 14px; }
+      .site-nav .cat-tabs { gap: 8px; }
+      .site-nav .cat-tabs .cat-list { gap: 14px; }
+      .site-nav .cat-tab { font-size: 14px; }
+      .site-nav .site-row { gap: 10px; }
+      .site-nav .site-row .row-label { font-size: 13px; }
+      .site-nav .site-link { width: 33.333%; font-size: 13px; padding: 3px 4px; }
       .group { margin-top: 0; }
       .group-title { font-size: 16px; }
       /* 所有手机固定三列，避免自动换行导致一行一/两个 */
@@ -206,7 +344,8 @@
         notFound: '没有找到匹配的网站，换个关键词试试～',
         empty: '没有找到匹配的网站',
         footerPrefix: '共收录',
-        footerSuffix: '个实用网站'
+        footerSuffix: '个实用网站',
+        navEmpty: '暂无匹配的网站'
       },
       en: {
         title: 'Useful Web Navigation',
@@ -215,7 +354,8 @@
         notFound: 'No matching sites found, try another keyword~',
         empty: 'No matching sites found',
         footerPrefix: 'Collected',
-        footerSuffix: 'useful sites'
+        footerSuffix: 'useful sites',
+        navEmpty: 'No matching sites'
       }
     };
     function T(k){
@@ -234,6 +374,11 @@
 </head>
 <body>
 <header>
+  <!-- 站点导航：按语言自动显示国内/国外分类，点击分类切换，网站名点击直接打开外链 -->
+  <nav class="site-nav" id="siteNav">
+    <div class="cat-tabs" id="catTabs"></div>
+    <div class="cat-panel" id="catPanel"></div>
+  </nav>
   <div class="search-box">
     <input id="search" type="text" placeholder="搜索名称或功能，如：PDF/OCR/背景替换/证件" aria-label="搜索" autofocus>
   </div>
@@ -406,6 +551,459 @@
     }
   ];
 
+  /* ===== 站点导航数据：国内 / 国外，一级分类下含多个二级分类（热门搜索网站） ===== */
+  const SITE_NAV = {
+    // 国内
+    cn: [
+      {
+        "cat": "资讯",
+        "subs": [
+          {
+            "cat": "新闻",
+            "sites": [
+              { "name": "腾讯新闻", "link": "https://news.qq.com" },
+              { "name": "新浪新闻", "link": "https://news.sina.com.cn" },
+              { "name": "网易新闻", "link": "https://news.163.com" },
+              { "name": "凤凰网", "link": "https://www.ifeng.com" },
+              { "name": "澎湃新闻", "link": "https://www.thepaper.cn" },
+              { "name": "环球网", "link": "https://www.huanqiu.com" }
+            ]
+          },
+          {
+            "cat": "体育",
+            "sites": [
+              { "name": "新浪体育", "link": "https://sports.sina.com.cn" },
+              { "name": "虎扑", "link": "https://www.hupu.com" },
+              { "name": "球探体育", "link": "https://www.win007.com" },
+              { "name": "懂球帝", "link": "https://www.dongqiudi.com" },
+              { "name": "腾讯体育", "link": "https://sports.qq.com" },
+              { "name": "直播吧", "link": "https://www.zhibo8.cc" }
+            ]
+          },
+          {
+            "cat": "军事",
+            "sites": [
+              { "name": "搜狐军事", "link": "https://mil.sohu.com" },
+              { "name": "新浪军事", "link": "https://mil.news.sina.com.cn" },
+              { "name": "铁血网", "link": "https://www.tiexue.net" },
+              { "name": "中华网军事", "link": "https://military.china.com" },
+              { "name": "环球军事", "link": "https://mil.huanqiu.com" }
+            ]
+          },
+          {
+            "cat": "财经",
+            "sites": [
+              { "name": "东方财富", "link": "https://www.eastmoney.com" },
+              { "name": "新浪财经", "link": "https://finance.sina.com.cn" },
+              { "name": "同花顺", "link": "https://www.10jqka.com.cn" },
+              { "name": "搜狐财经", "link": "https://business.sohu.com" },
+              { "name": "雪球", "link": "https://xueqiu.com" },
+              { "name": "和讯网", "link": "https://www.hexun.com" }
+            ]
+          },
+          {
+            "cat": "科技",
+            "sites": [
+              { "name": "36氪", "link": "https://36kr.com" },
+              { "name": "IT之家", "link": "https://www.ithome.com" },
+              { "name": "虎嗅网", "link": "https://www.huxiu.com" },
+              { "name": "cnBeta", "link": "https://www.cnbeta.com.tw" },
+              { "name": "少数派", "link": "https://sspai.com" }
+            ]
+          },
+          {
+            "cat": "汽车",
+            "sites": [
+              { "name": "汽车之家", "link": "https://www.autohome.com.cn" },
+              { "name": "太平洋汽车", "link": "https://www.pcauto.com.cn" },
+              { "name": "易车网", "link": "https://www.yiche.com" },
+              { "name": "懂车帝", "link": "https://www.dongchedi.com" },
+              { "name": "爱卡汽车", "link": "https://www.xcar.com.cn" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "休闲",
+        "subs": [
+          {
+            "cat": "视频",
+            "sites": [
+              { "name": "哔哩哔哩", "link": "https://www.bilibili.com" },
+              { "name": "爱奇艺", "link": "https://www.iqiyi.com" },
+              { "name": "腾讯视频", "link": "https://v.qq.com" },
+              { "name": "优酷", "link": "https://www.youku.com" },
+              { "name": "芒果TV", "link": "https://www.mgtv.com" },
+              { "name": "抖音", "link": "https://www.douyin.com" },
+              { "name": "快手", "link": "https://www.kuaishou.com" }
+            ]
+          },
+          {
+            "cat": "直播",
+            "sites": [
+              { "name": "斗鱼", "link": "https://www.douyu.com" },
+              { "name": "虎牙", "link": "https://www.huya.com" },
+              { "name": "YY直播", "link": "https://www.yy.com" },
+              { "name": "央视频", "link": "https://www.yangshipin.cn" },
+              { "name": "CCTV", "link": "https://tv.cctv.com" }
+            ]
+          },
+          {
+            "cat": "音乐",
+            "sites": [
+              { "name": "QQ音乐", "link": "https://y.qq.com" },
+              { "name": "网易云音乐", "link": "https://music.163.com" },
+              { "name": "酷狗音乐", "link": "https://www.kugou.com" },
+              { "name": "酷我音乐", "link": "https://www.kuwo.cn" },
+              { "name": "虾米音乐", "link": "https://www.xiami.com" },
+              { "name": "咪咕音乐", "link": "https://music.migu.cn" }
+            ]
+          },
+          {
+            "cat": "小说",
+            "sites": [
+              { "name": "起点中文网", "link": "https://www.qidian.com" },
+              { "name": "晋江文学城", "link": "https://www.jjwxc.net" },
+              { "name": "纵横中文网", "link": "https://www.zongheng.com" },
+              { "name": "番茄小说", "link": "https://fanqienovel.com" },
+              { "name": "七猫免费小说", "link": "https://www.qimao.com" },
+              { "name": "潇湘书院", "link": "https://www.xxsy.net" }
+            ]
+          },
+          {
+            "cat": "社区",
+            "sites": [
+              { "name": "微博", "link": "https://weibo.com" },
+              { "name": "知乎", "link": "https://www.zhihu.com" },
+              { "name": "豆瓣", "link": "https://www.douban.com" },
+              { "name": "小红书", "link": "https://www.xiaohongshu.com" },
+              { "name": "贴吧", "link": "https://tieba.baidu.com" },
+              { "name": "天涯社区", "link": "https://www.tianya.cn" }
+            ]
+          },
+          {
+            "cat": "游戏",
+            "sites": [
+              { "name": "游民星空", "link": "https://www.gamersky.com" },
+              { "name": "3DM", "link": "https://www.3dmgame.com" },
+              { "name": "17173", "link": "https://www.17173.com" },
+              { "name": "TapTap", "link": "https://www.taptap.cn" },
+              { "name": "NGA", "link": "https://bbs.nga.cn" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "生活",
+        "subs": [
+          {
+            "cat": "购物",
+            "sites": [
+              { "name": "淘宝", "link": "https://www.taobao.com" },
+              { "name": "天猫", "link": "https://www.tmall.com" },
+              { "name": "京东", "link": "https://www.jd.com" },
+              { "name": "拼多多", "link": "https://www.pinduoduo.com" },
+              { "name": "唯品会", "link": "https://www.vip.com" },
+              { "name": "苏宁易购", "link": "https://www.suning.com" }
+            ]
+          },
+          {
+            "cat": "美食",
+            "sites": [
+              { "name": "美团", "link": "https://www.meituan.com" },
+              { "name": "大众点评", "link": "https://www.dianping.com" },
+              { "name": "饿了么", "link": "https://www.ele.me" },
+              { "name": "下厨房", "link": "https://www.xiachufang.com" },
+              { "name": "豆果美食", "link": "https://www.douguo.com" }
+            ]
+          },
+          {
+            "cat": "出行",
+            "sites": [
+              { "name": "携程", "link": "https://www.ctrip.com" },
+              { "name": "去哪儿", "link": "https://www.qunar.com" },
+              { "name": "飞猪", "link": "https://www.fliggy.com" },
+              { "name": "12306", "link": "https://www.12306.cn" },
+              { "name": "高德地图", "link": "https://www.amap.com" },
+              { "name": "百度地图", "link": "https://map.baidu.com" }
+            ]
+          },
+          {
+            "cat": "房产",
+            "sites": [
+              { "name": "58同城", "link": "https://www.58.com" },
+              { "name": "链家", "link": "https://www.lianjia.com" },
+              { "name": "安居客", "link": "https://www.anjuke.com" },
+              { "name": "贝壳找房", "link": "https://www.ke.com" },
+              { "name": "房天下", "link": "https://www.fang.com" }
+            ]
+          },
+          {
+            "cat": "健康",
+            "sites": [
+              { "name": "丁香园", "link": "https://www.dxy.cn" },
+              { "name": "好大夫在线", "link": "https://www.haodf.com" },
+              { "name": "39健康网", "link": "https://www.39.net" },
+              { "name": "寻医问药", "link": "https://www.xywy.com" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "工具",
+        "subs": [
+          {
+            "cat": "搜索",
+            "sites": [
+              { "name": "百度", "link": "https://www.baidu.com" },
+              { "name": "必应", "link": "https://cn.bing.com" },
+              { "name": "搜狗", "link": "https://www.sogou.com" },
+              { "name": "360搜索", "link": "https://www.so.com" },
+              { "name": "神马搜索", "link": "https://m.sm.cn" }
+            ]
+          },
+          {
+            "cat": "邮箱",
+            "sites": [
+              { "name": "QQ邮箱", "link": "https://mail.qq.com" },
+              { "name": "163邮箱", "link": "https://mail.163.com" },
+              { "name": "新浪邮箱", "link": "https://mail.sina.com.cn" },
+              { "name": "阿里邮箱", "link": "https://mail.aliyun.com" },
+              { "name": "139邮箱", "link": "https://mail.10086.cn" }
+            ]
+          },
+          {
+            "cat": "网盘",
+            "sites": [
+              { "name": "百度网盘", "link": "https://pan.baidu.com" },
+              { "name": "阿里云盘", "link": "https://www.alipan.com" },
+              { "name": "腾讯微云", "link": "https://www.weiyun.com" },
+              { "name": "夸克网盘", "link": "https://pan.quark.cn" },
+              { "name": "迅雷云盘", "link": "https://pan.xunlei.com" }
+            ]
+          },
+          {
+            "cat": "翻译",
+            "sites": [
+              { "name": "百度翻译", "link": "https://fanyi.baidu.com" },
+              { "name": "有道翻译", "link": "https://fanyi.youdao.com" },
+              { "name": "腾讯翻译君", "link": "https://fanyi.qq.com" },
+              { "name": "彩云小译", "link": "https://www.caiyunapp.com" }
+            ]
+          },
+          {
+            "cat": "查询",
+            "sites": [
+              { "name": "天气预报", "link": "https://www.weather.com.cn" },
+              { "name": "快递100", "link": "https://www.kuaidi100.com" },
+              { "name": "天眼查", "link": "https://www.tianyancha.com" },
+              { "name": "企查查", "link": "https://www.qcc.com" },
+              { "name": "123查", "link": "https://www.123cha.com" },
+              { "name": "国家企业信用", "link": "https://www.gsxt.gov.cn" }
+            ]
+          },
+          {
+            "cat": "政务",
+            "sites": [
+              { "name": "中国政府网", "link": "https://www.gov.cn" },
+              { "name": "国家政务服务平台", "link": "https://gjzwfw.www.gov.cn" },
+              { "name": "12345政务服务", "link": "https://www.12345.gov.cn" },
+              { "name": "国家税务总局", "link": "https://www.chinatax.gov.cn" },
+              { "name": "社保查询", "link": "https://si.12333.gov.cn" }
+            ]
+          }
+        ]
+      }
+    ],
+    // 国外
+    en: [
+      {
+        "cat": "资讯",
+        "subs": [
+          {
+            "cat": "新闻",
+            "sites": [
+              { "name": "Google News", "link": "https://news.google.com" },
+              { "name": "BBC News", "link": "https://www.bbc.com/news" },
+              { "name": "CNN", "link": "https://edition.cnn.com" },
+              { "name": "Reuters", "link": "https://www.reuters.com" },
+              { "name": "NYTimes", "link": "https://www.nytimes.com" },
+              { "name": "The Guardian", "link": "https://www.theguardian.com" }
+            ]
+          },
+          {
+            "cat": "体育",
+            "sites": [
+              { "name": "ESPN", "link": "https://www.espn.com" },
+              { "name": "Sky Sports", "link": "https://www.skysports.com" },
+              { "name": "Bleacher Report", "link": "https://bleacherreport.com" },
+              { "name": "Sports Illustrated", "link": "https://www.si.com" },
+              { "name": "BBC Sport", "link": "https://www.bbc.com/sport" }
+            ]
+          },
+          {
+            "cat": "财经",
+            "sites": [
+              { "name": "Yahoo Finance", "link": "https://finance.yahoo.com" },
+              { "name": "CNBC", "link": "https://www.cnbc.com" },
+              { "name": "MarketWatch", "link": "https://www.marketwatch.com" },
+              { "name": "Investing.com", "link": "https://www.investing.com" },
+              { "name": "TradingView", "link": "https://www.tradingview.com" },
+              { "name": "Forbes", "link": "https://www.forbes.com" }
+            ]
+          },
+          {
+            "cat": "科技",
+            "sites": [
+              { "name": "TechCrunch", "link": "https://techcrunch.com" },
+              { "name": "The Verge", "link": "https://www.theverge.com" },
+              { "name": "Wired", "link": "https://www.wired.com" },
+              { "name": "Ars Technica", "link": "https://arstechnica.com" },
+              { "name": "Hacker News", "link": "https://news.ycombinator.com" },
+              { "name": "Engadget", "link": "https://www.engadget.com" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "休闲",
+        "subs": [
+          {
+            "cat": "视频",
+            "sites": [
+              { "name": "YouTube", "link": "https://www.youtube.com" },
+              { "name": "Netflix", "link": "https://www.netflix.com" },
+              { "name": "Twitch", "link": "https://www.twitch.tv" },
+              { "name": "Vimeo", "link": "https://vimeo.com" },
+              { "name": "Hulu", "link": "https://www.hulu.com" },
+              { "name": "Disney+", "link": "https://www.disneyplus.com" }
+            ]
+          },
+          {
+            "cat": "音乐",
+            "sites": [
+              { "name": "Spotify", "link": "https://www.spotify.com" },
+              { "name": "SoundCloud", "link": "https://soundcloud.com" },
+              { "name": "Apple Music", "link": "https://music.apple.com" },
+              { "name": "Last.fm", "link": "https://www.last.fm" },
+              { "name": "Bandcamp", "link": "https://bandcamp.com" }
+            ]
+          },
+          {
+            "cat": "社区",
+            "sites": [
+              { "name": "X (Twitter)", "link": "https://x.com" },
+              { "name": "Facebook", "link": "https://www.facebook.com" },
+              { "name": "Instagram", "link": "https://www.instagram.com" },
+              { "name": "Reddit", "link": "https://www.reddit.com" },
+              { "name": "Pinterest", "link": "https://www.pinterest.com" },
+              { "name": "Discord", "link": "https://discord.com" }
+            ]
+          },
+          {
+            "cat": "小说",
+            "sites": [
+              { "name": "Wattpad", "link": "https://www.wattpad.com" },
+              { "name": "Royal Road", "link": "https://www.royalroad.com" },
+              { "name": "Archive of Our Own", "link": "https://archiveofourown.org" },
+              { "name": "FanFiction", "link": "https://www.fanfiction.net" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "生活",
+        "subs": [
+          {
+            "cat": "购物",
+            "sites": [
+              { "name": "Amazon", "link": "https://www.amazon.com" },
+              { "name": "eBay", "link": "https://www.ebay.com" },
+              { "name": "AliExpress", "link": "https://www.aliexpress.com" },
+              { "name": "Walmart", "link": "https://www.walmart.com" },
+              { "name": "Etsy", "link": "https://www.etsy.com" }
+            ]
+          },
+          {
+            "cat": "出行",
+            "sites": [
+              { "name": "Booking", "link": "https://www.booking.com" },
+              { "name": "Airbnb", "link": "https://www.airbnb.com" },
+              { "name": "Expedia", "link": "https://www.expedia.com" },
+              { "name": "TripAdvisor", "link": "https://www.tripadvisor.com" },
+              { "name": "Skyscanner", "link": "https://www.skyscanner.net" }
+            ]
+          },
+          {
+            "cat": "美食",
+            "sites": [
+              { "name": "Uber Eats", "link": "https://www.ubereats.com" },
+              { "name": "DoorDash", "link": "https://www.doordash.com" },
+              { "name": "Yelp", "link": "https://www.yelp.com" },
+              { "name": "Allrecipes", "link": "https://www.allrecipes.com" }
+            ]
+          }
+        ]
+      },
+      {
+        "cat": "工具",
+        "subs": [
+          {
+            "cat": "搜索",
+            "sites": [
+              { "name": "Google", "link": "https://www.google.com" },
+              { "name": "Bing", "link": "https://www.bing.com" },
+              { "name": "DuckDuckGo", "link": "https://duckduckgo.com" },
+              { "name": "Yahoo", "link": "https://www.yahoo.com" },
+              { "name": "Yandex", "link": "https://yandex.com" }
+            ]
+          },
+          {
+            "cat": "邮箱",
+            "sites": [
+              { "name": "Gmail", "link": "https://mail.google.com" },
+              { "name": "Outlook", "link": "https://outlook.live.com" },
+              { "name": "Yahoo Mail", "link": "https://mail.yahoo.com" },
+              { "name": "Proton Mail", "link": "https://proton.me/mail" }
+            ]
+          },
+          {
+            "cat": "云盘",
+            "sites": [
+              { "name": "Google Drive", "link": "https://drive.google.com" },
+              { "name": "Dropbox", "link": "https://www.dropbox.com" },
+              { "name": "OneDrive", "link": "https://onedrive.live.com" },
+              { "name": "iCloud", "link": "https://www.icloud.com" },
+              { "name": "MEGA", "link": "https://mega.nz" }
+            ]
+          },
+          {
+            "cat": "翻译",
+            "sites": [
+              { "name": "Google Translate", "link": "https://translate.google.com" },
+              { "name": "DeepL", "link": "https://www.deepl.com" },
+              { "name": "Bing Translator", "link": "https://www.bing.com/translator" },
+              { "name": "Reverso", "link": "https://www.reverso.net" }
+            ]
+          },
+          {
+            "cat": "查询",
+            "sites": [
+              { "name": "Google Maps", "link": "https://maps.google.com" },
+              { "name": "Wikipedia", "link": "https://www.wikipedia.org" },
+              { "name": "IMDb", "link": "https://www.imdb.com" },
+              { "name": "Weather.com", "link": "https://weather.com" },
+              { "name": "XE Currency", "link": "https://www.xe.com" },
+              { "name": "Wolfram Alpha", "link": "https://www.wolframalpha.com" },
+              { "name": "Time.is", "link": "https://time.is" },
+              { "name": "Archive.org", "link": "https://archive.org" }
+            ]
+          }
+        ]
+      }
+    ]
+  };
+
   /* ===== 工具函数 ===== */
   const content = document.getElementById('content');
   const searchInput = document.getElementById('search');
@@ -413,12 +1011,142 @@
   const totalCount = document.getElementById('totalCount');
   const footerPrefix = document.getElementById('footerPrefix');
   const footerSuffix = document.getElementById('footerSuffix');
+  const catTabs = document.getElementById('catTabs');
+  const catPanel = document.getElementById('catPanel');
   // 当前语言：参考 txt.html，按系统语言自动检测（无需手动切换按钮）
   const lang = okmoreGetLang();
   // 搜索框占位符按当前语言设置
   searchInput.placeholder = T('searchPlaceholder');
 
   // 以下静态/动态文案统一通过 head 中的 OKMORE_I18N + T() 按系统语言渲染（参考 txt.html）
+
+  /* ===== 站点导航渲染与交互 ===== */
+  // 导航内容随语言自动切换：中文显示国内导航，英文显示国外导航
+  const navRegion = lang === 'en' ? 'en' : 'cn';
+  let navCatIndex = 0;                           // 当前一级分类索引
+  const navExpanded = { cn: {}, en: {} };        // 各二级分类行的展开状态
+
+  // 分类标签行：各一级分类
+  function renderCatTabs(cats, keyword) {
+    catTabs.innerHTML = '';
+    if (keyword) return;   // 搜索状态不显示分类标签
+    const list = document.createElement('div');
+    list.className = 'cat-list';
+    cats.forEach((c, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cat-tab' + (i === navCatIndex ? ' active' : '');
+      btn.textContent = c.cat;
+      btn.addEventListener('click', () => {
+        navCatIndex = i;
+        renderSiteNav();
+        // 选中标签滚动到可视区域
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      });
+      list.appendChild(btn);
+    });
+    catTabs.appendChild(list);
+  }
+
+  // 生成单个二级分类行（左侧二级分类名 + 右侧网站名 + 可选展开按钮）
+  // key 用于记录展开状态；expandedMap 为展开状态表
+  function buildRow(sub, expandedMap) {
+    const expanded = !!expandedMap[sub.key];
+    // 收起时：桌面每行 4 个、手机每行 3 个，保证正好一行
+    const perRow = window.innerWidth <= 600 ? 3 : 4;
+    const visibleCount = expanded ? sub.sites.length : perRow;
+    const sites = sub.sites.slice(0, visibleCount);
+
+    const row = document.createElement('div');
+    row.className = 'site-row';
+
+    const label = document.createElement('div');
+    label.className = 'row-label';
+    label.textContent = sub.cat;
+    row.appendChild(label);
+
+    const links = document.createElement('div');
+    links.className = 'row-links';
+    sites.forEach(s => {
+      const a = document.createElement('a');
+      a.className = 'site-link';
+      a.href = s.link;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.title = s.name;
+      a.textContent = s.name;
+      links.appendChild(a);
+    });
+    row.appendChild(links);
+
+    // 展开 / 收起按钮（仅当该二级分类网站超过一行时显示）
+    if (sub.sites.length > perRow) {
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'row-toggle' + (expanded ? ' expanded' : '');
+      toggle.setAttribute('aria-expanded', String(expanded));
+      toggle.setAttribute('aria-label', sub.cat);
+      toggle.innerHTML = '<span class="arrow">▾</span>';
+      toggle.addEventListener('click', () => {
+        expandedMap[sub.key] = !expandedMap[sub.key];
+        renderSiteNav();
+      });
+      row.appendChild(toggle);
+    }
+    return row;
+  }
+
+  // 将一级分类数组拍平成二级分类列表（key = 一级/二级，保证唯一）
+  function flattenSubs(cats) {
+    const out = [];
+    cats.forEach(c => {
+      (c.subs || []).forEach(s => {
+        out.push({ key: c.cat + '/' + s.cat, cat: s.cat, sites: s.sites });
+      });
+    });
+    return out;
+  }
+
+  // 渲染二级分类行集合；无数据时显示空提示
+  function renderRows(subs, expandedMap) {
+    catPanel.innerHTML = '';
+    if (!subs.length) {
+      const empty = document.createElement('div');
+      empty.className = 'nav-empty';
+      empty.textContent = T('navEmpty');
+      catPanel.appendChild(empty);
+      return;
+    }
+    subs.forEach(sub => catPanel.appendChild(buildRow(sub, expandedMap)));
+  }
+
+  // 渲染站点导航：单分类视图（各二级分类各一行，可展开）+ 搜索过滤
+  function renderSiteNav(kw = '') {
+    const keyword = kw.trim().toLowerCase();
+    const cats = SITE_NAV[navRegion] || [];
+    renderCatTabs(cats, keyword);
+    const expandedMap = navExpanded[navRegion];
+
+    // 搜索状态：跨全部二级分类收集匹配网站（保留二级分类名）
+    if (keyword) {
+      const subs = [];
+      flattenSubs(cats).forEach(sub => {
+        const sites = sub.sites.filter(s =>
+          s.name.toLowerCase().includes(keyword) ||
+          s.link.toLowerCase().includes(keyword));
+        if (sites.length) subs.push({ key: sub.key, cat: sub.cat, sites });
+      });
+      renderRows(subs, expandedMap);
+      return;
+    }
+
+    // 单分类视图：仅展示所选一级分类下的二级分类
+    const parent = cats[navCatIndex];
+    const subs = parent ? (parent.subs || []).map(s => ({
+      key: parent.cat + '/' + s.cat, cat: s.cat, sites: s.sites
+    })) : [];
+    renderRows(subs, expandedMap);
+  }
 
   // 统计总网站数（去重按名称）
   function calcTotal() {
@@ -507,10 +1235,15 @@
   }
 
   /* ===== 事件绑定 ===== */
-  searchInput.addEventListener('input', e => render(e.target.value));
+  searchInput.addEventListener('input', e => {
+    const v = e.target.value;
+    render(v);          // 过滤下方卡片分组
+    renderSiteNav(v);   // 同步过滤上方站点导航
+  });
   okmoreApplyI18n();   // 按系统语言初始化标题、h1、页脚文案（参考 txt.html）
   document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
   calcTotal();
+  renderSiteNav();
   render();
 </script>
 </body>
