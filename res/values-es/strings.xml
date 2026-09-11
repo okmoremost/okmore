@@ -18,6 +18,7 @@
     <string name="ad_filtering">Filtrado de anuncios</string>
     <string name="speed_experience">Rendimiento</string>
     <string name="dark_mode">Modo oscuro</string>
+    <string name="language">Idioma</string>
     <string name="video_playback">Reproducción de vídeo</string>
     <string name="download_settings">Ajustes de descarga</string>
     <string name="about">Acerca de</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Restaurar pestañas al iniciar</string>
     <string name="chrome_remote_debugging">Activar depuración remota de Chrome</string>
     <string name="chrome_remote_debugging_desc">Introduzca "chrome://inspect" en la barra de direcciones de Chrome para depurar páginas web de forma remota a través del navegador Chrome.</string>
-    <string name="ua_mode">Identificador del navegador</string>
+    <string name="ua_mode">ID del navegador</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Tableta</string>
     <string name="ua_iphone">iPhone</string>
@@ -79,10 +80,10 @@
     <string name="home">Inicio</string>
     <string name="close">Cerrar</string>
     <string name="toggle_layout">Cambiar diseño</string>
-    <string name="find_in_page">Buscar en la página</string>
+    <string name="find_in_page">Buscar</string>
     <string name="font_size">Tamaño de fuente</string>
     <string name="font_size2">Tamaño de fuente</string>
-    <string name="eye_care">Protección ocular</string>
+    <string name="eye_care">Fondo</string>
     <string name="eye_care2">Protección ocular</string>
     <string name="eye_care_default">Predeterminado</string>
     <string name="eye_care_parchment">Pergamino</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">Las páginas web ajustan automáticamente su diseño según el tamaño de la pantalla</string>
     <string name="media_sniffer">Detector de medios</string>
     <string name="media_sniffer_no_result">No se detectaron recursos multimedia</string>
+    <!-- Ver recursos web -->
+    <string name="web_resources">Ver recursos</string>
+    <string name="web_resources_title">Recursos web</string>
+    <string name="web_resources_empty">No se encontraron recursos web</string>
+    <string name="web_res_image">Imágenes</string>
+    <string name="web_res_script">Scripts</string>
+    <string name="web_res_style">Estilos</string>
+    <string name="web_res_media">Medios</string>
+    <string name="web_res_iframe">Marcos</string>
+    <string name="web_res_link">Enlaces</string>
     <string name="ai">Asistente de IA</string>
     <string name="clear_privacy_data">Borrar datos de privacidad</string>
     <string name="auto_clear_privacy_on_exit">Borrar datos de privacidad al salir automáticamente</string>
@@ -266,7 +277,7 @@
     <string name="free_copy">Copia libre</string>
     <string name="free_copy_failed">No se encontró ningún enlace para operar</string>
     <string name="restore_link">Restaurar enlace</string>
-    <string name="view_image">Ver imagen</string>
+    <string name="view_image">Visor de imágenes</string>
     <string name="save_image">Guardar imagen</string>
     <string name="zoom_minimum">Diminuto</string>
     <string name="zoom_small">Pequeño</string>
@@ -322,7 +333,7 @@
     <string name="original_page">Página original</string>
     <string name="refresh">Actualizar</string>
     <string name="cancel_loading">Cancelar carga</string>
-    <string name="force_refresh">Actualización forzada</string>
+    <string name="force_refresh">Recargar</string>
     <string name="homepage_url_hint">Introduzca la URL de la página de inicio</string>
     <string name="homepage_settings_desc">Establecer una URL de página de inicio personalizada. Deje vacío para usar la página de inicio predeterminada</string>
     <string name="close_all">Cerrar todo</string>
@@ -340,8 +351,8 @@
     <string name="translate">Traducir</string>
     <string name="translate_service">Servicio de traducción de páginas web</string>
     <string name="translating">Traduciendo página…</string>
-    <string name="read_aloud">Leer en voz alta</string>
-    <string name="image_mode">Modo sin imágenes</string>
+    <string name="read_aloud">Escuchar</string>
+    <string name="image_mode">Sin imágenes</string>
     <string name="image_mode_always">Siempre con imágenes</string>
     <string name="image_mode_wifi">Sin imágenes con datos móviles</string>
     <string name="image_mode_never">Siempre sin imágenes</string>
@@ -403,6 +414,7 @@
     <string name="player">Reproductor</string>
     <string name="video_already_downloaded">Vídeo ya descargado</string>
     <string name="download_location_hint">Introduzca la ruta del directorio de descargas</string>
+    <string name="phone_storage">Almacenamiento interno</string>
     <string name="download_concurrent_tasks">Descargas simultáneas</string>
     <string name="download_thread_count">Subprocesos de descarga</string>
     <string name="download_auto_delete_ts">Combinar y eliminar segmentos TS automáticamente</string>
@@ -471,6 +483,8 @@
     <string name="download_detail_size">Tamaño</string>
     <string name="download_detail_time">Hora</string>
     <string name="download_segments">segmentos</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Disponible %1$s</string>
     <string name="filter_all">Todos</string>
     <string name="filter_image">Imágenes</string>
     <string name="filter_video">Vídeos</string>
@@ -504,7 +518,10 @@
     <string name="reading_theme_orange">Naranja</string>
     <string name="reading_theme_parchment">Pergamino</string>
     <string name="reading_theme_white">Blanco</string>
-    <string name="add_to_home">Añadir a inicio</string>
+    <string name="add_to_home">Al inicio</string>
+    <string name="add_to_phone">Al teléfono</string>
+    <string name="shortcut_added">Añadido a la pantalla de inicio</string>
+    <string name="shortcut_add_failed">No se pudo añadir, comprueba el permiso de accesos directos</string>
     <string name="hide_password">Ocultar contraseña</string>
     <string name="show_password">Mostrar contraseña</string>
     <string name="comma_separator">, </string>
@@ -519,9 +536,9 @@
     <string name="wallpaper_preview">Vista previa</string>
     <string name="wallpaper_clear_image">Borrar imagen</string>
     <string name="wallpaper_theme_color">Color de tema (Nombre / Cuadro de búsqueda / Botones de la barra de herramientas)</string>
-    <string name="show_home_logo">Mostrar logotipo de inicio</string>
-    <string name="show_home_add_button">Mostrar botón de añadir</string>
-    <string name="show_home_search_box">Mostrar barra de búsqueda</string>
+    <string name="show_home_logo">Logotipo</string>
+    <string name="show_home_add_button">Botón de más</string>
+    <string name="show_home_search_box">Barra de búsqueda</string>
     <string name="customize_bottom_toolbar">Personalizar diseño</string>
     <string name="customize_bottom_toolbar_desc">Arrastre para ajustar el diseño de la barra de navegación</string>
     <string name="customize_tabs_toolbar">Personalizar botones de la página del administrador de pestañas</string>
@@ -543,7 +560,7 @@
     <string name="toolbar_select_button">Seleccionar botón</string>
     <string name="toolbar_position_section">Cambiar posición de la barra: Abajo/Arriba</string>
     <string name="toolbar_spare_section">Botones de reserva</string>
-    <string name="full_screen_mode">Modo pantalla completa</string>
+    <string name="full_screen_mode">Pantalla completa</string>
     <string name="full_screen_mode_desc">Ocultar la barra de navegación al desplazarse hacia arriba, mostrarla al desplazarse hacia abajo</string>
     <string name="edit_menu_order">Editar orden del menú</string>
     <string name="drag_to_reorder_hint">Mantenga pulsado y arrastre el icono para ordenar</string>
@@ -557,11 +574,11 @@
     <string name="log_cleared">Registros borrados</string>
     <string name="log_share_failed">Error al exportar, inténtalo de nuevo</string>
     <string name="open_source_licenses">Aviso de software de código abierto</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Comentarios y sugerencias</string>
+    <string name="contact_community">Comunidad y contacto</string>
+    <string name="license_agreement">Acuerdo de licencia y de servicio</string>
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="feedback_contact_desc">Puedes enviarnos tus comentarios a través de los siguientes canales</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">Filtro básico integrado</string>
@@ -666,4 +683,11 @@
     <string name="press_back_again_to_exit">Pulse Atrás de nuevo para salir</string>
     <string name="site_settings">Configuración del sitio</string>
     <string name="reset_to_global">Restablecer valores globales</string>
+
+    <!-- Primer inicio: términos del servicio y política de privacidad -->
+    <string name="agreement_title">Términos del servicio y política de privacidad</string>
+    <string name="agreement_desc">¡Bienvenido a %1$s! Lee detenidamente y acepta el «%2$s». %1$s valora tu privacidad; consulta la «%3$s» para más detalles.</string>
+    <string name="agreement_agree">Aceptar y continuar</string>
+    <string name="agreement_disagree">No aceptar y salir</string>
+    <string name="skip">Omitir</string>
 </resources>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>软件许可及服务协议</title>
+    <title data-i18n="pageTitle">软件许可及服务协议</title>
     <style>
         body {
             font-family: "Microsoft Yahei", system-ui, sans-serif;
@@ -34,68 +34,209 @@
             margin: 8px 0;
         }
     </style>
+    <!-- 多语言（中文 / English）：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+    <script>
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+        zh: {
+            pageTitle: '软件许可及服务协议',
+            title: '软件许可及服务协议',
+            updateDate: '更新日期：2026年07月22日',
+            effectDate: '生效日期：2026年07月22日',
+            intro: '欢迎您使用本软件客户端及相关服务（以下统称“本软件”）。在下载、安装、注册、登录及使用本软件前，请您仔细阅读本《软件许可及服务协议》（下称“本协议”）。您点击同意、下载安装或使用本软件的行为，即代表您已充分阅读、理解并自愿接受本协议全部条款约束。若您不同意协议任意内容，请立即停止下载并删除本软件。',
+
+            h1: '一、协议主体与适用范围',
+            h1_1: '1.1 本协议是您（使用用户）与本软件运营主体之间订立的合法有效服务合约。',
+            h1_2: '1.2 本协议适用于本软件移动端客户端、网页端及全部附属功能、配套服务。',
+            h1_3: '1.3 未满18周岁未成年人，需在法定监护人知晓并同意本协议前提下方可使用；监护人需对未成年人使用行为承担全部法律责任。',
+
+            h2: '二、软件使用许可授权',
+            h2_1: '2.1 运营方授予您<strong>有限、非独占、不可转让、仅限个人非商业用途</strong>的软件使用权。',
+            h2_2: '2.2 您仅可通过官方渠道获取正版安装包，仅限在个人设备上使用，禁止下列行为：',
+            h2_2a: '复制、拷贝、分发、出租、出借、售卖本软件安装包；',
+            h2_2b: '对软件进行反编译、反汇编、逆向工程、破解、篡改程序代码；',
+            h2_2c: '基于本软件制作修改版、衍生版、外挂程序、脚本工具。',
+            h2_3: '2.3 本软件全部著作权、商标权、知识产权均归运营方所有，您仅获得使用权，不享有任何知识产权权属。',
+
+            h3: '三、用户账号与使用规范',
+            h3_1: '3.1 若本软件支持账号注册，您需保证提交信息真实合法，不得批量注册、虚假注册账号。账号使用权仅限本人，禁止租借、售卖账号。',
+            h3_2: '3.2 您需自行保管账号登录信息，因密码泄露、设备丢失造成的账号风险与损失，由您自行承担。',
+            h3_3: '3.3 用户使用过程中严禁实施以下行为：',
+            h3_3a: '发布传播色情、暴力、谣言、政治敏感、侵权、违法违规内容；',
+            h3_3b: '使用爬虫、攻击程序、外挂干扰、破坏软件服务器正常运行；',
+            h3_3c: '利用软件开展诈骗、引流、传销、商业推广等违规牟利行为；',
+            h3_3d: '冒用他人身份、侵犯第三方肖像权、著作权、名誉权等合法权益。',
+            h3_4: '3.4 运营方发现您违反使用规范时，有权采取警告、功能限制、账号封禁等处置措施。',
+
+            h4: '四、服务变更、暂停与终止',
+            h4_1: '4.1 运营方有权根据产品运营、技术迭代需求，随时对软件功能进行升级、调整、优化。',
+            h4_2: '4.2 因服务器维护、网络故障、政策监管、不可抗力等因素导致服务临时中断、暂停，运营方无需承担赔偿责任。',
+            h4_3: '4.3 运营方有权根据整体运营规划，单方面永久终止软件服务，终止前将通过软件内公告进行公示。',
+
+            h5: '五、个人信息与隐私约定',
+            h5_1: '5.1 您在使用本软件过程中的个人信息处理规则，严格遵照配套《隐私保护指引》执行。',
+            h5_2: '5.2 您同意按照隐私指引约定，授权软件收集、使用必要设备及运行信息。',
+
+            h6: '六、用户自主发布内容责任',
+            h6_1: '6.1 若软件支持用户上传、发布图文、文件等内容，您对自行发布内容承担全部法律责任。',
+            h6_2: '6.2 如您发布内容侵害第三方权益或违反法律法规，运营方有权直接删除内容，并不承担连带责任。',
+
+            h7: '七、免责声明',
+            h7_1: '7.1 本软件按照“现状”提供服务，运营方不保证服务绝对零故障、不间断、无漏洞。',
+            h7_2: '7.2 因您个人设备故障、网络环境异常、自身操作失误引发的损失，由用户自行承担。',
+            h7_3: '7.3 软件内第三方跳转链接、第三方服务内容，由第三方独立承担责任，运营方不对第三方内容做担保。',
+            h7_4: '7.4 地震、洪水、政策管控、网络管制等不可抗力造成的服务异常，双方互不追责。',
+
+            h8: '八、协议修改规则',
+            h8Body: '运营方有权依据法律法规调整、修订本协议条款，修改后将在软件内页面公示，公示后即时生效。您继续使用软件，即视为同意新版协议内容。若不同意修改条款，可停止使用并卸载软件。',
+
+            h9: '九、争议解决',
+            h9Body: '因本协议产生的任何争议，双方优先友好协商解决；协商不成的，提交运营方所在地人民法院诉讼解决。',
+
+            h10: '十、联系渠道',
+            h10Body: '如有协议相关咨询、反馈，可发送邮件联系：ok_more@qq.com'
+        },
+        en: {
+            pageTitle: 'Software License and Service Agreement',
+            title: 'Software License and Service Agreement',
+            updateDate: 'Last updated: July 22, 2026',
+            effectDate: 'Effective date: July 22, 2026',
+            intro: 'Welcome to the client of this software and its related services (collectively, the "Software"). Before downloading, installing, registering, signing in to or using the Software, please read this Software License and Service Agreement (the "Agreement") carefully. By clicking "Agree", downloading, installing or using the Software, you confirm that you have fully read and understood this Agreement and voluntarily accept all of its terms. If you do not agree with any part of this Agreement, please immediately stop downloading and delete the Software.',
+
+            h1: '1. Parties and Scope of Application',
+            h1_1: '1.1 This Agreement is a lawful and valid service contract concluded between you (the user) and the operator of the Software.',
+            h1_2: '1.2 This Agreement applies to the mobile client and web version of the Software, together with all affiliated features and supporting services.',
+            h1_3: '1.3 Minors under the age of 18 may use the Software only with the knowledge and consent of their legal guardian, who shall bear full legal responsibility for the minor\u2019s use.',
+
+            h2: '2. Software License Grant',
+            h2_1: '2.1 The operator grants you a <strong>limited, non-exclusive, non-transferable license for personal, non-commercial use only</strong>.',
+            h2_2: '2.2 You may obtain the genuine installation package only through official channels and use it only on your personal devices. The following acts are prohibited:',
+            h2_2a: 'Copying, duplicating, distributing, renting, lending or selling the installation package of the Software;',
+            h2_2b: 'Decompiling, disassembling, reverse engineering, cracking or tampering with the program code;',
+            h2_2c: 'Creating modified versions, derivative versions, plug-ins or script tools based on the Software.',
+            h2_3: '2.3 All copyrights, trademark rights and intellectual property rights in the Software belong to the operator. You only obtain a right of use and hold no ownership of any intellectual property.',
+
+            h3: '3. User Accounts and Rules of Use',
+            h3_1: '3.1 If the Software supports account registration, you must ensure that the information you submit is true and lawful, and you may not register accounts in bulk or with false information. Account usage rights belong to you alone; renting or selling accounts is prohibited.',
+            h3_2: '3.2 You are responsible for keeping your sign-in credentials secure. Any account risk or loss caused by password disclosure or device loss shall be borne by you.',
+            h3_3: '3.3 The following acts are strictly prohibited while using the Software:',
+            h3_3a: 'Publishing or spreading pornographic, violent, rumorous, politically sensitive, infringing or otherwise unlawful content;',
+            h3_3b: 'Using crawlers, attacking programs or plug-ins to interfere with or disrupt the normal operation of the Software\u2019s servers;',
+            h3_3c: 'Using the Software for fraud, traffic diversion, pyramid schemes, commercial promotion or other unlawful profiteering;',
+            h3_3d: 'Impersonating others, or infringing third parties\u2019 portrait rights, copyrights, reputation rights or other lawful interests.',
+            h3_4: '3.4 If the operator finds that you have violated these rules, it has the right to take measures such as warnings, feature restrictions or account bans.',
+
+            h4: '4. Service Changes, Suspension and Termination',
+            h4_1: '4.1 The operator has the right to upgrade, adjust or optimize the Software\u2019s features at any time based on product operation and technical iteration needs.',
+            h4_2: '4.2 The operator shall not be liable for compensation for temporary interruption or suspension of services caused by server maintenance, network failures, policy supervision, force majeure or similar factors.',
+            h4_3: '4.3 The operator has the right, based on overall operating plans, to unilaterally and permanently terminate the Software service; prior notice will be given through an in-app announcement.',
+
+            h5: '5. Personal Information and Privacy',
+            h5_1: '5.1 The rules for processing your personal information while you use the Software strictly follow the accompanying Privacy Policy.',
+            h5_2: '5.2 You agree, as set out in the Privacy Policy, to authorize the Software to collect and use the necessary device and operation information.',
+
+            h6: '6. Responsibility for Content You Publish',
+            h6_1: '6.1 If the Software allows users to upload or publish text, images or files, you bear full legal responsibility for the content you publish.',
+            h6_2: '6.2 If the content you publish infringes third-party rights or violates laws and regulations, the operator has the right to delete it directly and shall bear no joint liability.',
+
+            h7: '7. Disclaimer',
+            h7_1: '7.1 The Software is provided on an "as is" basis. The operator does not guarantee that the service will be completely error-free, uninterrupted or free of vulnerabilities.',
+            h7_2: '7.2 Losses caused by your device failure, abnormal network environment or your own operating errors shall be borne by you.',
+            h7_3: '7.3 Third-party links and third-party service content within the Software are the sole responsibility of those third parties, and the operator makes no warranty regarding such content.',
+            h7_4: '7.4 Neither party shall be held liable for service abnormalities caused by force majeure such as earthquakes, floods, policy controls or network restrictions.',
+
+            h8: '8. Amendments to This Agreement',
+            h8Body: 'The operator has the right to adjust or revise the terms of this Agreement in accordance with laws and regulations. Any amendment will be announced on a page within the Software and takes effect immediately upon announcement. Your continued use of the Software constitutes acceptance of the revised Agreement. If you do not agree with the amendments, you may stop using the Software and uninstall it.',
+
+            h9: '9. Dispute Resolution',
+            h9Body: 'Any dispute arising from this Agreement shall first be resolved through friendly negotiation between the parties. If negotiation fails, the dispute shall be submitted to the people\u2019s court in the place where the operator is located for litigation.',
+
+            h10: '10. Contact',
+            h10Body: 'For enquiries or feedback regarding this Agreement, please contact us by email: ok_more@qq.com'
+        }
+    };
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    // 文案内允许使用 <strong> 等简单标签，故使用 innerHTML 渲染
+    function okmoreApplyI18n(){
+        var lang = okmoreGetLang();
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            if (key) n[i].innerHTML = T(key);
+        }
+    }
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+    </script>
 </head>
 <body>
-    <h1>软件许可及服务协议</h1>
-    <p>更新日期：2026年07月22日</p>
-    <p>生效日期：2026年07月22日</p>
+    <h1 data-i18n="title">软件许可及服务协议</h1>
+    <p data-i18n="updateDate">更新日期：2026年07月22日</p>
+    <p data-i18n="effectDate">生效日期：2026年07月22日</p>
 
-    <p>欢迎您使用本软件客户端及相关服务（以下统称“本软件”）。在下载、安装、注册、登录及使用本软件前，请您仔细阅读本《软件许可及服务协议》（下称“本协议”）。您点击同意、下载安装或使用本软件的行为，即代表您已充分阅读、理解并自愿接受本协议全部条款约束。若您不同意协议任意内容，请立即停止下载并删除本软件。</p>
+    <p data-i18n="intro">欢迎您使用本软件客户端及相关服务（以下统称“本软件”）。在下载、安装、注册、登录及使用本软件前，请您仔细阅读本《软件许可及服务协议》（下称“本协议”）。您点击同意、下载安装或使用本软件的行为，即代表您已充分阅读、理解并自愿接受本协议全部条款约束。若您不同意协议任意内容，请立即停止下载并删除本软件。</p>
 
-    <h2>一、协议主体与适用范围</h2>
-    <p>1.1 本协议是您（使用用户）与本软件运营主体之间订立的合法有效服务合约。</p>
-    <p>1.2 本协议适用于本软件移动端客户端、网页端及全部附属功能、配套服务。</p>
-    <p>1.3 未满18周岁未成年人，需在法定监护人知晓并同意本协议前提下方可使用；监护人需对未成年人使用行为承担全部法律责任。</p>
+    <h2 data-i18n="h1">一、协议主体与适用范围</h2>
+    <p data-i18n="h1_1">1.1 本协议是您（使用用户）与本软件运营主体之间订立的合法有效服务合约。</p>
+    <p data-i18n="h1_2">1.2 本协议适用于本软件移动端客户端、网页端及全部附属功能、配套服务。</p>
+    <p data-i18n="h1_3">1.3 未满18周岁未成年人，需在法定监护人知晓并同意本协议前提下方可使用；监护人需对未成年人使用行为承担全部法律责任。</p>
 
-    <h2>二、软件使用许可授权</h2>
-    <p>2.1 运营方授予您<strong>有限、非独占、不可转让、仅限个人非商业用途</strong>的软件使用权。</p>
-    <p>2.2 您仅可通过官方渠道获取正版安装包，仅限在个人设备上使用，禁止下列行为：</p>
+    <h2 data-i18n="h2">二、软件使用许可授权</h2>
+    <p data-i18n="h2_1">2.1 运营方授予您<strong>有限、非独占、不可转让、仅限个人非商业用途</strong>的软件使用权。</p>
+    <p data-i18n="h2_2">2.2 您仅可通过官方渠道获取正版安装包，仅限在个人设备上使用，禁止下列行为：</p>
     <ul>
-        <li>复制、拷贝、分发、出租、出借、售卖本软件安装包；</li>
-        <li>对软件进行反编译、反汇编、逆向工程、破解、篡改程序代码；</li>
-        <li>基于本软件制作修改版、衍生版、外挂程序、脚本工具。</li>
+        <li data-i18n="h2_2a">复制、拷贝、分发、出租、出借、售卖本软件安装包；</li>
+        <li data-i18n="h2_2b">对软件进行反编译、反汇编、逆向工程、破解、篡改程序代码；</li>
+        <li data-i18n="h2_2c">基于本软件制作修改版、衍生版、外挂程序、脚本工具。</li>
     </ul>
-    <p>2.3 本软件全部著作权、商标权、知识产权均归运营方所有，您仅获得使用权，不享有任何知识产权权属。</p>
+    <p data-i18n="h2_3">2.3 本软件全部著作权、商标权、知识产权均归运营方所有，您仅获得使用权，不享有任何知识产权权属。</p>
 
-    <h2>三、用户账号与使用规范</h2>
-    <p>3.1 若本软件支持账号注册，您需保证提交信息真实合法，不得批量注册、虚假注册账号。账号使用权仅限本人，禁止租借、售卖账号。</p>
-    <p>3.2 您需自行保管账号登录信息，因密码泄露、设备丢失造成的账号风险与损失，由您自行承担。</p>
-    <p>3.3 用户使用过程中严禁实施以下行为：</p>
+    <h2 data-i18n="h3">三、用户账号与使用规范</h2>
+    <p data-i18n="h3_1">3.1 若本软件支持账号注册，您需保证提交信息真实合法，不得批量注册、虚假注册账号。账号使用权仅限本人，禁止租借、售卖账号。</p>
+    <p data-i18n="h3_2">3.2 您需自行保管账号登录信息，因密码泄露、设备丢失造成的账号风险与损失，由您自行承担。</p>
+    <p data-i18n="h3_3">3.3 用户使用过程中严禁实施以下行为：</p>
     <ul>
-        <li>发布传播色情、暴力、谣言、政治敏感、侵权、违法违规内容；</li>
-        <li>使用爬虫、攻击程序、外挂干扰、破坏软件服务器正常运行；</li>
-        <li>利用软件开展诈骗、引流、传销、商业推广等违规牟利行为；</li>
-        <li>冒用他人身份、侵犯第三方肖像权、著作权、名誉权等合法权益。</li>
+        <li data-i18n="h3_3a">发布传播色情、暴力、谣言、政治敏感、侵权、违法违规内容；</li>
+        <li data-i18n="h3_3b">使用爬虫、攻击程序、外挂干扰、破坏软件服务器正常运行；</li>
+        <li data-i18n="h3_3c">利用软件开展诈骗、引流、传销、商业推广等违规牟利行为；</li>
+        <li data-i18n="h3_3d">冒用他人身份、侵犯第三方肖像权、著作权、名誉权等合法权益。</li>
     </ul>
-    <p>3.4 运营方发现您违反使用规范时，有权采取警告、功能限制、账号封禁等处置措施。</p>
+    <p data-i18n="h3_4">3.4 运营方发现您违反使用规范时，有权采取警告、功能限制、账号封禁等处置措施。</p>
 
-    <h2>四、服务变更、暂停与终止</h2>
-    <p>4.1 运营方有权根据产品运营、技术迭代需求，随时对软件功能进行升级、调整、优化。</p>
-    <p>4.2 因服务器维护、网络故障、政策监管、不可抗力等因素导致服务临时中断、暂停，运营方无需承担赔偿责任。</p>
-    <p>4.3 运营方有权根据整体运营规划，单方面永久终止软件服务，终止前将通过软件内公告进行公示。</p>
+    <h2 data-i18n="h4">四、服务变更、暂停与终止</h2>
+    <p data-i18n="h4_1">4.1 运营方有权根据产品运营、技术迭代需求，随时对软件功能进行升级、调整、优化。</p>
+    <p data-i18n="h4_2">4.2 因服务器维护、网络故障、政策监管、不可抗力等因素导致服务临时中断、暂停，运营方无需承担赔偿责任。</p>
+    <p data-i18n="h4_3">4.3 运营方有权根据整体运营规划，单方面永久终止软件服务，终止前将通过软件内公告进行公示。</p>
 
-    <h2>五、个人信息与隐私约定</h2>
-    <p>5.1 您在使用本软件过程中的个人信息处理规则，严格遵照配套《隐私保护指引》执行。</p>
-    <p>5.2 您同意按照隐私指引约定，授权软件收集、使用必要设备及运行信息。</p>
+    <h2 data-i18n="h5">五、个人信息与隐私约定</h2>
+    <p data-i18n="h5_1">5.1 您在使用本软件过程中的个人信息处理规则，严格遵照配套《隐私保护指引》执行。</p>
+    <p data-i18n="h5_2">5.2 您同意按照隐私指引约定，授权软件收集、使用必要设备及运行信息。</p>
 
-    <h2>六、用户自主发布内容责任</h2>
-    <p>6.1 若软件支持用户上传、发布图文、文件等内容，您对自行发布内容承担全部法律责任。</p>
-    <p>6.2 如您发布内容侵害第三方权益或违反法律法规，运营方有权直接删除内容，并不承担连带责任。</p>
+    <h2 data-i18n="h6">六、用户自主发布内容责任</h2>
+    <p data-i18n="h6_1">6.1 若软件支持用户上传、发布图文、文件等内容，您对自行发布内容承担全部法律责任。</p>
+    <p data-i18n="h6_2">6.2 如您发布内容侵害第三方权益或违反法律法规，运营方有权直接删除内容，并不承担连带责任。</p>
 
-    <h2>七、免责声明</h2>
-    <p>7.1 本软件按照“现状”提供服务，运营方不保证服务绝对零故障、不间断、无漏洞。</p>
-    <p>7.2 因您个人设备故障、网络环境异常、自身操作失误引发的损失，由用户自行承担。</p>
-    <p>7.3 软件内第三方跳转链接、第三方服务内容，由第三方独立承担责任，运营方不对第三方内容做担保。</p>
-    <p>7.4 地震、洪水、政策管控、网络管制等不可抗力造成的服务异常，双方互不追责。</p>
+    <h2 data-i18n="h7">七、免责声明</h2>
+    <p data-i18n="h7_1">7.1 本软件按照“现状”提供服务，运营方不保证服务绝对零故障、不间断、无漏洞。</p>
+    <p data-i18n="h7_2">7.2 因您个人设备故障、网络环境异常、自身操作失误引发的损失，由用户自行承担。</p>
+    <p data-i18n="h7_3">7.3 软件内第三方跳转链接、第三方服务内容，由第三方独立承担责任，运营方不对第三方内容做担保。</p>
+    <p data-i18n="h7_4">7.4 地震、洪水、政策管控、网络管制等不可抗力造成的服务异常，双方互不追责。</p>
 
-    <h2>八、协议修改规则</h2>
-    <p>运营方有权依据法律法规调整、修订本协议条款，修改后将在软件内页面公示，公示后即时生效。您继续使用软件，即视为同意新版协议内容。若不同意修改条款，可停止使用并卸载软件。</p>
+    <h2 data-i18n="h8">八、协议修改规则</h2>
+    <p data-i18n="h8Body">运营方有权依据法律法规调整、修订本协议条款，修改后将在软件内页面公示，公示后即时生效。您继续使用软件，即视为同意新版协议内容。若不同意修改条款，可停止使用并卸载软件。</p>
 
-    <h2>九、争议解决</h2>
-    <p>因本协议产生的任何争议，双方优先友好协商解决；协商不成的，提交运营方所在地人民法院诉讼解决。</p>
+    <h2 data-i18n="h9">九、争议解决</h2>
+    <p data-i18n="h9Body">因本协议产生的任何争议，双方优先友好协商解决；协商不成的，提交运营方所在地人民法院诉讼解决。</p>
 
-    <h2>十、联系渠道</h2>
-    <p>如有协议相关咨询、反馈，可发送邮件联系：ok_more@qq.com</p>
-
+    <h2 data-i18n="h10">十、联系渠道</h2>
+    <p data-i18n="h10Body">如有协议相关咨询、反馈，可发送邮件联系：ok_more@qq.com</p>
 </body>
 </html>

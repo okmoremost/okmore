@@ -18,6 +18,7 @@
     <string name="ad_filtering">网页广告过滤</string>
     <string name="speed_experience">极速体验中心</string>
     <string name="dark_mode">深色模式</string>
+    <string name="language">语言</string>
     <string name="video_playback">视频播放</string>
     <string name="download_settings">下载设置</string>
     <string name="about">关于</string>
@@ -79,10 +80,10 @@
     <string name="home">主页</string>
     <string name="close">关闭</string>
     <string name="toggle_layout">切换布局</string>
-    <string name="find_in_page">页内查找</string>
+    <string name="find_in_page">网页内查找</string>
     <string name="font_size">字体大小</string>
     <string name="font_size2">字号</string>
-    <string name="eye_care">网页保护色</string>
+    <string name="eye_care">网页背景色</string>
     <string name="eye_care2">护眼</string>
     <string name="eye_care_default">默认</string>
     <string name="eye_care_parchment">羊皮纸</string>
@@ -153,6 +154,16 @@
     <string name="adaptive_screen_desc">网页根据屏幕大小自动调整布局</string>
     <string name="media_sniffer">媒体嗅探</string>
     <string name="media_sniffer_no_result">暂无嗅探到的媒体资源</string>
+    <!-- 查看网页资源 -->
+    <string name="web_resources">查看资源</string>
+    <string name="web_resources_title">网页资源</string>
+    <string name="web_resources_empty">未发现网页资源</string>
+    <string name="web_res_image">图片</string>
+    <string name="web_res_script">JS</string>
+    <string name="web_res_style">样式</string>
+    <string name="web_res_media">媒体</string>
+    <string name="web_res_iframe">框架</string>
+    <string name="web_res_link">链接</string>
     <string name="ai">AI助手</string>
     <string name="clear_privacy_data">清理隐私数据</string>
     <string name="auto_clear_privacy_on_exit">是否退出时自动清除隐私数据</string>
@@ -283,7 +294,7 @@
     <string name="free_copy">自由复制</string>
     <string name="free_copy_failed">未找到可操作的链接</string>
     <string name="restore_link">恢复链接</string>
-    <string name="view_image">查看图片</string>
+    <string name="view_image">看图模式</string>
     <string name="save_image">保存图片</string>
     <string name="zoom_minimum">极小</string>
     <string name="zoom_small">小</string>
@@ -358,7 +369,7 @@
     <string name="translate_service">网页翻译服务</string>
     <string name="translating">正在翻译网页…</string>
     <string name="torrent_search">种子搜索</string>
-    <string name="read_aloud">朗读</string>
+    <string name="read_aloud">网页朗读</string>
     <string name="image_mode">无图模式</string>
     <string name="image_mode_always">始终有图</string>
     <string name="image_mode_wifi">仅移动数据网络无图</string>
@@ -428,6 +439,7 @@
     <string name="video_already_downloaded">视频已下载到本地</string>
     <string name="download_location">下载位置</string>
     <string name="download_location_hint">输入下载目录路径</string>
+    <string name="phone_storage">手机存储</string>
     <string name="download_concurrent_tasks">同时下载任务数量</string>
     <string name="download_thread_count">下载线程</string>
     <string name="download_auto_delete_ts">自动合并ts并删除片段</string>
@@ -491,6 +503,8 @@
     <string name="download_detail_size">大小</string>
     <string name="download_detail_time">时间</string>
     <string name="download_segments">段</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">可用 %1$s</string>
     <string name="filter_all">全部</string>
     <string name="filter_image">图片</string>
     <string name="filter_video">视频</string>
@@ -525,6 +539,9 @@
     <string name="reading_theme_parchment">羊皮纸</string>
     <string name="reading_theme_white">纯白</string>
     <string name="add_to_home">添加至首屏</string>
+    <string name="add_to_phone">添加至手机</string>
+    <string name="shortcut_added">已添加至桌面</string>
+    <string name="shortcut_add_failed">添加失败，请检查桌面快捷方式权限</string>
     <string name="hide_password">隐藏密码</string>
     <string name="show_password">显示密码</string>
     <string name="comma_separator">、</string>
@@ -537,9 +554,9 @@
     <string name="wallpaper_search_box_alpha">搜索框透明度</string>
     <string name="wallpaper_reset">恢复默认</string>
     <string name="wallpaper_preview">效果预览</string>
-    <string name="show_home_logo">显示首页 Logo</string>
-    <string name="show_home_add_button">显示首页加号</string>
-    <string name="show_home_search_box">显示搜索框</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">加号</string>
+    <string name="show_home_search_box">搜索框</string>
     <string name="customize_bottom_toolbar">自定义布局</string>
     <string name="customize_bottom_toolbar_desc">拖拽调整导航栏布局</string>
     <string name="customize_tabs_toolbar">自定义窗口管理页按钮</string>
@@ -586,6 +603,7 @@
     <string name="feedback_issues">Issues：%1$s</string>
     <string name="feedback_qq_group">--</string>
     <string name="check_updates">检查更新</string>
+    <string name="join_qq_channel">加入QQ频道</string>
     <string name="checking_updates">正在检查更新...</string>
     <string name="latest_version">已是最新版本</string>
     <string name="update_failed">检查更新失败</string>
@@ -619,6 +637,8 @@
     <string name="swipe_navigation_desc">开启后，在网页左右滑动可快速切换前进后退</string>
     <string name="swipe_up_to_go_home">上滑返回首页</string>
     <string name="swipe_up_to_go_home_desc">在工具栏上向上滑动可快速返回首页</string>
+    <string name="toolbar_swipe_switch_window">工具栏左右滑动切换窗口</string>
+    <string name="toolbar_swipe_switch_window_desc">在底部工具栏上左右滑动可切换到下一个/上一个窗口</string>
     <string name="free_tools">免费工具</string>
     <!-- 书签同步 -->
     <string name="bookmark_sync">书签同步</string>
@@ -683,4 +703,13 @@
     <string name="exit">退出</string>
     <string name="exit_confirm_message">确定要退出应用吗？</string>
     <string name="press_back_again_to_exit">再按一次返回键退出</string>
+
+    <!-- 首次启动：服务协议与隐私政策 -->
+    <string name="agreement_title">服务协议与隐私政策</string>
+    <string name="agreement_desc">欢迎使用%1$s！请你仔细阅读并同意《%2$s》，%1$s重视您的隐私，阅读《%3$s》可详细了解。</string>
+    <string name="agreement_agree">同意并继续</string>
+    <string name="agreement_disagree">不同意并退出</string>
+
+    <!-- 首次启动布局引导：跳过 -->
+    <string name="skip">跳过</string>
 </resources>

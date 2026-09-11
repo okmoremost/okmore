@@ -18,6 +18,7 @@
     <string name="ad_filtering">Chặn quảng cáo</string>
     <string name="speed_experience">Tốc độ</string>
     <string name="dark_mode">Chế độ tối</string>
+    <string name="language">Ngôn ngữ</string>
     <string name="video_playback">Phát video</string>
     <string name="download_settings">Cài đặt tải xuống</string>
     <string name="about">Giới thiệu</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Khôi phục tab khi khởi động</string>
     <string name="chrome_remote_debugging">Bật gỡ lỗi từ xa Chrome</string>
     <string name="chrome_remote_debugging_desc">Nhập "chrome://inspect" vào thanh địa chỉ Chrome để gỡ lỗi trang web từ xa qua trình duyệt Chrome</string>
-    <string name="ua_mode">Định danh trình duyệt</string>
+    <string name="ua_mode">ID trình duyệt</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -79,10 +80,10 @@
     <string name="home">Trang chủ</string>
     <string name="close">Đóng</string>
     <string name="toggle_layout">Chuyển bố cục</string>
-    <string name="find_in_page">Tìm trong trang</string>
+    <string name="find_in_page">Tìm kiếm</string>
     <string name="font_size">Cỡ chữ</string>
     <string name="font_size2">Cỡ chữ</string>
-    <string name="eye_care">Bảo vệ mắt</string>
+    <string name="eye_care">Màu nền</string>
     <string name="eye_care2">Bảo vệ mắt</string>
     <string name="eye_care_default">Mặc định</string>
     <string name="eye_care_parchment">Da</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">Trang web tự động điều chỉnh bố cục theo kích thước màn hình</string>
     <string name="media_sniffer">Sniffer media</string>
     <string name="media_sniffer_no_result">Không phát hiện media</string>
+    <!-- Xem tài nguyên web -->
+    <string name="web_resources">Xem tài nguyên</string>
+    <string name="web_resources_title">Tài nguyên web</string>
+    <string name="web_resources_empty">Không tìm thấy tài nguyên web</string>
+    <string name="web_res_image">Hình ảnh</string>
+    <string name="web_res_script">Tập lệnh</string>
+    <string name="web_res_style">Kiểu</string>
+    <string name="web_res_media">Phương tiện</string>
+    <string name="web_res_iframe">Khung</string>
+    <string name="web_res_link">Liên kết</string>
     <string name="ai">Trợ lý AI</string>
     <string name="clear_privacy_data">Xóa dữ liệu riêng tư</string>
     <string name="auto_clear_privacy_on_exit">Tự động xóa dữ liệu riêng tư khi thoát</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">Sao chép tự do</string>
     <string name="free_copy_failed">Không tìm thấy liên kết để thao tác</string>
     <string name="restore_link">Khôi phục liên kết</string>
-    <string name="view_image">Xem hình ảnh</string>
+    <string name="view_image">Trình xem ảnh</string>
     <string name="save_image">Lưu hình ảnh</string>
     <string name="zoom_minimum">Rất nhỏ</string>
     <string name="zoom_small">Nhỏ</string>
@@ -329,7 +340,7 @@
     <string name="original_page">Trang gốc</string>
     <string name="refresh">Làm mới</string>
     <string name="cancel_loading">Hủy tải</string>
-    <string name="force_refresh">Làm mới bắt buộc</string>
+    <string name="force_refresh">Tải lại</string>
     <string name="homepage_url_hint">Nhập URL trang chủ</string>
     <string name="homepage_settings_desc">Đặt URL trang chủ tùy chỉnh. Để trống để dùng trang chủ mặc định</string>
     <string name="close_all">Đóng tất cả</string>
@@ -348,7 +359,7 @@
     <string name="translate_service">Dịch vụ dịch trang web</string>
     <string name="translating">Đang dịch trang…</string>
     <string name="read_aloud">Đọc to</string>
-    <string name="image_mode">Chế độ không ảnh</string>
+    <string name="image_mode">Không ảnh</string>
     <string name="image_mode_always">Luôn có ảnh</string>
     <string name="image_mode_wifi">Không ảnh trên mạng di động</string>
     <string name="image_mode_never">Luôn không ảnh</string>
@@ -414,6 +425,7 @@
     <string name="video_already_downloaded">Video đã được tải xuống</string>
     <string name="download_location">Vị trí tải xuống</string>
     <string name="download_location_hint">Nhập đường dẫn thư mục tải xuống</string>
+    <string name="phone_storage">Bộ nhớ trong</string>
     <string name="download_concurrent_tasks">Số lượng tải đồng thời</string>
     <string name="download_thread_count">Luồng tải xuống</string>
     <string name="download_auto_delete_ts">Tự động gộp và xóa phân đoạn TS</string>
@@ -482,6 +494,8 @@
     <string name="download_detail_size">Kích thước</string>
     <string name="download_detail_time">Thời gian</string>
     <string name="download_segments">phân đoạn</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Có sẵn %1$s</string>
     <string name="filter_all">Tất cả</string>
     <string name="filter_image">Hình ảnh</string>
     <string name="filter_video">Video</string>
@@ -515,7 +529,10 @@
     <string name="reading_theme_orange">Cam</string>
     <string name="reading_theme_parchment">Da</string>
     <string name="reading_theme_white">Trắng</string>
-    <string name="add_to_home">Thêm vào trang chủ</string>
+    <string name="add_to_home">Vào trang chủ</string>
+    <string name="add_to_phone">Vào điện thoại</string>
+    <string name="shortcut_added">Đã thêm vào màn hình chính</string>
+    <string name="shortcut_add_failed">Thêm không thành công, hãy kiểm tra quyền lối tắt màn hình chính</string>
     <string name="hide_password">Ẩn mật khẩu</string>
     <string name="show_password">Hiện mật khẩu</string>
     <string name="comma_separator">, </string>
@@ -530,9 +547,9 @@
     <string name="wallpaper_preview">Xem trước</string>
     <string name="wallpaper_clear_image">Xóa hình ảnh</string>
     <string name="wallpaper_theme_color">Màu chủ đề (Tên / Hộp tìm kiếm / Nút thanh công cụ)</string>
-    <string name="show_home_logo">Hiển thị Logo trang chủ</string>
-    <string name="show_home_add_button">Hiện nút thêm</string>
-    <string name="show_home_search_box">Hiện thanh tìm kiếm</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">Nút dấu cộng</string>
+    <string name="show_home_search_box">Ô tìm kiếm</string>
     <string name="customize_bottom_toolbar">Tùy chỉnh bố cục</string>
     <string name="customize_bottom_toolbar_desc">Kéo để điều chỉnh bố cục thanh điều hướng</string>
     <string name="customize_tabs_toolbar">Tùy chỉnh nút trang quản lý thẻ</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_select_button">Chọn nút</string>
     <string name="toolbar_position_section">Chuyển đổi vị trí thanh công cụ: Dưới/Trên</string>
     <string name="toolbar_spare_section">Nút dự phòng</string>
-    <string name="full_screen_mode">Chế độ toàn màn hình</string>
+    <string name="full_screen_mode">Toàn màn hình</string>
     <string name="full_screen_mode_desc">Ẩn thanh điều hướng khi cuộn lên, hiện khi cuộn xuống</string>
     <string name="edit_menu_order">Chỉnh sửa thứ tự menu</string>
     <string name="drag_to_reorder_hint">Nhấn giữ và kéo biểu tượng để sắp xếp</string>
@@ -568,11 +585,11 @@
     <string name="log_cleared">Đã xóa nhật ký</string>
     <string name="log_share_failed">Xuất thất bại, vui lòng thử lại</string>
     <string name="open_source_licenses">Tuyên bố phần mềm mã nguồn mở</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Phản hồi và góp ý</string>
+    <string name="contact_community">Cộng đồng và liên hệ</string>
+    <string name="license_agreement">Thỏa thuận cấp phép phần mềm và dịch vụ</string>
+    <string name="privacy_policy">Chính sách quyền riêng tư</string>
+    <string name="feedback_contact_desc">Bạn có thể gửi phản hồi qua các kênh sau</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">Bộ lọc cơ bản tích hợp</string>
@@ -677,4 +694,11 @@
     <string name="press_back_again_to_exit">Nhấn Quay lại lần nữa để thoát</string>
     <string name="site_settings">Cài đặt trang</string>
     <string name="reset_to_global">Đặt lại về mặc định chung</string>
+
+    <!-- Khởi chạy lần đầu: điều khoản dịch vụ và chính sách quyền riêng tư -->
+    <string name="agreement_title">Điều khoản dịch vụ và Chính sách quyền riêng tư</string>
+    <string name="agreement_desc">Chào mừng bạn đến với %1$s! Vui lòng đọc kỹ và đồng ý với «%2$s». %1$s coi trọng quyền riêng tư của bạn; hãy đọc «%3$s» để biết chi tiết.</string>
+    <string name="agreement_agree">Đồng ý và tiếp tục</string>
+    <string name="agreement_disagree">Không đồng ý và thoát</string>
+    <string name="skip">Bỏ qua</string>
 </resources>

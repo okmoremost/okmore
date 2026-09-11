@@ -18,6 +18,7 @@
     <string name="ad_filtering">網頁廣告過濾</string>
     <string name="speed_experience">極速體驗中心</string>
     <string name="dark_mode">深色模式</string>
+    <string name="language">語言</string>
     <string name="video_playback">視頻播放</string>
     <string name="download_settings">下載設定</string>
     <string name="about">關於</string>
@@ -79,10 +80,10 @@
     <string name="home">主頁</string>
     <string name="close">關閉</string>
     <string name="toggle_layout">切換佈局</string>
-    <string name="find_in_page">頁內尋找</string>
+    <string name="find_in_page">網頁內尋找</string>
     <string name="font_size">字體大小</string>
     <string name="font_size2">字號</string>
-    <string name="eye_care">網頁保護色</string>
+    <string name="eye_care">網頁背景色</string>
     <string name="eye_care2">護眼</string>
     <string name="eye_care_default">預設</string>
     <string name="eye_care_parchment">羊皮紙</string>
@@ -151,6 +152,16 @@
     <string name="adaptive_screen_desc">網頁根據螢幕大小自動調整佈局</string>
     <string name="media_sniffer">媒體嗅探</string>
     <string name="media_sniffer_no_result">暫無嗅探到的媒體資源</string>
+    <!-- 查看網頁資源 -->
+    <string name="web_resources">查看資源</string>
+    <string name="web_resources_title">網頁資源</string>
+    <string name="web_resources_empty">未發現網頁資源</string>
+    <string name="web_res_image">圖片</string>
+    <string name="web_res_script">JS</string>
+    <string name="web_res_style">樣式</string>
+    <string name="web_res_media">媒體</string>
+    <string name="web_res_iframe">框架</string>
+    <string name="web_res_link">連結</string>
     <string name="ai">AI助手</string>
     <string name="clear_privacy_data">清理隱私資料</string>
     <string name="auto_clear_privacy_on_exit">是否退出時自動清除隱私資料</string>
@@ -281,7 +292,7 @@
     <string name="free_copy">自由複製</string>
     <string name="free_copy_failed">未找到可操作的連結</string>
     <string name="restore_link">恢復連結</string>
-    <string name="view_image">檢視圖片</string>
+    <string name="view_image">看圖模式</string>
     <string name="save_image">儲存圖片</string>
     <string name="zoom_minimum">極小</string>
     <string name="zoom_small">小</string>
@@ -355,7 +366,7 @@
     <string name="translate">翻譯</string>
     <string name="translate_service">網頁翻譯服務</string>
     <string name="translating">正在翻譯網頁…</string>
-    <string name="read_aloud">朗讀</string>
+    <string name="read_aloud">網頁朗讀</string>
     <string name="image_mode">無圖模式</string>
     <string name="image_mode_always">始終有圖</string>
     <string name="image_mode_wifi">僅行動數據網路無圖</string>
@@ -425,6 +436,7 @@
     <string name="video_already_downloaded">影片已下載到本地</string>
     <string name="download_location">下載位置</string>
     <string name="download_location_hint">輸入下載目錄路徑</string>
+    <string name="phone_storage">手機儲存空間</string>
     <string name="download_concurrent_tasks">同時下載任務數量</string>
     <string name="download_thread_count">下載執行緒</string>
     <string name="download_auto_delete_ts">自動合併ts並刪除片段</string>
@@ -488,6 +500,8 @@
     <string name="download_detail_size">大小</string>
     <string name="download_detail_time">時間</string>
     <string name="download_segments">段</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">可用 %1$s</string>
     <string name="filter_all">全部</string>
     <string name="filter_image">圖片</string>
     <string name="filter_video">視頻</string>
@@ -522,6 +536,9 @@
     <string name="reading_theme_parchment">羊皮紙</string>
     <string name="reading_theme_white">純白</string>
     <string name="add_to_home">新增至首頁</string>
+    <string name="add_to_phone">新增至手機</string>
+    <string name="shortcut_added">已新增至桌面</string>
+    <string name="shortcut_add_failed">新增失敗，請檢查桌面捷徑權限</string>
     <string name="hide_password">隱藏密碼</string>
     <string name="show_password">顯示密碼</string>
     <string name="comma_separator">、</string>
@@ -534,9 +551,9 @@
     <string name="wallpaper_search_box_alpha">搜尋框透明度</string>
     <string name="wallpaper_reset">恢復預設</string>
     <string name="wallpaper_preview">效果預覽</string>
-    <string name="show_home_logo">顯示首頁 Logo</string>
-    <string name="show_home_add_button">顯示首頁加號</string>
-    <string name="show_home_search_box">顯示搜尋框</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">加號</string>
+    <string name="show_home_search_box">搜尋框</string>
     <string name="customize_bottom_toolbar">自訂佈局</string>
     <string name="customize_bottom_toolbar_desc">拖曳調整導覽列佈局</string>
     <string name="customize_tabs_toolbar">自定義分頁管理頁按鈕</string>
@@ -572,15 +589,16 @@
     <string name="log_cleared">日誌已清除</string>
     <string name="log_share_failed">匯出失敗，請重試</string>
     <string name="open_source_licenses">開源軟體聲明</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">意見回饋</string>
+    <string name="contact_community">交流與聯繫</string>
+    <string name="license_agreement">軟體許可及服務協議</string>
+    <string name="privacy_policy">隱私保護</string>
+    <string name="feedback_contact_desc">您可透過以下管道提供意見回饋</string>
     <string name="feedback_issues">Issues：%1$s</string>
     <string name="feedback_qq_group">官方 QQ 群：2222</string>
     <string name="built_in_filter">內建基礎過濾</string>
     <string name="check_updates">檢查更新</string>
+    <string name="join_qq_channel">加入QQ頻道</string>
     <string name="checking_updates">正在檢查更新...</string>
     <string name="latest_version">已是最新版本</string>
     <string name="update_failed">檢查更新失敗</string>
@@ -677,4 +695,11 @@
     <string name="press_back_again_to_exit">再按一次返回鍵退出</string>
     <string name="site_settings">網站設定</string>
     <string name="reset_to_global">恢復全域預設</string>
+
+    <!-- 首次啟動：服務協議與隱私政策 -->
+    <string name="agreement_title">服務協議與隱私政策</string>
+    <string name="agreement_desc">歡迎使用%1$s！請你仔細閱讀並同意《%2$s》，%1$s重視您的隱私，閱讀《%3$s》可詳細了解。</string>
+    <string name="agreement_agree">同意並繼續</string>
+    <string name="agreement_disagree">不同意並退出</string>
+    <string name="skip">跳過</string>
 </resources>

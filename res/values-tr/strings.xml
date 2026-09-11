@@ -18,6 +18,7 @@
     <string name="ad_filtering">Reklam Filtreleme</string>
     <string name="speed_experience">Hız</string>
     <string name="dark_mode">Karanlık Mod</string>
+    <string name="language">Dil</string>
     <string name="video_playback">Video Oynatma</string>
     <string name="download_settings">İndirme Ayarları</string>
     <string name="about">Hakkında</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Açılışta sekmeleri geri yükle</string>
     <string name="chrome_remote_debugging">Chrome Uzaktan Hata Ayıklamayı Etkinleştir</string>
     <string name="chrome_remote_debugging_desc">Web sayfalarını Chrome tarayıcısı üzerinden uzaktan hata ayıklamak için Chrome adres çubuğuna "chrome://inspect" yazın</string>
-    <string name="ua_mode">Tarayıcı Tanımlayıcısı</string>
+    <string name="ua_mode">Tarayıcı ID</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -82,7 +83,7 @@
     <string name="find_in_page">Sayfada Bul</string>
     <string name="font_size">Yazı Boyutu</string>
     <string name="font_size2">Yazı Boyutu</string>
-    <string name="eye_care">Göz Koruma</string>
+    <string name="eye_care">Arka plan</string>
     <string name="eye_care2">Göz Koruma</string>
     <string name="eye_care_default">Varsayılan</string>
     <string name="eye_care_parchment">Pergamen</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">Web sayfaları ekran boyutuna göre yerleşimi otomatik ayarlar</string>
     <string name="media_sniffer">Medya Algılayıcı</string>
     <string name="media_sniffer_no_result">Medya kaynağı algılanmadı</string>
+    <!-- Web kaynaklarını görüntüle -->
+    <string name="web_resources">Kaynakları Görüntüle</string>
+    <string name="web_resources_title">Web Kaynakları</string>
+    <string name="web_resources_empty">Web kaynağı bulunamadı</string>
+    <string name="web_res_image">Görseller</string>
+    <string name="web_res_script">Betikler</string>
+    <string name="web_res_style">Stiller</string>
+    <string name="web_res_media">Medya</string>
+    <string name="web_res_iframe">Çerçeveler</string>
+    <string name="web_res_link">Bağlantılar</string>
     <string name="ai">Yapay Zeka Asistanı</string>
     <string name="clear_privacy_data">Gizlilik verilerini temizle</string>
     <string name="auto_clear_privacy_on_exit">Çıkışta gizlilik verilerini otomatik temizle</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">Serbest Kopyala</string>
     <string name="free_copy_failed">İşlem yapılacak bağlantı bulunamadı</string>
     <string name="restore_link">Bağlantıyı Geri Yükle</string>
-    <string name="view_image">Görseli Görüntüle</string>
+    <string name="view_image">Görüntüleyici</string>
     <string name="save_image">Görseli Kaydet</string>
     <string name="zoom_minimum">Küçücük</string>
     <string name="zoom_small">Küçük</string>
@@ -347,8 +358,8 @@
     <string name="translate">Çevir</string>
     <string name="translate_service">Web sayfası çeviri hizmeti</string>
     <string name="translating">Sayfa çevriliyor…</string>
-    <string name="read_aloud">Yüksek Sesle Oku</string>
-    <string name="image_mode">Görülsüz Mod</string>
+    <string name="read_aloud">Sesli oku</string>
+    <string name="image_mode">Görüntüsüz</string>
     <string name="image_mode_always">Her Zaman Resimli</string>
     <string name="image_mode_wifi">Mobil Veride Resimsiz</string>
     <string name="image_mode_never">Her Zaman Resimsiz</string>
@@ -414,6 +425,7 @@
     <string name="video_already_downloaded">Video zaten indirildi</string>
     <string name="download_location">İndirme Konumu</string>
     <string name="download_location_hint">İndirme dizini yolunu girin</string>
+    <string name="phone_storage">Dahili depolama</string>
     <string name="download_concurrent_tasks">Eşzamanlı indirmeler</string>
     <string name="download_thread_count">İndirme iş parçacıkları</string>
     <string name="download_auto_delete_ts">TS Parçalarını Otomatik Birleştir ve Sil</string>
@@ -482,6 +494,8 @@
     <string name="download_detail_size">Boyut</string>
     <string name="download_detail_time">Zaman</string>
     <string name="download_segments">parça</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Kullanılabilir %1$s</string>
     <string name="filter_all">Tümü</string>
     <string name="filter_image">Görseller</string>
     <string name="filter_video">Videolar</string>
@@ -515,7 +529,10 @@
     <string name="reading_theme_orange">Turuncu</string>
     <string name="reading_theme_parchment">Pergamen</string>
     <string name="reading_theme_white">Beyaz</string>
-    <string name="add_to_home">Ana Sayfaya Ekle</string>
+    <string name="add_to_home">Ana sayfaya</string>
+    <string name="add_to_phone">Telefona</string>
+    <string name="shortcut_added">Ana ekrana eklendi</string>
+    <string name="shortcut_add_failed">Eklenemedi, ana ekran kısayol iznini kontrol edin</string>
     <string name="hide_password">Parolayı Gizle</string>
     <string name="show_password">Parolayı Göster</string>
     <string name="comma_separator">, </string>
@@ -530,9 +547,9 @@
     <string name="wallpaper_preview">Önizleme</string>
     <string name="wallpaper_clear_image">Görseli Temizle</string>
     <string name="wallpaper_theme_color">Tema Rengi (Ad / Arama Kutusu / Araç Çubuğu Düğmeleri)</string>
-    <string name="show_home_logo">Ana Sayfa Logosunu Göster</string>
-    <string name="show_home_add_button">Ekle Düğmesini Göster</string>
-    <string name="show_home_search_box">Arama Çubuğunu Göster</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">Artı düğmesi</string>
+    <string name="show_home_search_box">Arama kutusu</string>
     <string name="customize_bottom_toolbar">Düzeni Özelleştir</string>
     <string name="customize_bottom_toolbar_desc">Gezinme çubuğu düzenini ayarlamak için sürükleyin</string>
     <string name="customize_tabs_toolbar">Sekme Yöneticisi Sayfa Düğmelerini Özelleştir</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_select_button">Düğme Seç</string>
     <string name="toolbar_position_section">Araç Çubuğu Konumunu Değiştir: Alt/Üst</string>
     <string name="toolbar_spare_section">Yedek Düğmeler</string>
-    <string name="full_screen_mode">Tam Ekran Modu</string>
+    <string name="full_screen_mode">Tam Ekran</string>
     <string name="full_screen_mode_desc">Yukarı kaydırırken gezinti çubuğunu gizle, aşağı kaydırırken göster</string>
     <string name="edit_menu_order">Menü Sırasını Düzenle</string>
     <string name="drag_to_reorder_hint">Sıralamak için simgeyi basılı tutup sürükleyin</string>
@@ -568,11 +585,11 @@
     <string name="log_cleared">Günlükler temizlendi</string>
     <string name="log_share_failed">Dışa aktarma başarısız, tekrar deneyin</string>
     <string name="open_source_licenses">Açık Kaynak Yazılım Bildirimi</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Geri bildirim ve öneriler</string>
+    <string name="contact_community">Topluluk ve iletişim</string>
+    <string name="license_agreement">Yazılım Lisansı ve Hizmet Sözleşmesi</string>
+    <string name="privacy_policy">Gizlilik Politikası</string>
+    <string name="feedback_contact_desc">Aşağıdaki kanallar üzerinden geri bildirim gönderebilirsiniz</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">Yerleşik temel filtre</string>
@@ -676,4 +693,11 @@
     <string name="exit_confirm_message">Uygulamadan çıkmak istediğinize emin misiniz?</string>
     <string name="site_settings">Site Ayarları</string>
     <string name="reset_to_global">Genel varsayılana sıfırla</string>
+
+    <!-- İlk açılış: hizmet sözleşmesi ve gizlilik politikası -->
+    <string name="agreement_title">Hizmet sözleşmesi ve gizlilik politikası</string>
+    <string name="agreement_desc">%1$s uygulamasına hoş geldiniz! Lütfen «%2$s» belgesini dikkatlice okuyup onaylayın. %1$s gizliliğinize önem verir; ayrıntılar için «%3$s» belgesini okuyun.</string>
+    <string name="agreement_agree">Onayla ve devam et</string>
+    <string name="agreement_disagree">Onaylamıyorum, çık</string>
+    <string name="skip">Atla</string>
 </resources>

@@ -18,6 +18,7 @@
     <string name="ad_filtering">Ad Filtering</string>
     <string name="speed_experience">Speed Experience</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
     <string name="video_playback">Video Playback</string>
     <string name="download_settings">Download Settings</string>
     <string name="about">About</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Restore tabs on startup</string>
     <string name="chrome_remote_debugging">Enable Chrome Remote Debugging</string>
     <string name="chrome_remote_debugging_desc">Enter "chrome://inspect" in the Chrome address bar to remotely debug browser web pages through the Chrome browser</string>
-    <string name="ua_mode">Browser Identifier</string>
+    <string name="ua_mode">Browser UA</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -82,7 +83,7 @@
     <string name="find_in_page">Find in Page</string>
     <string name="font_size">Font Size</string>
     <string name="font_size2">Font Size</string>
-    <string name="eye_care">Eye Care</string>
+    <string name="eye_care">Background</string>
     <string name="eye_care2">Eye Care</string>
     <string name="eye_care_default">Default</string>
     <string name="eye_care_parchment">Parchment</string>
@@ -151,6 +152,16 @@
     <string name="adaptive_screen_desc">Web pages automatically adjust their layout based on the screen size</string>
     <string name="media_sniffer">Media Sniffer</string>
     <string name="media_sniffer_no_result">No media resources detected</string>
+    <!-- View web resources -->
+    <string name="web_resources">View Resources</string>
+    <string name="web_resources_title">Web Resources</string>
+    <string name="web_resources_empty">No web resources found</string>
+    <string name="web_res_image">Images</string>
+    <string name="web_res_script">Scripts</string>
+    <string name="web_res_style">Styles</string>
+    <string name="web_res_media">Media</string>
+    <string name="web_res_iframe">Frames</string>
+    <string name="web_res_link">Links</string>
     <string name="ai">AI Assistant</string>
     <string name="clear_privacy_data">Clear privacy data</string>
     <string name="auto_clear_privacy_on_exit">Auto clear privacy data on exit</string>
@@ -273,7 +284,7 @@
     <string name="free_copy">Free Copy</string>
     <string name="free_copy_failed">No link found to operate</string>
     <string name="restore_link">Restore Link</string>
-    <string name="view_image">View Image</string>
+    <string name="view_image">Image Viewer</string>
     <string name="save_image">Save Image</string>
     <string name="zoom_minimum">Tiny</string>
     <string name="zoom_small">Small</string>
@@ -348,7 +359,7 @@
     <string name="translating">Translating page…</string>
     <string name="torrent_search">Torrent Search</string>
     <string name="read_aloud">Read Aloud</string>
-    <string name="image_mode">Image-Free Mode</string>
+    <string name="image_mode">No Images</string>
     <string name="image_mode_always">Always With Images</string>
     <string name="image_mode_wifi">Mobile Data Image-Free</string>
     <string name="image_mode_never">Always Image-Free</string>
@@ -417,6 +428,7 @@
     <string name="video_already_downloaded">Video already downloaded</string>
     <string name="download_location">Download Location</string>
     <string name="download_location_hint">Enter download directory path</string>
+    <string name="phone_storage">Internal storage</string>
     <string name="download_concurrent_tasks">Concurrent Download Tasks</string>
     <string name="download_thread_count">Download Threads</string>
     <string name="download_auto_delete_ts">Auto Merge and Delete TS Segments</string>
@@ -481,6 +493,8 @@
     <string name="download_detail_size">Size</string>
     <string name="download_detail_time">Time</string>
     <string name="download_segments">segments</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Available %1$s</string>
     <string name="filter_all">All</string>
     <string name="filter_image">Images</string>
     <string name="filter_video">Videos</string>
@@ -514,7 +528,10 @@
     <string name="reading_theme_orange">Orange</string>
     <string name="reading_theme_parchment">Parchment</string>
     <string name="reading_theme_white">White</string>
-    <string name="add_to_home">Add to Home</string>
+    <string name="add_to_home">Add Home</string>
+    <string name="add_to_phone">Add Phone</string>
+    <string name="shortcut_added">Added to home screen</string>
+    <string name="shortcut_add_failed">Failed to add, please check home screen shortcut permission</string>
     <string name="hide_password">Hide Password</string>
     <string name="show_password">Show Password</string>
     <string name="comma_separator">, </string>
@@ -527,9 +544,9 @@
     <string name="wallpaper_search_box_alpha">Search Box Transparency</string>
     <string name="wallpaper_reset">Reset to Default</string>
     <string name="wallpaper_preview">Preview</string>
-    <string name="show_home_logo">Show Home Logo</string>
-    <string name="show_home_add_button">Show Home Add Button</string>
-    <string name="show_home_search_box">Show Search Box</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">Plus Button</string>
+    <string name="show_home_search_box">Search Box</string>
     <string name="customize_bottom_toolbar">Customize Layout</string>
     <string name="customize_bottom_toolbar_desc">Drag to rearrange the navigation bar layout</string>
     <string name="customize_tabs_toolbar">Customize Tab Manager Page Buttons</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_top_search_section">Top Search Bar</string>
     <string name="toolbar_top_search_drag_hint">Drag a search bar here to pin it on top</string>
     <string name="toolbar_top_search_restore">Move search bar back to toolbar</string>
-    <string name="full_screen_mode">Full Screen Mode</string>
+    <string name="full_screen_mode">Full Screen</string>
     <string name="full_screen_mode_desc">Hide navigation bar when scrolling up, show when scrolling down</string>
     <string name="edit_menu_order">Edit Menu Order</string>
     <string name="drag_to_reorder_hint">Long press and drag the icon to reorder</string>
@@ -568,14 +585,15 @@
     <string name="log_cleared">Logs cleared</string>
     <string name="log_share_failed">Export failed, please retry</string>
     <string name="open_source_licenses">Open Source Licenses</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Feedback &amp; Suggestions</string>
+    <string name="contact_community">Community &amp; Contact</string>
+    <string name="license_agreement">License and Service Agreement</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="feedback_contact_desc">You can send us feedback through any of the channels below</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="check_updates">Check for Updates</string>
+    <string name="join_qq_channel">Join QQ Channel</string>
     <string name="checking_updates">Checking for updates...</string>
     <string name="latest_version">Already on the latest version</string>
     <string name="update_failed">Failed to check for updates</string>
@@ -609,6 +627,8 @@
     <string name="swipe_navigation_desc">Swipe left or right on the webpage to navigate forward or backward when enabled</string>
     <string name="swipe_up_to_go_home">Swipe up to go home</string>
     <string name="swipe_up_to_go_home_desc">Swipe up on the toolbar to return to the home page</string>
+    <string name="toolbar_swipe_switch_window">Swipe toolbar to switch windows</string>
+    <string name="toolbar_swipe_switch_window_desc">Swipe left or right on the bottom toolbar to switch to the next/previous window</string>
     <string name="free_tools">Free Tools</string>
     <!-- Bookmark Sync -->
     <string name="bookmark_sync">Bookmark Sync</string>
@@ -673,4 +693,11 @@
     <string name="exit">Exit</string>
     <string name="exit_confirm_message">Are you sure you want to exit the app?</string>
     <string name="press_back_again_to_exit">Press back again to exit</string>
+
+    <!-- First launch: Terms of Service and Privacy Policy -->
+    <string name="agreement_title">Terms of Service and Privacy Policy</string>
+    <string name="agreement_desc">Welcome to %1$s! Please read and agree to the %2$s. %1$s values your privacy — read the %3$s to learn more.</string>
+    <string name="agreement_agree">Agree and Continue</string>
+    <string name="agreement_disagree">Disagree and Exit</string>
+    <string name="skip">Skip</string>
 </resources>

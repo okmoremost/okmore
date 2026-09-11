@@ -18,6 +18,7 @@
     <string name="ad_filtering">حظر الإعلانات</string>
     <string name="speed_experience">السرعة</string>
     <string name="dark_mode">الوضع الداكن</string>
+    <string name="language">اللغة</string>
     <string name="video_playback">تشغيل الفيديو</string>
     <string name="download_settings">إعدادات التنزيل</string>
     <string name="about">حول</string>
@@ -82,7 +83,7 @@
     <string name="find_in_page">بحث في الصفحة</string>
     <string name="font_size">حجم الخط</string>
     <string name="font_size2">حجم الخط</string>
-    <string name="eye_care">العناية بالعين</string>
+    <string name="eye_care">الخلفية</string>
     <string name="eye_care2">العناية بالعين</string>
     <string name="eye_care_default">افتراضي</string>
     <string name="eye_care_parchment">برشمان</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">تضبط صفحات الويب تخطيطها تلقائياً حسب حجم الشاشة</string>
     <string name="media_sniffer">استنشاق الوسائط</string>
     <string name="media_sniffer_no_result">لم يتم اكتشاف وسائط</string>
+    <!-- عرض موارد الويب -->
+    <string name="web_resources">عرض الموارد</string>
+    <string name="web_resources_title">موارد الويب</string>
+    <string name="web_resources_empty">لم يتم العثور على موارد ويب</string>
+    <string name="web_res_image">صور</string>
+    <string name="web_res_script">نصوص برمجية</string>
+    <string name="web_res_style">أنماط</string>
+    <string name="web_res_media">وسائط</string>
+    <string name="web_res_iframe">إطارات</string>
+    <string name="web_res_link">روابط</string>
     <string name="ai">مساعد الذكاء الاصطناعي</string>
     <string name="clear_privacy_data">مسح بيانات الخصوصية</string>
     <string name="auto_clear_privacy_on_exit">مسح بيانات الخصوصية تلقائياً عند الخروج</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">نسخ حر</string>
     <string name="free_copy_failed">لا يوجد رابط للتنفيذ</string>
     <string name="restore_link">استعادة الرابط</string>
-    <string name="view_image">عرض الصورة</string>
+    <string name="view_image">عارض الصور</string>
     <string name="save_image">حفظ الصورة</string>
     <string name="zoom_minimum">صغير جداً</string>
     <string name="zoom_small">صغير</string>
@@ -346,8 +357,8 @@
     <string name="translate">ترجمة</string>
     <string name="translate_service">خدمة ترجمة صفحات الويب</string>
     <string name="translating">جارٍ ترجمة الصفحة…</string>
-    <string name="read_aloud">قراءة بصوت عالٍ</string>
-    <string name="image_mode">وضع بدون صور</string>
+    <string name="read_aloud">قراءة صوتية</string>
+    <string name="image_mode">بدون صور</string>
     <string name="image_mode_always">دائماً مع الصور</string>
     <string name="image_mode_wifi">بدون صور على بيانات الجوال</string>
     <string name="image_mode_never">دائماً بدون صور</string>
@@ -413,6 +424,7 @@
     <string name="video_already_downloaded">تم تنزيل الفيديو بالفعل</string>
     <string name="download_location">موقع التنزيل</string>
     <string name="download_location_hint">أدخل مسار مجلد التنزيل</string>
+    <string name="phone_storage">وحدة التخزين الداخلية</string>
     <string name="download_concurrent_tasks">عدد مهام التنزيل المتزامنة</string>
     <string name="download_thread_count">مؤشرات التنزيل</string>
     <string name="download_auto_delete_ts">دمج وحذف مقاطع TS تلقائياً</string>
@@ -481,6 +493,8 @@
     <string name="download_detail_size">الحجم</string>
     <string name="download_detail_time">الوقت</string>
     <string name="download_segments">مقطع</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">متاح %1$s</string>
     <string name="filter_all">الكل</string>
     <string name="filter_image">الصور</string>
     <string name="filter_video">الفيديو</string>
@@ -514,7 +528,10 @@
     <string name="reading_theme_orange">برتقالي</string>
     <string name="reading_theme_parchment">برشمان</string>
     <string name="reading_theme_white">أبيض</string>
-    <string name="add_to_home">إضافة للرئيسية</string>
+    <string name="add_to_home">إلى الرئيسية</string>
+    <string name="add_to_phone">إلى الهاتف</string>
+    <string name="shortcut_added">تمت الإضافة إلى الشاشة الرئيسية</string>
+    <string name="shortcut_add_failed">تعذرت الإضافة، يرجى التحقق من إذن الاختصار على الشاشة الرئيسية</string>
     <string name="hide_password">إخفاء كلمة المرور</string>
     <string name="show_password">إظهار كلمة المرور</string>
     <string name="comma_separator">، </string>
@@ -527,9 +544,9 @@
     <string name="wallpaper_search_hint_color">لون نص تلميح البحث</string>
     <string name="wallpaper_reset">استعادة الافتراضي</string>
     <string name="wallpaper_preview">معاينة</string>
-    <string name="show_home_logo">إظهار شعار الصفحة الرئيسية</string>
-    <string name="show_home_add_button">إظهار زر الإضافة</string>
-    <string name="show_home_search_box">إظهار شريط البحث</string>
+    <string name="show_home_logo">الشعار</string>
+    <string name="show_home_add_button">زر الجمع</string>
+    <string name="show_home_search_box">مربع البحث</string>
     <string name="customize_bottom_toolbar">تخصيص التخطيط</string>
     <string name="customize_bottom_toolbar_desc">اسحب لإعادة ترتيب تخطيط شريط التنقل</string>
     <string name="customize_tabs_toolbar">تخصيص أزرار صفحة مدير التبويب</string>
@@ -551,7 +568,7 @@
     <string name="toolbar_select_button">اختر زراً</string>
     <string name="toolbar_position_section">تبديل موضع شريط الأدوات: أسفل/أعلى</string>
     <string name="toolbar_spare_section">أزرار احتياطية</string>
-    <string name="full_screen_mode">وضع ملء الشاشة</string>
+    <string name="full_screen_mode">ملء الشاشة</string>
     <string name="full_screen_mode_desc">إخفاء شريط التنقل عند التمرير لأعلى وإظهاره عند التمرير لأسفل</string>
     <string name="edit_menu_order">تعديل ترتيب القائمة</string>
     <string name="drag_to_reorder_hint">اضغط مطولاً واسحب الأيقونة لإعادة الترتيب</string>
@@ -565,11 +582,11 @@
     <string name="log_cleared">تم مسح السجلات</string>
     <string name="log_share_failed">فشل التصدير، حاول مرة أخرى</string>
     <string name="open_source_licenses">إشعار برمجيات المصادر المفتوحة</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">الملاحظات والاقتراحات</string>
+    <string name="contact_community">المجتمع والتواصل</string>
+    <string name="license_agreement">اتفاقية الترخيص والخدمة</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="feedback_contact_desc">يمكنك إرسال ملاحظاتك عبر القنوات التالية</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">عامل التصفية الأساسي المدمج</string>
@@ -674,4 +691,11 @@
     <string name="press_back_again_to_exit">اضغط رجوع مرة أخرى للخروج</string>
     <string name="site_settings">إعدادات الموقع</string>
     <string name="reset_to_global">استعادة الافتراضي العام</string>
+
+    <!-- أول تشغيل: اتفاقية الخدمة وسياسة الخصوصية -->
+    <string name="agreement_title">اتفاقية الخدمة وسياسة الخصوصية</string>
+    <string name="agreement_desc">مرحبًا بك في %1$s! يُرجى قراءة «%2$s» بعناية والموافقة عليه. تولي %1$s خصوصيتك اهتمامًا كبيرًا؛ اقرأ «%3$s» لمعرفة التفاصيل.</string>
+    <string name="agreement_agree">أوافق وأكمل</string>
+    <string name="agreement_disagree">لا أوافق وأخرج</string>
+    <string name="skip">تخطي</string>
 </resources>

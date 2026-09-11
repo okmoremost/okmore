@@ -18,6 +18,7 @@
     <string name="ad_filtering">การบล็อกโฆษณา</string>
     <string name="speed_experience">ความเร็ว</string>
     <string name="dark_mode">โหมดมืด</string>
+    <string name="language">ภาษา</string>
     <string name="video_playback">การเล่นวิดีโอ</string>
     <string name="download_settings">การตั้งค่าการดาวน์โหลด</string>
     <string name="about">เกี่ยวกับ</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">กู้คืนแท็บเมื่อเริ่มโปรแกรม</string>
     <string name="chrome_remote_debugging">เปิดดีบักระยะไกล Chrome</string>
     <string name="chrome_remote_debugging_desc">ป้อน "chrome://inspect" ในแถบที่อยู่ Chrome เพื่อดีบักหน้าเว็บระยะไกลผ่านเบราว์เซอร์ Chrome</string>
-    <string name="ua_mode">ตัวระบุเบราว์เซอร์</string>
+    <string name="ua_mode">ID เบราว์เซอร์</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -79,10 +80,10 @@
     <string name="home">หน้าแรก</string>
     <string name="close">ปิด</string>
     <string name="toggle_layout">สลับรูปแบบ</string>
-    <string name="find_in_page">ค้นหาในหน้า</string>
+    <string name="find_in_page">ค้นหา</string>
     <string name="font_size">ขนาดตัวอักษร</string>
     <string name="font_size2">ขนาดตัวอักษร</string>
-    <string name="eye_care">ถนอมสายตา</string>
+    <string name="eye_care">พื้นหลัง</string>
     <string name="eye_care2">ถนอมสายตา</string>
     <string name="eye_care_default">เริ่มต้น</string>
     <string name="eye_care_parchment">กระดาษเปอร์กาเมนต์</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">หน้าเว็บปรับเค้าโครงตามขนาดหน้าจออัตโนมัติ</string>
     <string name="media_sniffer">ดักจับสื่อ</string>
     <string name="media_sniffer_no_result">ไม่พบสื่อ</string>
+    <!-- ดูทรัพยากรเว็บ -->
+    <string name="web_resources">ดูทรัพยากร</string>
+    <string name="web_resources_title">ทรัพยากรเว็บ</string>
+    <string name="web_resources_empty">ไม่พบทรัพยากรเว็บ</string>
+    <string name="web_res_image">รูปภาพ</string>
+    <string name="web_res_script">สคริปต์</string>
+    <string name="web_res_style">สไตล์</string>
+    <string name="web_res_media">สื่อ</string>
+    <string name="web_res_iframe">เฟรม</string>
+    <string name="web_res_link">ลิงก์</string>
     <string name="ai">ผู้ช่วย AI</string>
     <string name="clear_privacy_data">ล้างข้อมูลส่วนตัว</string>
     <string name="auto_clear_privacy_on_exit">ล้างข้อมูลส่วนตัวอัตโนมัติเมื่อออก</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">คัดลอกอิสระ</string>
     <string name="free_copy_failed">ไม่พบลิงก์สำหรับดำเนินการ</string>
     <string name="restore_link">กู้คืนลิงก์</string>
-    <string name="view_image">ดูรูปภาพ</string>
+    <string name="view_image">โหมดดูรูปภาพ</string>
     <string name="save_image">บันทึกรูปภาพ</string>
     <string name="zoom_minimum">เล็กที่สุด</string>
     <string name="zoom_small">เล็ก</string>
@@ -329,7 +340,7 @@
     <string name="original_page">หน้าต้นฉบับ</string>
     <string name="refresh">รีเฟรช</string>
     <string name="cancel_loading">ยกเลิกการโหลด</string>
-    <string name="force_refresh">รีเฟรชบังคับ</string>
+    <string name="force_refresh">โหลดใหม่</string>
     <string name="homepage_url_hint">ป้อน URL หน้าแรก</string>
     <string name="homepage_settings_desc">ตั้งค่า URL หน้าแรกเอง ปล่อยว่างเพื่อใช้หน้าเริ่มต้น</string>
     <string name="close_all">ปิดทั้งหมด</string>
@@ -348,7 +359,7 @@
     <string name="translate_service">บริการแปลหน้าเว็บ</string>
     <string name="translating">กำลังแปลหน้าเว็บ…</string>
     <string name="read_aloud">อ่านออกเสียง</string>
-    <string name="image_mode">โหมดไม่มีรูปภาพ</string>
+    <string name="image_mode">ไม่มีรูปภาพ</string>
     <string name="image_mode_always">มีรูปภาพเสมอ</string>
     <string name="image_mode_wifi">ไม่มีรูปภาพบนเครือข่ายมือถือ</string>
     <string name="image_mode_never">ไม่มีรูปภาพเสมอ</string>
@@ -414,6 +425,7 @@
     <string name="video_already_downloaded">วิดีโอถูกดาวน์โหลดแล้ว</string>
     <string name="download_location">ตำแหน่งดาวน์โหลด</string>
     <string name="download_location_hint">ป้อนพาธโฟลเดอร์ดาวน์โหลด</string>
+    <string name="phone_storage">พื้นที่จัดเก็บภายใน</string>
     <string name="download_concurrent_tasks">จำนวนดาวน์โหลดพร้อมกัน</string>
     <string name="download_thread_count">เธรดดาวน์โหลด</string>
     <string name="download_auto_delete_ts">รวมและลบ TS อัตโนมัติ</string>
@@ -482,6 +494,8 @@
     <string name="download_detail_size">ขนาด</string>
     <string name="download_detail_time">เวลา</string>
     <string name="download_segments">เซ็กเมนต์</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">ว่าง %1$s</string>
     <string name="filter_all">ทั้งหมด</string>
     <string name="filter_image">รูปภาพ</string>
     <string name="filter_video">วิดีโอ</string>
@@ -515,7 +529,10 @@
     <string name="reading_theme_orange">ส้ม</string>
     <string name="reading_theme_parchment">เปอร์กาเมนต์</string>
     <string name="reading_theme_white">ขาว</string>
-    <string name="add_to_home">เพิ่มไปหน้าแรก</string>
+    <string name="add_to_home">เพิ่มหน้าแรก</string>
+    <string name="add_to_phone">เพิ่มโทรศัพท์</string>
+    <string name="shortcut_added">เพิ่มลงหน้าจอหลักแล้ว</string>
+    <string name="shortcut_add_failed">เพิ่มไม่สำเร็จ กรุณาตรวจสอบสิทธิ์ทางลัดหน้าจอหลัก</string>
     <string name="hide_password">ซ่อนรหัสผ่าน</string>
     <string name="show_password">แสดงรหัสผ่าน</string>
     <string name="comma_separator">, </string>
@@ -530,9 +547,9 @@
     <string name="wallpaper_preview">ตัวอย่าง</string>
     <string name="wallpaper_clear_image">ลบรูปภาพ</string>
     <string name="wallpaper_theme_color">สีธีม (ชื่อ / ช่องค้นหา / ปุ่มแถบเครื่องมือ)</string>
-    <string name="show_home_logo">แสดงโลโก้หน้าแรก</string>
-    <string name="show_home_add_button">แสดงปุ่มเพิ่ม</string>
-    <string name="show_home_search_box">แสดงช่องค้นหา</string>
+    <string name="show_home_logo">โลโก้</string>
+    <string name="show_home_add_button">ปุ่มบวก</string>
+    <string name="show_home_search_box">ช่องค้นหา</string>
     <string name="customize_bottom_toolbar">ปรับแต่งเลย์เอาต์</string>
     <string name="customize_bottom_toolbar_desc">ลากเพื่อปรับแต่งรูปแบบแถบนำทาง</string>
     <string name="customize_tabs_toolbar">ปรับแต่งปุ่มหน้าจัดการแท็บ</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_select_button">เลือกปุ่ม</string>
     <string name="toolbar_position_section">สลับตำแหน่งแถบเครื่องมือ: ล่าง/บน</string>
     <string name="toolbar_spare_section">ปุ่มสำรอง</string>
-    <string name="full_screen_mode">โหมดเต็มจอ</string>
+    <string name="full_screen_mode">เต็มจอ</string>
     <string name="full_screen_mode_desc">ซ่อนแถบนำทางเมื่อเลื่อนขึ้น แสดงเมื่อเลื่อนลง</string>
     <string name="edit_menu_order">แก้ไขลำดับเมนู</string>
     <string name="drag_to_reorder_hint">กดค้างแล้วลากไอคอนเพื่อจัดเรียง</string>
@@ -568,11 +585,11 @@
     <string name="log_cleared">ล้างบันทึกแล้ว</string>
     <string name="log_share_failed">ส่งออกล้มเหลว โปรดลองอีกครั้ง</string>
     <string name="open_source_licenses">แถลงการณ์ซอฟต์แวร์โอเพนซอร์ส</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">ข้อเสนอแนะ</string>
+    <string name="contact_community">ชุมชนและการติดต่อ</string>
+    <string name="license_agreement">ข้อตกลงการใช้งานและการให้บริการ</string>
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="feedback_contact_desc">คุณสามารถส่งข้อเสนอแนะผ่านช่องทางต่อไปนี้</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">ตัวกรองพื้นฐานในตัว</string>
@@ -677,4 +694,11 @@
     <string name="press_back_again_to_exit">กดย้อนกลับอีกครั้งเพื่อออก</string>
     <string name="site_settings">การตั้งค่าไซต์</string>
     <string name="reset_to_global">ตั้งค่าใหม่เป็นค่าตั้งต้นทั่วไป</string>
+
+    <!-- เปิดครั้งแรก: ข้อตกลงการให้บริการและนโยบายความเป็นส่วนตัว -->
+    <string name="agreement_title">ข้อตกลงการให้บริการและนโยบายความเป็นส่วนตัว</string>
+    <string name="agreement_desc">ยินดีต้อนรับสู่ %1$s! โปรดอ่านอย่างละเอียดและยอมรับ«%2$s» %1$sให้ความสำคัญกับความเป็นส่วนตัวของคุณ อ่าน«%3$s»เพื่อดูรายละเอียด</string>
+    <string name="agreement_agree">ยอมรับและดำเนินการต่อ</string>
+    <string name="agreement_disagree">ไม่ยอมรับและออก</string>
+    <string name="skip">ข้าม</string>
 </resources>

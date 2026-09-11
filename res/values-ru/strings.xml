@@ -18,6 +18,7 @@
     <string name="ad_filtering">Блокировка рекламы</string>
     <string name="speed_experience">Скорость</string>
     <string name="dark_mode">Тёмная тема</string>
+    <string name="language">Язык</string>
     <string name="video_playback">Воспроизведение видео</string>
     <string name="download_settings">Настройки загрузок</string>
     <string name="about">О программе</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Восстанавливать вкладки при запуске</string>
     <string name="chrome_remote_debugging">Включить удалённую отладку Chrome</string>
     <string name="chrome_remote_debugging_desc">Введите "chrome://inspect" в адресной строке Chrome для удалённой отладки веб-страниц через браузер Chrome</string>
-    <string name="ua_mode">Идентификатор браузера</string>
+    <string name="ua_mode">ID браузера</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -79,10 +80,10 @@
     <string name="home">Главная</string>
     <string name="close">Закрыть</string>
     <string name="toggle_layout">Переключить вид</string>
-    <string name="find_in_page">Найти на странице</string>
+    <string name="find_in_page">Найти</string>
     <string name="font_size">Размер шрифта</string>
     <string name="font_size2">Размер шрифта</string>
-    <string name="eye_care">Защита глаз</string>
+    <string name="eye_care">Фон</string>
     <string name="eye_care2">Защита глаз</string>
     <string name="eye_care_default">По умолчанию</string>
     <string name="eye_care_parchment">Пергамент</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">Веб-страницы автоматически подстраивают макет под размер экрана</string>
     <string name="media_sniffer">Перехват медиа</string>
     <string name="media_sniffer_no_result">Медиаресурсы не обнаружены</string>
+    <!-- Просмотр ресурсов страницы -->
+    <string name="web_resources">Просмотр ресурсов</string>
+    <string name="web_resources_title">Ресурсы страницы</string>
+    <string name="web_resources_empty">Ресурсы не найдены</string>
+    <string name="web_res_image">Изображения</string>
+    <string name="web_res_script">Скрипты</string>
+    <string name="web_res_style">Стили</string>
+    <string name="web_res_media">Медиа</string>
+    <string name="web_res_iframe">Фреймы</string>
+    <string name="web_res_link">Ссылки</string>
     <string name="ai">ИИ-ассистент</string>
     <string name="clear_privacy_data">Очистить данные конфиденциальности</string>
     <string name="auto_clear_privacy_on_exit">Автоочистка данных при выходе</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">Свободное копирование</string>
     <string name="free_copy_failed">Не найдена ссылка для действия</string>
     <string name="restore_link">Восстановить ссылку</string>
-    <string name="view_image">Просмотр изображения</string>
+    <string name="view_image">Просмотр изображений</string>
     <string name="save_image">Сохранить изображение</string>
     <string name="zoom_minimum">Крошечный</string>
     <string name="zoom_small">Маленький</string>
@@ -329,7 +340,7 @@
     <string name="original_page">Исходная страница</string>
     <string name="refresh">Обновить</string>
     <string name="cancel_loading">Отменить загрузку</string>
-    <string name="force_refresh">Принудительное обновление</string>
+    <string name="force_refresh">Перезагрузить</string>
     <string name="homepage_url_hint">Введите URL главной страницы</string>
     <string name="homepage_settings_desc">Задайте пользовательский URL главной страницы. Оставьте пустым для страницы по умолчанию</string>
     <string name="close_all">Закрыть всё</string>
@@ -348,7 +359,7 @@
     <string name="translate_service">Сервис перевода веб-страниц</string>
     <string name="translating">Перевод страницы…</string>
     <string name="read_aloud">Чтение вслух</string>
-    <string name="image_mode">Режим без изображений</string>
+    <string name="image_mode">Без картинок</string>
     <string name="image_mode_always">Всегда с изображениями</string>
     <string name="image_mode_wifi">Без изображений на мобильной сети</string>
     <string name="image_mode_never">Всегда без изображений</string>
@@ -414,6 +425,7 @@
     <string name="video_already_downloaded">Видео уже скачано</string>
     <string name="download_location">Расположение загрузок</string>
     <string name="download_location_hint">Введите путь к каталогу загрузок</string>
+    <string name="phone_storage">Внутренняя память</string>
     <string name="download_concurrent_tasks">Одновременные загрузки</string>
     <string name="download_thread_count">Потоки загрузки</string>
     <string name="download_auto_delete_ts">Автообъединение и удаление TS-сегментов</string>
@@ -482,6 +494,8 @@
     <string name="download_detail_size">Размер</string>
     <string name="download_detail_time">Время</string>
     <string name="download_segments">сегментов</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Доступно %1$s</string>
     <string name="filter_all">Все</string>
     <string name="filter_image">Изображения</string>
     <string name="filter_video">Видео</string>
@@ -515,7 +529,10 @@
     <string name="reading_theme_orange">Оранжевый</string>
     <string name="reading_theme_parchment">Пергамент</string>
     <string name="reading_theme_white">Белый</string>
-    <string name="add_to_home">На главный экран</string>
+    <string name="add_to_home">На главную</string>
+    <string name="add_to_phone">На телефон</string>
+    <string name="shortcut_added">Добавлено на главный экран</string>
+    <string name="shortcut_add_failed">Не удалось добавить, проверьте разрешение на создание ярлыков</string>
     <string name="hide_password">Скрыть пароль</string>
     <string name="show_password">Показать пароль</string>
     <string name="comma_separator">, </string>
@@ -530,9 +547,9 @@
     <string name="wallpaper_preview">Предпросмотр</string>
     <string name="wallpaper_clear_image">Очистить изображение</string>
     <string name="wallpaper_theme_color">Цвет темы (Название / Поле поиска / Кнопки панели инструментов)</string>
-    <string name="show_home_logo">Показать логотип на главной</string>
-    <string name="show_home_add_button">Показывать кнопку добавления</string>
-    <string name="show_home_search_box">Показывать строку поиска</string>
+    <string name="show_home_logo">Логотип</string>
+    <string name="show_home_add_button">Кнопка плюс</string>
+    <string name="show_home_search_box">Строка поиска</string>
     <string name="customize_bottom_toolbar">Настроить макет</string>
     <string name="customize_bottom_toolbar_desc">Перетащите, чтобы настроить макет панели навигации</string>
     <string name="customize_tabs_toolbar">Настройка кнопок страницы диспетчера вкладок</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_select_button">Выбрать кнопку</string>
     <string name="toolbar_position_section">Переключить положение панели: Внизу/Вверху</string>
     <string name="toolbar_spare_section">Запасные кнопки</string>
-    <string name="full_screen_mode">Полноэкранный режим</string>
+    <string name="full_screen_mode">Полный экран</string>
     <string name="full_screen_mode_desc">Скрывать панель навигации при прокрутке вверх, показывать при прокрутке вниз</string>
     <string name="edit_menu_order">Изменить порядок меню</string>
     <string name="drag_to_reorder_hint">Нажмите и удерживайте, затем перетащите значок для сортировки</string>
@@ -568,11 +585,11 @@
     <string name="log_cleared">Журнал очищен</string>
     <string name="log_share_failed">Не удалось экспортировать, попробуйте снова</string>
     <string name="open_source_licenses">Уведомление о ПО с открытым исходным кодом</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Отзывы и предложения</string>
+    <string name="contact_community">Сообщество и контакты</string>
+    <string name="license_agreement">Лицензионное соглашение и условия обслуживания</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="feedback_contact_desc">Вы можете отправить отзыв через следующие каналы</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">Встроенный базовый фильтр</string>
@@ -677,4 +694,11 @@
     <string name="press_back_again_to_exit">Нажмите «Назад» ещё раз для выхода</string>
     <string name="site_settings">Настройки сайта</string>
     <string name="reset_to_global">Сбросить к общим по умолчанию</string>
+
+    <!-- Первый запуск: условия использования и политика конфиденциальности -->
+    <string name="agreement_title">Условия использования и политика конфиденциальности</string>
+    <string name="agreement_desc">Добро пожаловать в %1$s! Внимательно прочитайте «%2$s» и примите их. %1$s ценит вашу конфиденциальность — подробности в «%3$s».</string>
+    <string name="agreement_agree">Принять и продолжить</string>
+    <string name="agreement_disagree">Не принимать и выйти</string>
+    <string name="skip">Пропустить</string>
 </resources>

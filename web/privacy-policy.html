@@ -1,10 +1,12 @@
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8<meta name="viewport" content="width=device-width, initial-scale=1.0">
-   隐私保护指引
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">隐私保护指引</title>
     <style>
         body {
-            font-family: "Microsoft Yahei", sans-serif;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
             max-width: 820px;
             margin: 0 auto;
             padding: 25px 20px;
@@ -28,49 +30,230 @@
             margin: 12px 0;
         }
     </style>
+    <!-- 多语言（中文 / English）：按系统语言自动切换，原生侧也可注入 window.OKMORE_LANG 覆盖 -->
+    <script>
+    function okmoreGetLang(){
+        var l = (window.OKMORE_LANG || navigator.language || 'zh-CN').toLowerCase();
+        return l.indexOf('zh') === 0 ? 'zh' : 'en';
+    }
+    var OKMORE_I18N = {
+        zh: {
+            pageTitle: '隐私保护指引',
+            title: '隐私保护指引',
+            updateDate: '更新日期：2026年07月22日',
+            effectDate: '生效日期：2026年07月22日',
+            intro: '本应用（以下简称“我们”）高度重视用户的个人信息与隐私保护，严格遵守《中华人民共和国个人信息保护法》《网络安全法》《电信条例》等相关法律法规。本隐私保护指引旨在向您清晰说明我们如何收集、使用、存储、共享和保护您的个人信息，以及您所享有的相关权利。',
+            notice: '特别说明：您使用、安装、登录本应用，即表示您已阅读、理解并同意本隐私保护指引全部内容。',
+
+            h1: '一、信息收集原则',
+            h1Body: '本应用严格遵循<strong>最小必要、合法正当</strong>原则，仅收集实现产品功能所必需的信息，不会收集与业务无关的个人隐私信息，不会强制授权非必要权限。',
+
+            h2: '二、我们收集的信息类型及用途',
+            h2_1: '1. 设备与环境信息（必要收集）',
+            h2_1Body: '为保障应用正常运行、适配设备、优化使用体验，我们会自动收集设备基础信息，包括设备型号、操作系统版本、设备唯一标识符、网络类型、设备屏幕参数、应用运行状态、崩溃日志、访问时长等信息。',
+            h2_1Use: '用途：保障应用稳定运行、修复异常崩溃、优化适配机型、统计基础使用情况、保障服务安全。',
+            h2_2: '2. 网络日志信息（必要收集）',
+            h2_2Body: '在您使用服务过程中，系统会自动记录接口请求、访问操作、功能点击记录等日志信息。',
+            h2_2Use: '用途：维护服务安全、防范风险操作、排查功能异常、优化产品。',
+            h2_3: '3. 本地存储信息（仅本地处理）',
+            h2_3Body: '为缓存基础配置、提升打开速度，应用会读写本地存储空间，所有缓存数据仅保存在用户设备本地，不会主动上传隐私内容。',
+            h2_4: '4. 不收集的信息',
+            h2_4Body: '本应用<strong>不会</strong>收集定位、通讯录、短信、通话记录、相册、麦克风、摄像头、银行卡、身份证等敏感个人信息。如部分功能后续需调用相关权限，将单独向您弹窗申请，您可自主选择同意或拒绝。',
+
+            h3: '三、权限调用说明',
+            h3_1: '1. 网络权限：用于正常数据通信、功能加载、版本检测。',
+            h3_2: '2. 存储权限：用于本地缓存、资源保存，仅服务本App自身功能。',
+            h3_3: '3. 所有权限均遵循最小必要原则，无后台私自调用、无静默采集行为。',
+
+            h4: '四、第三方SDK',
+            h4Intro: '为保障基础服务稳定、优化产品体验，本应用可能集成合规第三方SDK，所有第三方均严格遵守隐私法律法规。',
+            h4_1: '1. 基础网络SDK：提供正常网络请求能力。',
+            h4_2: '2. 崩溃统计SDK：用于捕获闪退、异常，优化应用稳定性。',
+            h4_3: '3. 设备统计SDK：用于分析用户基础使用行为，优化产品体验。',
+            h4Note: '所有第三方不会私自收集敏感信息、不会用于非法用途、不会跨境传输用户数据。',
+
+            h5: '五、信息存储与保护',
+            h5_1: '1. 用户数据均存储于国内合规安全服务器，不进行境外传输。',
+            h5_2: '2. 所有网络数据传输采用加密方式，后台设有安全防护机制，防止数据泄露、篡改、丢失。',
+            h5_3: '3. 数据仅保留业务所需最短周期，超出留存期限将自动清理或匿名化处理。',
+
+            h6: '六、信息共享、转让与公开披露',
+            h6_1: '1. 本应用<strong>不会出售、出租、倒卖</strong>用户的任何个人信息。',
+            h6_2: '2. 不会向无关第三方共享您的个人信息。',
+            h6_3: '3. 如因法律法规、司法机关、行政机关法定要求需要披露的，我们将严格按照法律规定的范围与程序进行。',
+
+            h7: '七、广告、推送与个性化推荐',
+            h7Body: '本应用<strong>无开屏广告、无插屏广告、无信息流广告、无营销推送</strong>，不会推送营销骚扰消息，默认不开启个性化推荐。',
+
+            h8: '八、用户权利',
+            h8Intro: '您对个人信息享有以下合法权利：',
+            h8_1: '1. 知情权：您有权知晓我们收集、使用数据的类型、目的与方式。',
+            h8_2: '2. 撤回授权权：您可随时在手机系统设置中关闭权限授权。',
+            h8_3: '3. 删除权：您可通过卸载App清除所有本地数据。',
+            h8_4: '4. 咨询与投诉权：如有隐私相关问题，可通过官方联系方式咨询反馈。',
+
+            h9: '九、未成年人保护',
+            h9Body: '我们高度重视未成年人隐私安全，不会主动收集未成年人个人信息。若您为未成年人，请在监护人知情并同意的情况下使用本应用。如发现未成年人信息被违规收集，可联系我们及时处理。',
+
+            h10: '十、指引更新',
+            h10Body: '我们会根据业务更新、法律法规调整，适时更新本隐私保护指引。更新后将在应用内公示，公示后即生效，持续使用代表接受更新后条款。',
+
+            h11: '十一、联系我们',
+            h11Body: '如您对本隐私政策有疑问、投诉、建议或需要处理个人信息相关事宜，可通过以下邮箱联系我们。',
+            h11Mail: '邮箱：ok_more@qq.com'
+        },
+        en: {
+            pageTitle: 'Privacy Policy',
+            title: 'Privacy Policy',
+            updateDate: 'Last updated: July 22, 2026',
+            effectDate: 'Effective date: July 22, 2026',
+            intro: 'This application ("we", "us" or "our") attaches great importance to the protection of your personal information and privacy, and strictly complies with applicable laws and regulations, including the Personal Information Protection Law of the People\u2019s Republic of China, the Cybersecurity Law and the Telecommunications Regulations. This Privacy Policy explains clearly how we collect, use, store, share and protect your personal information, and the rights you are entitled to.',
+            notice: 'Important: By using, installing or signing in to this application, you confirm that you have read, understood and agreed to all terms of this Privacy Policy.',
+
+            h1: '1. Principles of Information Collection',
+            h1Body: 'This application strictly follows the principles of <strong>minimum necessity, legality and legitimacy</strong>. We only collect the information necessary to deliver product features, never collect personal privacy information unrelated to our business, and never force you to grant non-essential permissions.',
+
+            h2: '2. Types of Information We Collect and How We Use It',
+            h2_1: '2.1 Device and Environment Information (necessary)',
+            h2_1Body: 'To ensure the app runs properly, adapt to your device and improve your experience, we automatically collect basic device information, including device model, operating system version, unique device identifier, network type, screen parameters, app running status, crash logs and session duration.',
+            h2_1Use: 'Purpose: to keep the app stable, fix crashes, optimize device compatibility, gather basic usage statistics and safeguard service security.',
+            h2_2: '2.2 Network Log Information (necessary)',
+            h2_2Body: 'While you use our services, the system automatically records log information such as API requests, access operations and feature click records.',
+            h2_2Use: 'Purpose: to maintain service security, prevent risky operations, troubleshoot feature errors and improve the product.',
+            h2_3: '2.3 Local Storage Information (processed locally only)',
+            h2_3Body: 'To cache basic configuration and speed up startup, the app reads and writes local storage space. All cached data is kept only on your device and private content is never actively uploaded.',
+            h2_4: '2.4 Information We Do NOT Collect',
+            h2_4Body: 'This application does <strong>not</strong> collect sensitive personal information such as location, contacts, SMS, call records, photo album, microphone, camera, bank card or ID card data. If certain features later require related permissions, we will request them separately via a pop-up, and you may choose to agree or refuse.',
+
+            h3: '3. Permissions We Request',
+            h3_1: '1. Network permission: for normal data communication, feature loading and version checking.',
+            h3_2: '2. Storage permission: for local caching and resource saving, serving this app\u2019s own features only.',
+            h3_3: '3. All permissions follow the principle of minimum necessity. There is no private background invocation and no silent data collection.',
+
+            h4: '4. Third-Party SDKs',
+            h4Intro: 'To keep basic services stable and improve your experience, this application may integrate compliant third-party SDKs. All third parties strictly comply with privacy laws and regulations.',
+            h4_1: '1. Basic network SDK: provides standard network request capabilities.',
+            h4_2: '2. Crash reporting SDK: captures crashes and exceptions to improve app stability.',
+            h4_3: '3. Device statistics SDK: analyzes basic user behavior to improve the product experience.',
+            h4Note: 'All third parties will not collect sensitive information without authorization, will not use it for illegal purposes, and will not transfer user data across borders.',
+
+            h5: '5. Information Storage and Protection',
+            h5_1: '1. All user data is stored on compliant, secure servers and is not transferred abroad.',
+            h5_2: '2. All network data transmission is encrypted, and security protection mechanisms are in place to prevent data leakage, tampering and loss.',
+            h5_3: '3. Data is retained only for the shortest period required by business needs; data exceeding the retention period is automatically deleted or anonymized.',
+
+            h6: '6. Information Sharing, Transfer and Public Disclosure',
+            h6_1: '1. This application will <strong>never sell, rent or trade</strong> any of your personal information.',
+            h6_2: '2. We will not share your personal information with unrelated third parties.',
+            h6_3: '3. If disclosure is required by laws and regulations or by the legal requirements of judicial or administrative authorities, we will strictly follow the scope and procedures prescribed by law.',
+
+            h7: '7. Advertising, Push Notifications and Personalization',
+            h7Body: 'This application has <strong>no splash ads, no interstitial ads, no feed ads and no marketing push notifications</strong>. We never send promotional spam, and personalized recommendations are disabled by default.',
+
+            h8: '8. Your Rights',
+            h8Intro: 'You have the following lawful rights regarding your personal information:',
+            h8_1: '1. Right to know: you have the right to know the types, purposes and methods of the data we collect and use.',
+            h8_2: '2. Right to withdraw consent: you may turn off permission authorization in your phone\u2019s system settings at any time.',
+            h8_3: '3. Right to deletion: you can remove all local data by uninstalling the app.',
+            h8_4: '4. Right to inquire and complain: if you have privacy-related questions, you may contact us through the official channels below.',
+
+            h9: '9. Protection of Minors',
+            h9Body: 'We attach great importance to the privacy and safety of minors and do not actively collect their personal information. If you are a minor, please use this application with the knowledge and consent of your guardian. If you find that a minor\u2019s information has been collected in violation of this policy, please contact us and we will handle it promptly.',
+
+            h10: '10. Updates to This Policy',
+            h10Body: 'We may update this Privacy Policy from time to time in line with business updates or changes in laws and regulations. Any update will be announced in the app and takes effect upon announcement. Continued use means you accept the updated terms.',
+
+            h11: '11. Contact Us',
+            h11Body: 'If you have questions, complaints or suggestions about this Privacy Policy, or need to handle matters related to your personal information, you can contact us at the email address below.',
+            h11Mail: 'Email: ok_more@qq.com'
+        }
+    };
+    function T(k){
+        var d = OKMORE_I18N[okmoreGetLang()];
+        return (d && d[k] != null) ? d[k] : (OKMORE_I18N.zh[k] != null ? OKMORE_I18N.zh[k] : k);
+    }
+    // 文案内允许使用 <strong> 等简单标签，故使用 innerHTML 渲染
+    function okmoreApplyI18n(){
+        var lang = okmoreGetLang();
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang === 'en' ? 'en' : 'zh-CN';
+        var n = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < n.length; i++){
+            var key = n[i].getAttribute('data-i18n');
+            if (key) n[i].innerHTML = T(key);
+        }
+    }
+    document.documentElement.setAttribute('data-lang', okmoreGetLang());
+    document.addEventListener('DOMContentLoaded', okmoreApplyI18n);
+    </script>
+</head>
 <body>
-<h1>隐私</h1><p>更新日期：2026年07月22</p>
-   <p>生效日期：2026年07月22日</p>
+    <h1 data-i18n="title">隐私保护指引</h1>
+    <p data-i18n="updateDate">更新日期：2026年07月22日</p>
+    <p data-i18n="effectDate">生效日期：2026年07月22日</p>
 
-    <p>本应用（以下简称“我们”）高度重视用户的个人信息与隐私保护，严格遵守《中华人民共和国个人信息保护法》《网络安全法》《电信条例》等相关法律法规。本隐私保护指引旨在向您清晰说明我们如何收集、使用、存储、共享和保护您的个人信息，以及您所享有的相关权利。</p>
+    <p data-i18n="intro">本应用（以下简称“我们”）高度重视用户的个人信息与隐私保护，严格遵守《中华人民共和国个人信息保护法》《网络安全法》《电信条例》等相关法律法规。本隐私保护指引旨在向您清晰说明我们如何收集、使用、存储、共享和保护您的个人信息，以及您所享有的相关权利。</p>
 
-    <strong>特别说明：您使用、安装、登录本应用，即表示您已阅读、理解并同意本隐私保护指引全部内容</strong></p><h2>一、信息收集原则</h2>
-    <strong>最小必要、合法正当</strong>原则，仅收集实现产品功能所必需的信息，不会收集与业务无关的个人隐私信息，不会强制授权非必要权限。<h2>二、我们收集的信息类型及用途</h2>
-    <strong>1. 设备与环境信息（必要收集）</strong></p>
-    <p>为保障应用正常运行、适配设备、优化使用体验，我们会自动收集设备基础信息，包括设备型号、操作系统版本、设备唯一标识符、网络类型、设备屏幕参数、应用运行状态、崩溃日志、访问时长等信息。<p>用途：保障应用稳定运行、修复异常崩溃、优化适配机型、统计基础使用情况、保障服务安全。</p>
+    <p><strong data-i18n="notice">特别说明：您使用、安装、登录本应用，即表示您已阅读、理解并同意本隐私保护指引全部内容。</strong></p>
 
-    <strong>2. 网络日志信息（必要收集）</strong><p>在您使用服务过程中，系统会自动记录接口请求、访问操作、功能点击记录等日志信息。</p>
-    <p>用途：维护服务安全、防范风险操作、排查功能异常、优化产品</p>
+    <h2 data-i18n="h1">一、信息收集原则</h2>
+    <p data-i18n="h1Body">本应用严格遵循<strong>最小必要、合法正当</strong>原则，仅收集实现产品功能所必需的信息，不会收集与业务无关的个人隐私信息，不会强制授权非必要权限。</p>
 
-<strong>3. 本地存储信息（仅本地处理）</strong></p>
-   <p>为缓存基础配置、提升打开速度，应用会读写本地存储空间，所有缓存数据仅保存在用户设备本地，不会主动上传隐私内容。</p>
+    <h2 data-i18n="h2">二、我们收集的信息类型及用途</h2>
+    <p><strong data-i18n="h2_1">1. 设备与环境信息（必要收集）</strong></p>
+    <p data-i18n="h2_1Body">为保障应用正常运行、适配设备、优化使用体验，我们会自动收集设备基础信息，包括设备型号、操作系统版本、设备唯一标识符、网络类型、设备屏幕参数、应用运行状态、崩溃日志、访问时长等信息。</p>
+    <p data-i18n="h2_1Use">用途：保障应用稳定运行、修复异常崩溃、优化适配机型、统计基础使用情况、保障服务安全。</p>
 
-    <p><strong>4. 不收集的信息</strong></p>
-    <strong>不会</strong>定位、通讯录、短信、通话记录、相册、麦克风、摄像头、银行卡、身份证等敏感个人信息。如部分功能后续需调用相关权限，将单独向您弹窗申请，您可自主选择同意或拒绝。<h2>三、权限调用说明</h2>
-   <p>1. 网络权限：用于正常数据通信、功能加载、版本</p>
-<p>2. 存储权限：用于本地缓存、资源保存，仅服务本App自身功能。</p>
-    <p>3. 所有权限均遵循最小必要原则，无后台私自调用、无静默采集行为。<h2>四、第三方SDK</h2><p>为保障基础服务稳定、优化产品体验，本应用可能集成合规第三方SDK，所有第三方均严格遵守隐私法律法规</p>
-   <p>1. 基础网络SDK：提供正常网络请求能力。<p>2. 崩溃统计SDK：用于捕获闪退、异常，优化应用稳定性。</p>
-    <p>3. 设备统计SDK：用于分析用户基础使用行为，优化产品体验</p>
-   <strong>所有第三方不会私自收集敏感信息、不会用于非法用途、不会跨境传输用户数据。</strong></p>
+    <p><strong data-i18n="h2_2">2. 网络日志信息（必要收集）</strong></p>
+    <p data-i18n="h2_2Body">在您使用服务过程中，系统会自动记录接口请求、访问操作、功能点击记录等日志信息。</p>
+    <p data-i18n="h2_2Use">用途：维护服务安全、防范风险操作、排查功能异常、优化产品。</p>
 
-<h2>五、信息存储与保护</h2>
-    <p>1. 用户数据均存储于国内合规安全服务器，不进行境外传输</p>
-   <p>2. 所有网络数据传输采用加密方式，后台设有安全防护机制，防止数据泄露、篡改、丢失。<p>3. 数据仅保留业务所需最短周期，超出留存期限将自动清理或匿名化处理。<h2>六、信息共享、</h2>
-    <strong>不会出售、出租、倒卖</strong>用户任何个人</p>
-<p>2. 不会向无关第三方共享您的个人信息。</p>
-    <p>3. 如因法律法规、司法机关、行政机关法定要求需要披露的，我们将严格按照法律</p><h2>七、广告、推送与</h2><p>本<strong>无开屏广告、无插屏广告、无信息流广告、无</strong>，不会推送营销骚扰消息，默认不开启个性化推荐。</p>
+    <p><strong data-i18n="h2_3">3. 本地存储信息（仅本地处理）</strong></p>
+    <p data-i18n="h2_3Body">为缓存基础配置、提升打开速度，应用会读写本地存储空间，所有缓存数据仅保存在用户设备本地，不会主动上传隐私内容。</p>
 
-    <h2>八、用户</h2><p>您对个人信息享有以下合法</p>
-<p>1. 知情权：您有权知晓我们收集、使用数据的</p>
-<p>2. 撤回授权权：您可随时在手机系统设置关闭权限授权。<p>3. 删除权：您可通过卸载App清除所有</p><p>4. 咨询与投诉权：如有隐私相关问题，可通过官方联系方式咨询反馈</p>
+    <p><strong data-i18n="h2_4">4. 不收集的信息</strong></p>
+    <p data-i18n="h2_4Body">本应用<strong>不会</strong>收集定位、通讯录、短信、通话记录、相册、麦克风、摄像头、银行卡、身份证等敏感个人信息。如部分功能后续需调用相关权限，将单独向您弹窗申请，您可自主选择同意或拒绝。</p>
 
-   <h2>九、</h2><p>我们高度重视未成年人隐私安全，不会主动收集未成年人个人信息。若您为未成年人，请在监护人知情并同意的情况下使用本应用。如发现未成年人信息被违规收集，可联系我们及时</p>
+    <h2 data-i18n="h3">三、权限调用说明</h2>
+    <p data-i18n="h3_1">1. 网络权限：用于正常数据通信、功能加载、版本检测。</p>
+    <p data-i18n="h3_2">2. 存储权限：用于本地缓存、资源保存，仅服务本App自身功能。</p>
+    <p data-i18n="h3_3">3. 所有权限均遵循最小必要原则，无后台私自调用、无静默采集行为。</p>
 
-<h2>十</h2><p>我们会根据业务更新、法律法规调整，适时更新本隐私保护指引。更新后将在应用内公示，公示后即生效，持续使用代表接受更新后条款</p>
+    <h2 data-i18n="h4">四、第三方SDK</h2>
+    <p data-i18n="h4Intro">为保障基础服务稳定、优化产品体验，本应用可能集成合规第三方SDK，所有第三方均严格遵守隐私法律法规。</p>
+    <p data-i18n="h4_1">1. 基础网络SDK：提供正常网络请求能力。</p>
+    <p data-i18n="h4_2">2. 崩溃统计SDK：用于捕获闪退、异常，优化应用稳定性。</p>
+    <p data-i18n="h4_3">3. 设备统计SDK：用于分析用户基础使用行为，优化产品体验。</p>
+    <p><strong data-i18n="h4Note">所有第三方不会私自收集敏感信息、不会用于非法用途、不会跨境传输用户数据。</strong></p>
 
-   <h2>十一、</h2>
-<p>如您对本隐私政策有疑问、投诉、建议或需要处理个人信息相关事宜，可通过以下邮箱联系我们</p>
-   <p>邮箱：ok_more@qq.com</p>
+    <h2 data-i18n="h5">五、信息存储与保护</h2>
+    <p data-i18n="h5_1">1. 用户数据均存储于国内合规安全服务器，不进行境外传输。</p>
+    <p data-i18n="h5_2">2. 所有网络数据传输采用加密方式，后台设有安全防护机制，防止数据泄露、篡改、丢失。</p>
+    <p data-i18n="h5_3">3. 数据仅保留业务所需最短周期，超出留存期限将自动清理或匿名化处理。</p>
+
+    <h2 data-i18n="h6">六、信息共享、转让与公开披露</h2>
+    <p data-i18n="h6_1">1. 本应用<strong>不会出售、出租、倒卖</strong>用户的任何个人信息。</p>
+    <p data-i18n="h6_2">2. 不会向无关第三方共享您的个人信息。</p>
+    <p data-i18n="h6_3">3. 如因法律法规、司法机关、行政机关法定要求需要披露的，我们将严格按照法律规定的范围与程序进行。</p>
+
+    <h2 data-i18n="h7">七、广告、推送与个性化推荐</h2>
+    <p data-i18n="h7Body">本应用<strong>无开屏广告、无插屏广告、无信息流广告、无营销推送</strong>，不会推送营销骚扰消息，默认不开启个性化推荐。</p>
+
+    <h2 data-i18n="h8">八、用户权利</h2>
+    <p data-i18n="h8Intro">您对个人信息享有以下合法权利：</p>
+    <p data-i18n="h8_1">1. 知情权：您有权知晓我们收集、使用数据的类型、目的与方式。</p>
+    <p data-i18n="h8_2">2. 撤回授权权：您可随时在手机系统设置中关闭权限授权。</p>
+    <p data-i18n="h8_3">3. 删除权：您可通过卸载App清除所有本地数据。</p>
+    <p data-i18n="h8_4">4. 咨询与投诉权：如有隐私相关问题，可通过官方联系方式咨询反馈。</p>
+
+    <h2 data-i18n="h9">九、未成年人保护</h2>
+    <p data-i18n="h9Body">我们高度重视未成年人隐私安全，不会主动收集未成年人个人信息。若您为未成年人，请在监护人知情并同意的情况下使用本应用。如发现未成年人信息被违规收集，可联系我们及时处理。</p>
+
+    <h2 data-i18n="h10">十、指引更新</h2>
+    <p data-i18n="h10Body">我们会根据业务更新、法律法规调整，适时更新本隐私保护指引。更新后将在应用内公示，公示后即生效，持续使用代表接受更新后条款。</p>
+
+    <h2 data-i18n="h11">十一、联系我们</h2>
+    <p data-i18n="h11Body">如您对本隐私政策有疑问、投诉、建议或需要处理个人信息相关事宜，可通过以下邮箱联系我们。</p>
+    <p data-i18n="h11Mail">邮箱：ok_more@qq.com</p>
 </body>
 </html>

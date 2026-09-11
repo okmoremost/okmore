@@ -18,6 +18,7 @@
     <string name="ad_filtering">Penapisan Iklan</string>
     <string name="speed_experience">Kelajuan</string>
     <string name="dark_mode">Mod Gelap</string>
+    <string name="language">Bahasa</string>
     <string name="video_playback">Mainan Video</string>
     <string name="download_settings">Tetapan Muat Turun</string>
     <string name="about">Perihal</string>
@@ -43,7 +44,7 @@
     <string name="restore_tabs_on_startup">Pulihkan tab semasa permulaan</string>
     <string name="chrome_remote_debugging">Dayakan Penyahpepijat Jauh Chrome</string>
     <string name="chrome_remote_debugging_desc">Masukkan "chrome://inspect" dalam bar alamat Chrome untuk menyahpepijat halaman web secara jauh melalui pelayar Chrome</string>
-    <string name="ua_mode">Pengecam pelayar</string>
+    <string name="ua_mode">ID pelayar</string>
     <string name="ua_android">Android</string>
     <string name="ua_pad">Pad</string>
     <string name="ua_iphone">iPhone</string>
@@ -79,10 +80,10 @@
     <string name="home">Laman Utama</string>
     <string name="close">Tutup</string>
     <string name="toggle_layout">Tukar Susun Atur</string>
-    <string name="find_in_page">Cari dalam Halaman</string>
+    <string name="find_in_page">Cari</string>
     <string name="font_size">Saiz Fon</string>
     <string name="font_size2">Saiz Fon</string>
-    <string name="eye_care">Jaga Mata</string>
+    <string name="eye_care">Warna latar</string>
     <string name="eye_care2">Jaga Mata</string>
     <string name="eye_care_default">Lalai</string>
     <string name="eye_care_parchment">Parchment</string>
@@ -149,6 +150,16 @@
     <string name="adaptive_screen_desc">Halaman web melaraskan susun atur secara automatik mengikut saiz skrin</string>
     <string name="media_sniffer">Pengesan Media</string>
     <string name="media_sniffer_no_result">Tiada media dikesan</string>
+    <!-- Lihat sumber web -->
+    <string name="web_resources">Lihat Sumber</string>
+    <string name="web_resources_title">Sumber Web</string>
+    <string name="web_resources_empty">Tiada sumber web ditemui</string>
+    <string name="web_res_image">Imej</string>
+    <string name="web_res_script">Skrip</string>
+    <string name="web_res_style">Gaya</string>
+    <string name="web_res_media">Media</string>
+    <string name="web_res_iframe">Bingkai</string>
+    <string name="web_res_link">Pautan</string>
     <string name="ai">Pembantu AI</string>
     <string name="clear_privacy_data">Kosongkan data privasi</string>
     <string name="auto_clear_privacy_on_exit">Kosongkan data privasi secara automatik semasa keluar</string>
@@ -272,7 +283,7 @@
     <string name="free_copy">Salin Bebas</string>
     <string name="free_copy_failed">Tiada pautan untuk diproses</string>
     <string name="restore_link">Pulihkan Pautan</string>
-    <string name="view_image">Lihat Imej</string>
+    <string name="view_image">Penampil Imej</string>
     <string name="save_image">Simpan Imej</string>
     <string name="zoom_minimum">Sangat Kecil</string>
     <string name="zoom_small">Kecil</string>
@@ -329,7 +340,7 @@
     <string name="original_page">Halaman Asal</string>
     <string name="refresh">Segar Semula</string>
     <string name="cancel_loading">Batal muatkan</string>
-    <string name="force_refresh">Paksa Segar Semula</string>
+    <string name="force_refresh">Muat semula</string>
     <string name="homepage_url_hint">Masukkan URL laman utama</string>
     <string name="homepage_settings_desc">Tetapkan URL laman utama tersuai. Biarkan kosong untuk guna laman utama lalai</string>
     <string name="close_all">Tutup Semua</string>
@@ -347,8 +358,8 @@
     <string name="translate">Terjemah</string>
     <string name="translate_service">Perkhidmatan terjemahan halaman web</string>
     <string name="translating">Menterjemah halaman…</string>
-    <string name="read_aloud">Baca Kuat</string>
-    <string name="image_mode">Mod Tanpa Imej</string>
+    <string name="read_aloud">Baca kuat</string>
+    <string name="image_mode">Tanpa Imej</string>
     <string name="image_mode_always">Sentiasa dengan Imej</string>
     <string name="image_mode_wifi">Tanpa Imej pada Data Mudah Alih</string>
     <string name="image_mode_never">Sentiasa tanpa Imej</string>
@@ -414,6 +425,7 @@
     <string name="video_already_downloaded">Video sudah dimuat turun</string>
     <string name="download_location">Lokasi Muat Turun</string>
     <string name="download_location_hint">Masukkan laluan direktori muat turun</string>
+    <string name="phone_storage">Storan telefon</string>
     <string name="download_concurrent_tasks">Bilangan muat turun serentak</string>
     <string name="download_thread_count">Thread muat turun</string>
     <string name="download_auto_delete_ts">Gabung &amp; Padam Segmen TS Automatik</string>
@@ -482,6 +494,8 @@
     <string name="download_detail_size">Saiz</string>
     <string name="download_detail_time">Masa</string>
     <string name="download_segments">segmen</string>
+    <string name="download_storage_total">%1$s</string>
+    <string name="download_storage_available">Tersedia %1$s</string>
     <string name="filter_all">Semua</string>
     <string name="filter_image">Imej</string>
     <string name="filter_video">Video</string>
@@ -515,7 +529,10 @@
     <string name="reading_theme_orange">Oren</string>
     <string name="reading_theme_parchment">Parchment</string>
     <string name="reading_theme_white">Putih</string>
-    <string name="add_to_home">Tambah ke Laman Utama</string>
+    <string name="add_to_home">Ke Laman Utama</string>
+    <string name="add_to_phone">Ke Telefon</string>
+    <string name="shortcut_added">Ditambahkan ke skrin utama</string>
+    <string name="shortcut_add_failed">Gagal menambah, semak kebenaran pintasan skrin utama</string>
     <string name="hide_password">Sembunyikan Kata Laluan</string>
     <string name="show_password">Tunjuk Kata Laluan</string>
     <string name="comma_separator">, </string>
@@ -530,9 +547,9 @@
     <string name="wallpaper_preview">Pratonton</string>
     <string name="wallpaper_clear_image">Kosongkan Imej</string>
     <string name="wallpaper_theme_color">Warna Tema (Nama / Kotak Carian / Butang Bar Alat)</string>
-    <string name="show_home_logo">Tunjukkan Logo Halaman Utama</string>
-    <string name="show_home_add_button">Tunjukkan Butang Tambah</string>
-    <string name="show_home_search_box">Tunjukkan Bar Carian</string>
+    <string name="show_home_logo">Logo</string>
+    <string name="show_home_add_button">Butang tambah</string>
+    <string name="show_home_search_box">Kotak carian</string>
     <string name="customize_bottom_toolbar">Suai Atur Letak</string>
     <string name="customize_bottom_toolbar_desc">Seret untuk melaraskan susun atur bar navigasi</string>
     <string name="customize_tabs_toolbar">Sesuaikan Butang Halaman Pengurus Tab</string>
@@ -554,7 +571,7 @@
     <string name="toolbar_select_button">Pilih Butang</string>
     <string name="toolbar_position_section">Tukar Kedudukan Bar Alat: Bawah/Atas</string>
     <string name="toolbar_spare_section">Butang Simpanan</string>
-    <string name="full_screen_mode">Mod Skrin Penuh</string>
+    <string name="full_screen_mode">Skrin Penuh</string>
     <string name="full_screen_mode_desc">Sembunyikan bar navigasi semasa tatal ke atas, tunjuk semasa tatal ke bawah</string>
     <string name="edit_menu_order">Edit Susunan Menu</string>
     <string name="drag_to_reorder_hint">Tekan lama dan seret ikon untuk menyusun semula</string>
@@ -568,11 +585,11 @@
     <string name="log_cleared">Log dikosongkan</string>
     <string name="log_share_failed">Eksport gagal, sila cuba lagi</string>
     <string name="open_source_licenses">Notis Perisian Sumber Terbuka</string>
-    <string name="feedback_contact">反馈建议</string>
-    <string name="contact_community">交流与联系</string>
-    <string name="license_agreement">软件许可及服务协议</string>
-    <string name="privacy_policy">隐私保护</string>
-    <string name="feedback_contact_desc">您可通过以下渠道反馈建议</string>
+    <string name="feedback_contact">Maklum Balas dan Cadangan</string>
+    <string name="contact_community">Komuniti dan Hubungan</string>
+    <string name="license_agreement">Perjanjian Lesen dan Perkhidmatan</string>
+    <string name="privacy_policy">Dasar Privasi</string>
+    <string name="feedback_contact_desc">Anda boleh menghantar maklum balas melalui saluran berikut</string>
     <string name="feedback_issues">Issues: %1$s</string>
     <string name="feedback_qq_group">Telegram: https://t.me/+NSXthZC7kaxmZDc1</string>
     <string name="built_in_filter">Penapis asas terbina dalam</string>
@@ -677,4 +694,11 @@
     <string name="press_back_again_to_exit">Tekan Kembali sekali lagi untuk keluar</string>
     <string name="site_settings">Tetapan Laman</string>
     <string name="reset_to_global">Kembalikan ke lalai global</string>
+
+    <!-- Pelancaran pertama: perjanjian perkhidmatan dan dasar privasi -->
+    <string name="agreement_title">Perjanjian Perkhidmatan dan Dasar Privasi</string>
+    <string name="agreement_desc">Selamat datang ke %1$s! Sila baca dengan teliti dan terima «%2$s». %1$s menghargai privasi anda; baca «%3$s» untuk butiran lanjut.</string>
+    <string name="agreement_agree">Setuju dan Teruskan</string>
+    <string name="agreement_disagree">Tidak Setuju dan Keluar</string>
+    <string name="skip">Langkau</string>
 </resources>
