@@ -230,6 +230,10 @@
       font-size: 11px;
       color: var(--sub);
       line-height: 1.5;
+      /* 按分隔符合理断行：优先在 / 、 → 等标点处换行，避免把短语拆散导致换行难看 */
+      word-break: normal;
+      overflow-wrap: anywhere;
+      line-break: strict;
       /* 固定显示两行，超出以省略号截断，保证卡片高度一致 */
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -341,44 +345,44 @@
       "groupName": "免费在线转换",
       "groupNameEn": "Free Online Conversion",
       "webList": [
-        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "PDF与Word/Excel/PPT/图片互转", "featuresEn": "Convert between PDF and Word/Excel/PPT/images" },
-        { "name": "PDF派", "link": "https://www.pdfpai.com/", "features": "PDF双向转Word/PPT/图片/图片转PDF/Office转PDF", "featuresEn": "Two-way PDF to Word/PPT/images, images to PDF, Office to PDF" },
-        { "name": "iLovePDF", "link": "https://www.ilovepdf.com/zh-cn", "features": "PDF与Word/PPT/图片双向转换/图片合并为PDF/文档转PDF", "featuresEn": "Two-way PDF to Word/PPT/images, merge images to PDF, documents to PDF" },
-        { "name": "RunConvert", "link": "https://www.runconvert.com/zh", "features": "PDF/Office/图片双向互转", "featuresEn": "Two-way conversion between PDF/Office/images" },
-        { "name": "Convertio", "link": "https://convertio.co/zh/", "features": "文档/图片/PDF全格式互相转换", "featuresEn": "Convert all formats of documents/images/PDF" },
-        { "name": "易转换", "link": "https://www.easeconvert.com/", "features": "PDF与Word/PPT/图片双向转换/图片转文档/OCR识别", "featuresEn": "Two-way PDF to Word/PPT/images, images to documents, OCR" },
-        { "name": "ONLYOFFICE", "link": "https://onlyoffice.com/online-document-converter", "features": "Word/PPT/PDF互相转换", "featuresEn": "Convert between Word/PPT/PDF" },
-        { "name": "Office-Converter", "link": "https://www.office-converter.com", "features": "文档/PDF/图片/音视频等400+格式互转", "featuresEn": "Convert 400+ formats including documents/PDF/images/audio/video" },
-        { "name": "CloudConvert", "link": "https://www.cloudconvert.com", "features": "支持200+格式互转", "featuresEn": "Supports conversion between 200+ formats" },
-        { "name": "Aconvert", "link": "https://www.aconvert.com", "features": "文档/电子书/图像/音视频互转", "featuresEn": "Convert documents/e-books/images/audio/video" },
-        { "name": "PDF24", "link": "https://www.pdf24.org", "features": "PDF专项", "featuresEn": "PDF specialist tools" },
-        { "name": "Smallpdf", "link": "https://www.smallpdf.com", "features": "PDF专项", "featuresEn": "PDF specialist tools" },
-        { "name": "PDF Candy", "link": "https://www.pdfcandy.com", "features": "PDF专项", "featuresEn": "PDF specialist tools" },
-        { "name": "超级PDF", "link": "https://www.xpdf.net", "features": "PDF专项", "featuresEn": "PDF specialist tools" },
-        { "name": "文件快转", "link": "https://kz.ggdoc.cn", "features": "所有转换在本地完成", "featuresEn": "All conversions done locally" },
-        { "name": "LuxPDF", "link": "https://www.luxpdf.com", "features": "开源本地处理", "featuresEn": "Open-source local processing" }
+        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "PDF与Word/Excel/PPT/图片互转", "featuresEn": "PDF ↔ Word/Excel/PPT/images" },
+        { "name": "PDF派", "nameEn": "PDFPai", "link": "https://www.pdfpai.com/", "features": "PDF双向转Word/PPT/图片/图片转PDF/Office转PDF", "featuresEn": "PDF ↔ Word/PPT/images, images/Office → PDF" },
+        { "name": "iLovePDF", "link": "https://www.ilovepdf.com/zh-cn", "features": "PDF与Word/PPT/图片双向转换/图片合并为PDF/文档转PDF", "featuresEn": "PDF ↔ Word/PPT/images, merge/convert to PDF" },
+        { "name": "RunConvert", "link": "https://www.runconvert.com/zh", "features": "PDF/Office/图片双向互转", "featuresEn": "PDF/Office/images, both ways" },
+        { "name": "Convertio", "link": "https://convertio.co/zh/", "features": "文档/图片/PDF全格式互相转换", "featuresEn": "Any format: docs/images/PDF" },
+        { "name": "易转换", "nameEn": "EaseConvert", "link": "https://www.easeconvert.com/", "features": "PDF与Word/PPT/图片双向转换/图片转文档/OCR识别", "featuresEn": "PDF ↔ Word/PPT/images, OCR" },
+        { "name": "ONLYOFFICE", "link": "https://onlyoffice.com/online-document-converter", "features": "Word/PPT/PDF互相转换", "featuresEn": "Word/PPT/PDF interconversion" },
+        { "name": "Office-Converter", "link": "https://www.office-converter.com", "features": "文档/PDF/图片/音视频等400+格式互转", "featuresEn": "400+ formats: docs/PDF/images/media" },
+        { "name": "CloudConvert", "link": "https://www.cloudconvert.com", "features": "支持200+格式互转", "featuresEn": "200+ formats supported" },
+        { "name": "Aconvert", "link": "https://www.aconvert.com", "features": "文档/电子书/图像/音视频互转", "featuresEn": "Docs/e-books/images/media" },
+        { "name": "PDF24", "link": "https://www.pdf24.org", "features": "PDF专项", "featuresEn": "PDF only" },
+        { "name": "Smallpdf", "link": "https://www.smallpdf.com", "features": "PDF专项", "featuresEn": "PDF only" },
+        { "name": "PDF Candy", "link": "https://www.pdfcandy.com", "features": "PDF专项", "featuresEn": "PDF only" },
+        { "name": "超级PDF", "nameEn": "SuperPDF", "link": "https://www.xpdf.net", "features": "PDF专项", "featuresEn": "PDF only" },
+        { "name": "文件快转", "nameEn": "FileQuick", "link": "https://kz.ggdoc.cn", "features": "所有转换在本地完成", "featuresEn": "100% local conversion" },
+        { "name": "LuxPDF", "link": "https://www.luxpdf.com", "features": "开源本地处理", "featuresEn": "Open-source, runs locally" }
       ]
     },
     {
       "groupName": "免费在线OCR提取",
       "groupNameEn": "Free Online OCR",
       "webList": [
-        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "图片/扫描PDF OCR文字提取", "featuresEn": "OCR text extraction from images/scanned PDFs" },
-        { "name": "PearOCR", "link": "https://pearocr.com/", "features": "截图/图片/多页扫描PDF识别文字", "featuresEn": "Recognize text from screenshots/images/multi-page scanned PDFs" },
-        { "name": "OOCCRR", "link": "https://www.ooccrr.com/zh/", "features": "图片/截图OCR识别", "featuresEn": "OCR recognition for images/screenshots" },
-        { "name": "WPS在线OCR", "link": "https://pdf.wps.cn/ocr", "features": "图片/扫描PDF文字识别", "featuresEn": "Text recognition for images/scanned PDFs" },
-        { "name": "OCR.space", "link": "https://ocr.space/", "features": "图片/扫描PDF文字提取", "featuresEn": "Text extraction from images/scanned PDFs" },
-        { "name": "Ocr Free", "link": "https://ocr-free.com/zh-CN", "features": "图片/PDF扫描件文字提取", "featuresEn": "Text extraction from images/PDF scans" },
-        { "name": "img2txt", "link": "https://img2txt.com/", "features": "图片/PDF转可编辑文字", "featuresEn": "Convert images/PDF to editable text" },
-        { "name": "OnlineOCR", "link": "https://onlineocr.io/", "features": "扫描PDF/图片OCR识别", "featuresEn": "OCR recognition for scanned PDFs/images" },
-        { "name": "ExtractPDF", "link": "https://www.extractpdf.com/zh.html", "features": "原生PDF提取纯文字/内嵌图片/文字", "featuresEn": "Extract plain text/embedded images from native PDFs" },
-        { "name": "DeepSeekOCR", "link": "https://deepseekocr.io/zh/deepseek-ocr-2", "features": "AI驱动的OCR工具", "featuresEn": "AI-powered OCR tool" },
-        { "name": "ImageToText", "link": "https://toolin.ai/tools/imagetotext-info", "features": "AI图片文字提取", "featuresEn": "AI image text extraction" },
-        { "name": "ToolMage Image to Text", "link": "https://www.toolmage.com/en/tag/image-to-text/", "features": "AI图片/文档/手写笔记提取", "featuresEn": "AI extraction from images/documents/handwritten notes" },
-        { "name": "OCRify", "link": "https://www.koc.com.tw/archives/568360", "features": "OCR图片转文字工具", "featuresEn": "OCR image-to-text tool" },
-        { "name": "永中PDF 图片文字识别", "link": "https://pdf.yozocloud.cn/p/ocr", "features": "永中PDF/图片文字提取", "featuresEn": "Yozocloud PDF/image text extraction" },
-        { "name": "GroupDocs.Parser", "link": "https://products.groupdocs.app/parser", "features": "PDF/DOCX/XLSX提取文本", "featuresEn": "Extract text from PDF/DOCX/XLSX" },
-        { "name": "Aspose PDF Parser", "link": "https://api.products-qa.aspose.app/pdf/parser", "features": "PDF解析图片和文字", "featuresEn": "Parse images and text from PDF" },
+        { "name": "PDF24 Tools", "link": "https://tools.pdf24.org/zh/", "features": "图片/扫描PDF OCR文字提取", "featuresEn": "OCR images/scanned PDFs" },
+        { "name": "PearOCR", "link": "https://pearocr.com/", "features": "截图/图片/多页扫描PDF识别文字", "featuresEn": "OCR screenshots/images/multi-page PDFs" },
+        { "name": "OOCCRR", "link": "https://www.ooccrr.com/zh/", "features": "图片/截图OCR识别", "featuresEn": "OCR images/screenshots" },
+        { "name": "WPS在线OCR", "nameEn": "WPS Online OCR", "link": "https://pdf.wps.cn/ocr", "features": "图片/扫描PDF文字识别", "featuresEn": "OCR images/scanned PDFs" },
+        { "name": "OCR.space", "link": "https://ocr.space/", "features": "图片/扫描PDF文字提取", "featuresEn": "Extract text from images/PDFs" },
+        { "name": "Ocr Free", "link": "https://ocr-free.com/zh-CN", "features": "图片/PDF扫描件文字提取", "featuresEn": "Extract text from images/PDF scans" },
+        { "name": "img2txt", "link": "https://img2txt.com/", "features": "图片/PDF转可编辑文字", "featuresEn": "Images/PDF → editable text" },
+        { "name": "OnlineOCR", "link": "https://onlineocr.io/", "features": "扫描PDF/图片OCR识别", "featuresEn": "OCR scanned PDFs/images" },
+        { "name": "ExtractPDF", "link": "https://www.extractpdf.com/zh.html", "features": "原生PDF提取纯文字/内嵌图片/文字", "featuresEn": "Pull text/images from native PDFs" },
+        { "name": "DeepSeekOCR", "link": "https://deepseekocr.io/zh/deepseek-ocr-2", "features": "AI驱动的OCR工具", "featuresEn": "AI-powered OCR" },
+        { "name": "ImageToText", "link": "https://toolin.ai/tools/imagetotext-info", "features": "AI图片文字提取", "featuresEn": "AI image → text" },
+        { "name": "ToolMage Image to Text", "link": "https://www.toolmage.com/en/tag/image-to-text/", "features": "AI图片/文档/手写笔记提取", "featuresEn": "AI OCR for images/docs/handwriting" },
+        { "name": "OCRify", "link": "https://www.koc.com.tw/archives/568360", "features": "OCR图片转文字工具", "featuresEn": "OCR image → text" },
+        { "name": "永中PDF 图片文字识别", "nameEn": "Yozocloud OCR", "link": "https://pdf.yozocloud.cn/p/ocr", "features": "永中PDF/图片文字提取", "featuresEn": "Yozocloud PDF/image OCR" },
+        { "name": "GroupDocs.Parser", "link": "https://products.groupdocs.app/parser", "features": "PDF/DOCX/XLSX提取文本", "featuresEn": "Text from PDF/DOCX/XLSX" },
+        { "name": "Aspose PDF Parser", "link": "https://api.products-qa.aspose.app/pdf/parser", "features": "PDF解析图片和文字", "featuresEn": "Parse PDF text/images" },
         { "name": "PDF Candy", "link": "https://pdfcandy.com", "features": "OCR文本识别", "featuresEn": "OCR text recognition" },
         { "name": "PDF24", "link": "https://www.pdf24.org", "features": "PDF文本识别", "featuresEn": "PDF text recognition" }
       ]
@@ -387,35 +391,35 @@
       "groupName": "免费在线处理图片",
       "groupNameEn": "Free Online Image Tools",
       "webList": [
-        { "name": "Imgkits", "link": "https://www.imgkits.com/zh", "features": "老照片修复上色/画质超清增强/AI无痕消除/AI图片重绘/AI背景替换/文生图AI生成", "featuresEn": "Old photo restoration & colorization/HD enhancement/AI object removal/AI redraw/AI background replacement/text-to-image" },
-        { "name": "AIEnhancer", "link": "https://aienhancer.ai", "features": "老照片修复/4K画质超分/无痕移除物体/图生图重绘/抠图换背景/文生图创作", "featuresEn": "Old photo restoration/4K upscaling/seamless object removal/image-to-image redraw/cutout & background replacement/text-to-image" },
-        { "name": "Magic Eraser", "link": "https://magiceraser.org/zh/ai-image-editor/", "features": "老照片破损修复上色/画质细节增强/AI涂抹消除/画风重绘/智能换背景/AI绘画生成", "featuresEn": "Damaged photo repair & colorization/detail enhancement/AI brush removal/style redraw/smart background replacement/AI art generation" },
-        { "name": "图叮AI", "link": "https://tudingai.cn", "features": "老照片修复/画质超清放大/AI无痕去杂物/背景替换", "featuresEn": "Old photo restoration/HD upscaling/AI object removal/background replacement" },
-        { "name": "Cleanup.pictures", "link": "https://cleanup.pictures/", "features": "AI无痕消除水印/路人/简易画质增强/抠图换背景", "featuresEn": "AI removal of watermarks/passersby/basic enhancement/cutout & background replacement" },
-        { "name": "Seedream AI", "link": "https://seedream.pro/zh", "features": "文生图AI生成/图片重绘改写/抠图背景替换/简易画质优化", "featuresEn": "Text-to-image generation/image redraw/cutout background replacement/basic image optimization" },
-        { "name": "waifu2x", "link": "https://waifu2x.udp.jp", "features": "动漫图片超清降噪放大", "featuresEn": "HD denoise and upscale for anime images" },
-        { "name": "Restore Old Photos", "link": "https://restoreoldphotos.com", "features": "AI高清老照片修复", "featuresEn": "AI HD old photo restoration" },
-        { "name": "MyEdit", "link": "https://myedit.online", "features": "AI高清老照片修复/AI画质超清增强/AI背景替换", "featuresEn": "AI HD old photo restoration/AI HD enhancement/AI background replacement" },
-        { "name": "佐糖", "link": "https://picwish.cn", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除/AI背景替换", "featuresEn": "AI HD old photo restoration/AI HD enhancement/AI object removal/AI background replacement" },
-        { "name": "UnblurImage", "link": "https://unblurimage.ai", "features": "AI高清老照片修复/AI画质超清增强", "featuresEn": "AI HD old photo restoration/AI HD enhancement" },
-        { "name": "ArtGuru", "link": "https://www.artguru.ai", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除", "featuresEn": "AI HD old photo restoration/AI HD enhancement/AI object removal" },
-        { "name": "Qwen-Image-Edit", "link": "https://qwen-image-edit.com", "features": "AI图片重绘/AI无痕消除/AI背景替换", "featuresEn": "AI image redraw/AI object removal/AI background replacement" },
-        { "name": "HiDream AI", "link": "https://hidream.org", "features": "AI图片重绘/AI图片生成", "featuresEn": "AI image redraw/AI image generation" },
-        { "name": "AIUpscaler", "link": "https://aiupscaler.com", "features": "AI画质超清增强", "featuresEn": "AI HD image enhancement" },
-        { "name": "Upscale.media", "link": "https://upscale.media", "features": "AI画质超清增强", "featuresEn": "AI HD image enhancement" },
-        { "name": "Krea AI", "link": "https://www.krea.ai", "features": "AI画质超清增强", "featuresEn": "AI HD image enhancement" },
-        { "name": "Let's Enhance", "link": "https://letsenhance.io", "features": "AI画质超清增强", "featuresEn": "AI HD image enhancement" },
-        { "name": "Photoroom", "link": "https://www.photoroom.com", "features": "AI无痕消除/AI背景替换", "featuresEn": "AI object removal/AI background replacement" },
-        { "name": "PicTextRemover Object Remover", "link": "https://pictextremover.com/object-remover", "features": "AI无痕消除", "featuresEn": "AI object removal" },
-        { "name": "Kapwing", "link": "https://www.kapwing.com", "features": "AI无痕消除/AI背景替换", "featuresEn": "AI object removal/AI background replacement" },
-        { "name": "Nero AI", "link": "https://ai.nero.com", "features": "AI画质超清增强/AI背景替换", "featuresEn": "AI HD enhancement/AI background replacement" },
-        { "name": "Tensor Art", "link": "https://tensor.art", "features": "AI图片生成/AI背景替换", "featuresEn": "AI image generation/AI background replacement" },
-        { "name": "Stable Diffusion AI", "link": "https://stabledifffusion.com", "features": "AI图片生成", "featuresEn": "AI image generation" },
-        { "name": "Z-Image-Turbo", "link": "https://z-image.app", "features": "AI图片生成", "featuresEn": "AI image generation" },
-        { "name": "Dreamifly", "link": "https://dreamifly.com", "features": "AI图片生成", "featuresEn": "AI image generation" },
-        { "name": "BgSub", "link": "https://bgsub.com", "features": "AI背景替换", "featuresEn": "AI background replacement" },
-        { "name": "Raphael AI", "link": "https://raphaelai.org", "features": "AI背景替换", "featuresEn": "AI background replacement" },
-        { "name": "Nano Banana Pro", "link": "https://nanobanana-pro.studio", "features": "AI背景替换/AI无痕消除/AI画质超清增强", "featuresEn": "AI background replacement/AI object removal/AI HD enhancement" }
+        { "name": "Imgkits", "link": "https://www.imgkits.com/zh", "features": "老照片修复上色/画质超清增强/AI无痕消除/AI图片重绘/AI背景替换/文生图AI生成", "featuresEn": "Photo restore/upscale/eraser/redraw/bg swap/text-to-image" },
+        { "name": "AIEnhancer", "link": "https://aienhancer.ai", "features": "老照片修复/4K画质超分/无痕移除物体/图生图重绘/抠图换背景/文生图创作", "featuresEn": "Photo restore/4K upscale/eraser/redraw/cutout/text-to-image" },
+        { "name": "Magic Eraser", "link": "https://magiceraser.org/zh/ai-image-editor/", "features": "老照片破损修复上色/画质细节增强/AI涂抹消除/画风重绘/智能换背景/AI绘画生成", "featuresEn": "Photo repair/enhance/eraser/redraw/bg swap/AI art" },
+        { "name": "图叮AI", "nameEn": "Tuding AI", "link": "https://tudingai.cn", "features": "老照片修复/画质超清放大/AI无痕去杂物/背景替换", "featuresEn": "Photo restore/upscale/eraser/bg swap" },
+        { "name": "Cleanup.pictures", "link": "https://cleanup.pictures/", "features": "AI无痕消除水印/路人/简易画质增强/抠图换背景", "featuresEn": "Remove watermarks/people, enhance, bg swap" },
+        { "name": "Seedream AI", "link": "https://seedream.pro/zh", "features": "文生图AI生成/图片重绘改写/抠图背景替换/简易画质优化", "featuresEn": "Text-to-image/redraw/cutout/enhance" },
+        { "name": "waifu2x", "link": "https://waifu2x.udp.jp", "features": "动漫图片超清降噪放大", "featuresEn": "Anime upscale & denoise" },
+        { "name": "Restore Old Photos", "link": "https://restoreoldphotos.com", "features": "AI高清老照片修复", "featuresEn": "AI photo restoration" },
+        { "name": "MyEdit", "link": "https://myedit.online", "features": "AI高清老照片修复/AI画质超清增强/AI背景替换", "featuresEn": "Restore/upscale/bg swap" },
+        { "name": "佐糖", "nameEn": "PicWish", "link": "https://picwish.cn", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除/AI背景替换", "featuresEn": "Restore/upscale/eraser/bg swap" },
+        { "name": "UnblurImage", "link": "https://unblurimage.ai", "features": "AI高清老照片修复/AI画质超清增强", "featuresEn": "Restore & upscale" },
+        { "name": "ArtGuru", "link": "https://www.artguru.ai", "features": "AI高清老照片修复/AI画质超清增强/AI无痕消除", "featuresEn": "Restore/upscale/eraser" },
+        { "name": "Qwen-Image-Edit", "link": "https://qwen-image-edit.com", "features": "AI图片重绘/AI无痕消除/AI背景替换", "featuresEn": "Redraw/eraser/bg swap" },
+        { "name": "HiDream AI", "link": "https://hidream.org", "features": "AI图片重绘/AI图片生成", "featuresEn": "Redraw/image generation" },
+        { "name": "AIUpscaler", "link": "https://aiupscaler.com", "features": "AI画质超清增强", "featuresEn": "AI upscaling" },
+        { "name": "Upscale.media", "link": "https://upscale.media", "features": "AI画质超清增强", "featuresEn": "AI upscaling" },
+        { "name": "Krea AI", "link": "https://www.krea.ai", "features": "AI画质超清增强", "featuresEn": "AI upscaling" },
+        { "name": "Let's Enhance", "link": "https://letsenhance.io", "features": "AI画质超清增强", "featuresEn": "AI upscaling" },
+        { "name": "Photoroom", "link": "https://www.photoroom.com", "features": "AI无痕消除/AI背景替换", "featuresEn": "Eraser/bg swap" },
+        { "name": "PicTextRemover Object Remover", "link": "https://pictextremover.com/object-remover", "features": "AI无痕消除", "featuresEn": "AI eraser" },
+        { "name": "Kapwing", "link": "https://www.kapwing.com", "features": "AI无痕消除/AI背景替换", "featuresEn": "Eraser/bg swap" },
+        { "name": "Nero AI", "link": "https://ai.nero.com", "features": "AI画质超清增强/AI背景替换", "featuresEn": "Upscale/bg swap" },
+        { "name": "Tensor Art", "link": "https://tensor.art", "features": "AI图片生成/AI背景替换", "featuresEn": "Image generation/bg swap" },
+        { "name": "Stable Diffusion AI", "link": "https://stabledifffusion.com", "features": "AI图片生成", "featuresEn": "Image generation" },
+        { "name": "Z-Image-Turbo", "link": "https://z-image.app", "features": "AI图片生成", "featuresEn": "Image generation" },
+        { "name": "Dreamifly", "link": "https://dreamifly.com", "features": "AI图片生成", "featuresEn": "Image generation" },
+        { "name": "BgSub", "link": "https://bgsub.com", "features": "AI背景替换", "featuresEn": "AI bg swap" },
+        { "name": "Raphael AI", "link": "https://raphaelai.org", "features": "AI背景替换", "featuresEn": "AI bg swap" },
+        { "name": "Nano Banana Pro", "link": "https://nanobanana-pro.studio", "features": "AI背景替换/AI无痕消除/AI画质超清增强", "featuresEn": "Bg swap/eraser/upscale" }
       ]
     },
     {
@@ -424,39 +428,45 @@
       "webList": [
          {
            "name": "佐糖",
+           "nameEn": "PicWish",
            "link": "https://zuotang.com",
            "features": "AI抠图/一键换底色和AI换装",
-           "featuresEn": "AI cutout/one-click background & outfit replacement"
+           "featuresEn": "AI cutout, one-tap bg & outfit swap"
          },
          {
            "name": "搜狐简单AI",
+           "nameEn": "Sohu Simple AI",
            "link": "https://ai.sohu.com",
            "features": "海量西装、衬衫等模板可一键换装",
-           "featuresEn": "One-click outfit swap with plenty of suit and shirt templates"
+           "featuresEn": "One-tap outfit swap, tons of templates"
          },
          {
            "name": "证件照大师",
+           "nameEn": "ID Photo Master",
            "link": "https://id-photo.cn/maker/",
            "features": "适合考试、签证等严格场景",
-           "featuresEn": "Suitable for strict scenarios like exams and visas"
+           "featuresEn": "Good for exams, visas, strict rules"
          },
          {
            "name": "帮小忙",
+           "nameEn": "BangXiaoMang",
            "link": "https://tool.browser.qq.com/id_photo.html",
            "features": "一键换底色及美颜",
-           "featuresEn": "One-click background color change and beautification"
+           "featuresEn": "One-tap bg color change & beautify"
          },
          {
            "name": "珍彩证件照",
+           "nameEn": "Zhencai ID Photo",
            "link": "https://zhengjianzhao.com/index.php",
            "features": "海量规格尺寸任选",
-           "featuresEn": "Wide choice of photo sizes and formats"
+           "featuresEn": "Wide range of photo sizes"
          },
          {
            "name": "智能证件照",
+           "nameEn": "Smart ID Photo",
            "link": "https://id.zhengzhaopai.com",
            "features": "数百种证件照尺寸及底色/AI智能抠图",
-           "featuresEn": "Hundreds of ID photo sizes and backgrounds/AI smart cutout"
+           "featuresEn": "Hundreds of sizes & bg colors, AI cutout"
          },
          {
            "name": "Fotor",
@@ -468,43 +478,47 @@
            "name": "Cutout",
            "link": "https://www.cutout.pro",
            "features": "AI自动抠图",
-           "featuresEn": "AI automatic cutout"
+           "featuresEn": "Auto AI cutout"
          },
          {
            "name": "photo4you",
            "link": "https://www.photo4you.com",
            "features": "AI自动去除背景/护照/签证等多种官方尺寸。",
-           "featuresEn": "AI auto background removal/Passport/visa and other official sizes"
+           "featuresEn": "Auto bg removal, passport/visa sizes"
          },
          {
            "name": "拍点点证件照",
+           "nameEn": "Paidiandian ID Photo",
            "link": "https://tool.idphoto.cn",
            "features": "换底色/换服装/处理回执签证照片。",
-           "featuresEn": "Change background/outfit/process receipt and visa photos"
+           "featuresEn": "Swap bg/outfit, visa photos"
          },
          {
            "name": "Pixfit",
            "link": "https://pix-fit.com/zh-Hans",
            "features": "本地AI处理，证件照裁剪/换底色/压缩/打印排版",
-           "featuresEn": "Local AI processing, ID photo crop/background change/compress/print layout"
+           "featuresEn": "Local AI: crop/bg swap/compress/print"
          },
          {
            "name": "美图秀秀",
+           "nameEn": "Meitu",
            "link": "https://pc.meitu.com/id-photos",
            "features": "抠图/换底色/一寸二寸尺寸调整免费导出无水印",
-           "featuresEn": "Cutout/background change/1-inch & 2-inch resize, free export without watermark"
+           "featuresEn": "Cutout/bg swap/resize, free no watermark"
          },
          {
            "name": "凡人AI",
+           "nameEn": "Fanren AI",
            "link": "https://www.fanrenai.com/zhengjianzhao/",
            "features": "四六级/教资/公务员/签证所有考试尺寸",
-           "featuresEn": "All exam sizes for CET/teacher certification/civil service/visa"
+           "featuresEn": "Covers all exam & visa sizes"
          },
          {
            "name": "可立图",
+           "nameEn": "ClipImg",
            "link": "https://www.clipimg.com/",
            "features": "一键换底色/基础美颜/A4排版打印",
-           "featuresEn": "One-click background change/basic beautification/A4 print layout"
+           "featuresEn": "One-tap bg swap/beautify/A4 print"
          }
       ]
     }
@@ -1420,11 +1434,12 @@
         a.href = item.link;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-        // 根据当前语言选择功能描述（中文 features / 英文 featuresEn）
+        // 根据当前语言选择名称与功能描述（中文 name/features / 英文 nameEn/featuresEn）
+        const nameLabel = lang === 'en' ? (item.nameEn || item.name) : item.name;
         const featLabel = lang === 'en' ? (item.featuresEn || item.features) : item.features;
         a.innerHTML =
-          `<div class="name">${escapeHtml(item.name)}</div>` +
-          `<div class="features">${escapeHtml(featLabel)}</div>`;
+          `<div class="name">${escapeHtml(nameLabel)}</div>` +
+          `<div class="features">${formatFeatures(featLabel)}</div>`;
         grid.appendChild(a);
       });
 
@@ -1444,6 +1459,17 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  // 功能描述排版：在分隔符（/ 、 → ↔ + ，等）处插入零宽断行机会，
+  // 让文本优先在分隔符处换行，避免把词/短语从中间拆断，换行更整齐好看。
+  function formatFeatures(str) {
+    var s = escapeHtml(str);
+    // 分隔符后追加 <wbr>，作为可断行点（不显示任何字符）
+    s = s.replace(/([\/、，,；;·|+→↔＆])\s*/g, '$1<wbr>');
+    // 空格处同样允许断行
+    s = s.replace(/\s+/g, '<wbr> ');
+    return s;
   }
 
   /* ===== 事件绑定 ===== */
