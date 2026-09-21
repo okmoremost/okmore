@@ -1,5 +1,5 @@
 {
-  "baidu": "https://www.baidu.com/s?wd=$encodedQuery",
+  "baidu": "https://m.baidu.com/s?wd=$encodedQuery",
   "shenma": "https://m.sm.cn/s?q=$encodedQuery",
   "sogou": "https://www.sogou.com/web?query=$encodedQuery",
   "so360": "https://www.so.com/s?q=$encodedQuery",
