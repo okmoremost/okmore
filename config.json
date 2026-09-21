@@ -1,7 +1,7 @@
 {
-  "versionCode": 16,
-  "versionName": "1.3.1",
-  "updateContent": "•支持底部工具栏左右滑动切换窗口\n•优化下载目录显示路径\n•修复新建脚本无法编辑问题\n•阅读模式时系统手势无需后退",
+  "versionCode": 18,
+  "versionName": "1.3.3",
+  "updateContent": "•增加AI助手、游戏模式\n•修复部分M3U8下载无法播放问题，优化下载速度\n•修复阅读模式加载更多滚动问题\n•修复错误拦截跨域问题\n•修复手势冲突问题\n•修复广告过滤规则开启关闭导致网页加载失败问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
