@@ -1,7 +1,7 @@
 {
   "versionCode": 21,
   "versionName": "1.4.2",
-  "updateContent": "•文件下载完成通知扫描\n•脚本增加更多api支持，支持修改下载安装脚本执行方式\n•修复广告过滤相关bug，支持添加手动标记\n•本地视频非全屏长按3倍播放\n•优化进度条位置\n•修复下载进度条显示问题",
+  "updateContent": "•窗口管理增加搜索、增加长按交换位置\n•增加视频播放记录\n•优化加载网页速度\n•工具栏UI优化\n•键盘弹起处理\n•UA标识优化\n•修复部分机型崩溃问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
   "downloadFullUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_full.apk",
