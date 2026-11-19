@@ -1,6 +1,6 @@
 {
-  "versionCode": 21,
-  "versionName": "1.4.2",
+  "versionCode": 22,
+  "versionName": "1.4.3",
   "updateContent": "•窗口管理增加搜索、增加长按交换位置\n•增加视频播放记录\n•优化加载网页速度\n•工具栏UI优化\n•键盘弹起处理\n•UA标识优化\n•修复部分机型崩溃问题",
   "downloadUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore.apk",
   "downloadLiteUrl": "https://github.com/okmoremost/okmore/releases/latest/download/okmore_lite.apk",
